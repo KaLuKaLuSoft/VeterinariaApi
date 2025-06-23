@@ -16,6 +16,11 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.Regiones> Regiones { get; set; }
         public DbSet<VeterinariaApi.Models.Ciudad> Ciudades { get; set; }
         public DbSet<VeterinariaApi.Models.Sucursales> Sucursales { get; set; }
+        public DbSet<VeterinariaApi.Models.Departamentos> Departamentos { get; set; }
+        public DbSet<VeterinariaApi.Models.Roles> Roles { get; set; }
+        public DbSet<VeterinariaApi.Models.EspecialidadesMedicas> EspecialidadesMedicas { get; set; }
+        public DbSet<VeterinariaApi.Models.Empleados> Empleados { get; set; }
+        public DbSet<VeterinariaApi.Models.Usuarios> Usuarios { get; set; }
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

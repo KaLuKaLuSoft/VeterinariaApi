@@ -130,7 +130,7 @@ namespace VeterinariaApi.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error al crear el pais.");
-               return BadRequest(new {Message = "Error al crear el pais.", Details = ex.Message});
+                return BadRequest(new {Message = "Error al crear el pais.", Details = ex.Message});
             }
         }
 

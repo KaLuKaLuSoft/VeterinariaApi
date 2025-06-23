@@ -21,6 +21,12 @@ namespace VeterinariaApi
 
                 config.CreateMap<Sucursales, DtoSucursales>();
                 config.CreateMap<DtoSucursales, Sucursales>();
+
+                config.CreateMap<Departamentos, DtoDepartamentos>();
+                config.CreateMap<DtoDepartamentos, Departamentos>();
+
+                config.CreateMap<Roles, DtoRoles>();
+                config.CreateMap<DtoRoles, Roles>();
             });
             return mappingConfig;
         }

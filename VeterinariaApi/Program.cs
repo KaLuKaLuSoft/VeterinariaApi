@@ -28,6 +28,8 @@ builder.Services.AddScoped<IPaisesRepositorio, PaisesRepositorio>();
 builder.Services.AddScoped<IRegionesRepositorio, RegionesRepositorio>();
 builder.Services.AddScoped<ICiudadRepositorio, CiudadRepositorio>();
 builder.Services.AddScoped<ISucursalesRepositorio, SucursalesRepositorio>();
+builder.Services.AddScoped<IDepartamentosRepositorio, DepartamentosRepositorio>();
+builder.Services.AddScoped<IRolesRepositorio, RolesRepositorio>();
 
 var app = builder.Build();
 
