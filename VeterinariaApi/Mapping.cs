@@ -27,6 +27,9 @@ namespace VeterinariaApi
 
                 config.CreateMap<Roles, DtoRoles>();
                 config.CreateMap<DtoRoles, Roles>();
+
+                config.CreateMap<EspecialidadesMedicas, DtoEpecialidadesMedicas>();
+                config.CreateMap<DtoEpecialidadesMedicas, EspecialidadesMedicas>();
             });
             return mappingConfig;
         }

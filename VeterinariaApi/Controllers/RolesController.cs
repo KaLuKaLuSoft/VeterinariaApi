@@ -70,13 +70,13 @@ namespace VeterinariaApi.Controllers
                 if (roles != null)
                 {
                     _response.Result = roles;
-                    _response.DisplayMessage = "Rol no encontrado.";
-                    return NotFound(_response);
+                    _response.DisplayMessage = "Rol encontrado.";
+                    return Ok(_response);
                 }
                 else
                 {
                     _response.IsSuccess = false;
-                    _response.DisplayMessage = "Rol no encontrado.";
+                    _response.DisplayMessage = "Rol encontrado.";
                     return NotFound(_response);
                 }
             }
@@ -150,7 +150,7 @@ namespace VeterinariaApi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error al eliminar el rol con ID {Id}", id);
+                _logger.LogError(ex, "Error al eliminar el rol");
                 return StatusCode(500, new { Message = "Error al eliminar el rol.", Details = ex.Message });
             }
         }

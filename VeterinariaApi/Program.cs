@@ -30,6 +30,7 @@ builder.Services.AddScoped<ICiudadRepositorio, CiudadRepositorio>();
 builder.Services.AddScoped<ISucursalesRepositorio, SucursalesRepositorio>();
 builder.Services.AddScoped<IDepartamentosRepositorio, DepartamentosRepositorio>();
 builder.Services.AddScoped<IRolesRepositorio, RolesRepositorio>();
+builder.Services.AddScoped<IEspecialidadMedicaRepositorio, EspecialidadMedicaRepositorio>();
 
 var app = builder.Build();
 

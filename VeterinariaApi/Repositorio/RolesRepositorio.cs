@@ -27,7 +27,7 @@ namespace VeterinariaApi.Repositorio
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
                 command.CommandText = "InsertarActualizarRoles";
-                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandType = CommandType.StoredProcedure;
                 var idParam = new MySqlParameter("@r_Id", MySqlDbType.Int32)
                 {
                     Value = (object)DBNull.Value
@@ -40,11 +40,12 @@ namespace VeterinariaApi.Repositorio
                 };
                 command.Parameters.Add(nombreRolParam);
                 
-                var descripcionParam = new MySqlParameter("@r_Descripcion", MySqlDbType.VarChar, 255)
+                var descripcionParam = new MySqlParameter("@r_Descripcion", MySqlDbType.VarChar, 100)
                 {
                     Value = rolesDto.Descripcion ?? (object)DBNull.Value
                 };
                 command.Parameters.Add(descripcionParam);
+
                 command.ExecuteNonQuery();
                 transaction.Commit();
                 return Task.FromResult(rolesDto);
