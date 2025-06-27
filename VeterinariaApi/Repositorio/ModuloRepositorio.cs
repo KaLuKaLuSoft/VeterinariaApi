@@ -7,106 +7,104 @@ using System.Transactions;
 using VeterinariaApi.Data;
 using VeterinariaApi.Dto;
 using VeterinariaApi.Interface;
-
 namespace VeterinariaApi.Repositorio
 {
-    public class PaisesRepositorio : IPaisesRepositorio
+    public class ModuloRepositorio : IModuloRepositorio
     {
         private readonly ApplicationDbContext _context;
         private IMapper _mapper;
 
-        public PaisesRepositorio(ApplicationDbContext context, IMapper mapper)
+        public ModuloRepositorio(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
-        public async Task<DtoPaises> Create(DtoPaises paisesDto)
+        public async Task<DtoModulo> Create(DtoModulo moduloDto)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
-                command.CommandText = "InsertarActualizarPais";
-                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandText = "InsertarActualizarModulo";
+                command.CommandType = CommandType.StoredProcedure;
 
-                var idParam = new MySqlParameter("@p_Id", MySqlDbType.Int32)
+                var idParam = new MySqlParameter("@m_Id", MySqlDbType.Int32)
                 {
                     Value = (object)DBNull.Value
                 };
                 command.Parameters.Add(idParam);
-                var nombresParam = new MySqlParameter("@p_Nombre", MySqlDbType.VarChar, 100)
+
+                var nombreModuloParam = new MySqlParameter("@m_NombreModulo", MySqlDbType.VarChar, 100)
                 {
-                    Value = paisesDto.Nombre ?? (object)DBNull.Value
+                    Value = moduloDto.NombreModulo ?? (object)DBNull.Value
                 };
-                command.Parameters.Add(nombresParam);
-                var codigoParam = new MySqlParameter("@p_Codigo", MySqlDbType.VarChar, 10)
+                command.Parameters.Add(nombreModuloParam);
+
+                var descripcionParam = new MySqlParameter("@m_Descripcion", MySqlDbType.VarChar, 255)
                 {
-                    Value = paisesDto.Codigo ?? (object)DBNull.Value
+                    Value = moduloDto.Descripcion ?? (object)DBNull.Value
                 };
-                command.Parameters.Add(codigoParam);
+                command.Parameters.Add(descripcionParam);
 
                 await command.ExecuteNonQueryAsync();
-
                 await transaction.CommitAsync();
-
-                return paisesDto;
+                return moduloDto;
             }
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-                throw new Exception("Error al crear el país", ex);
+                throw new Exception("Error al crear el módulo", ex);
             }
         }
-        public async Task<DtoPaises> Update(DtoPaises paisesDto)
+        public async Task<DtoModulo> Update(DtoModulo moduloDto)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
-                command.CommandText = "InsertarActualizarPais";
+                command.CommandText = "InsertarActualizarModulo";
                 command.CommandType = CommandType.StoredProcedure;
 
-                var idParam = new MySqlParameter("@p_Id", MySqlDbType.Int32)
+                var idParam = new MySqlParameter("@m_Id", MySqlDbType.Int32)
                 {
-                    Value = paisesDto.Id > 0 ? (object)paisesDto.Id : (object)DBNull.Value
+                    Value = moduloDto.Id > 0 ? (object)moduloDto.Id : (object)DBNull.Value
                 };
                 command.Parameters.Add(idParam);
-                var nombresParam = new MySqlParameter("@p_Nombre", MySqlDbType.VarChar, 100)
+
+                var nombreModuloParam = new MySqlParameter("@m_NombreModulo", MySqlDbType.VarChar, 100)
                 {
-                    Value = paisesDto.Nombre ?? (object)DBNull.Value
+                    Value = moduloDto.NombreModulo ?? (object)DBNull.Value
                 };
-                command.Parameters.Add(nombresParam);
-                var codigoParam = new MySqlParameter("@p_Codigo", MySqlDbType.VarChar, 3)
+                command.Parameters.Add(nombreModuloParam);
+
+                var descripcionParam = new MySqlParameter("@m_Descripcion", MySqlDbType.VarChar, 255)
                 {
-                    Value = paisesDto.Codigo ?? (object)DBNull.Value
+                    Value = moduloDto.Descripcion ?? (object)DBNull.Value
                 };
-                command.Parameters.Add(codigoParam);
+                command.Parameters.Add(descripcionParam);
 
                 await command.ExecuteNonQueryAsync();
-
                 await transaction.CommitAsync();
-
-                return paisesDto;
+                return moduloDto;
             }
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-                throw new Exception("Error al actualizar el país", ex);
+                throw new Exception("Error al actualizar el módulo", ex);
             }
         }
-        public async Task<bool> DeletePaises(int id)
+        public async Task<bool> DeleteModulo(int id)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
-                command.CommandText = "EliminarPais";
+                command.CommandText = "EliminarModulo";
                 command.CommandType = CommandType.StoredProcedure;
-
-                var idParam = new MySqlParameter("@p_Id", MySqlDbType.Int32)
+                var idParam = new MySqlParameter("@m_Id", MySqlDbType.Int32)
                 {
                     Value = id
                 };
@@ -124,14 +122,15 @@ namespace VeterinariaApi.Repositorio
 
                 int result = Convert.ToInt32(resultParam.Value);
                 return result == 1;
+
             }
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-                throw new Exception("Error al eliminar el país", ex);
+                throw new Exception("Error al eliminar el módulo", ex);
             }
         }
-        public async Task<List<DtoPaises>> GetPaises()
+        public async Task<List<DtoModulo>> GetModulo()
         {
             try
             {
@@ -139,34 +138,34 @@ namespace VeterinariaApi.Repositorio
                 await connection.OpenAsync();
 
                 var command = connection.CreateCommand();
-                command.CommandText = "ObtenerPais";
+                command.CommandText = "ObtenerModulos";
                 command.CommandType = CommandType.StoredProcedure;
 
-                var pais = new List<DtoPaises>();
+                var modulo = new List<DtoModulo>();
                 using (var reader = await command.ExecuteReaderAsync())
                 {
-                    while (await reader.ReadAsync())
+                    while(await reader.ReadAsync())
                     {
-                        var paisDto = new DtoPaises
+                        var ModuloDto = new DtoModulo
                         {
                             Id = reader.GetInt32(0),
-                            Nombre = reader.GetString(1),
-                            Codigo = reader.GetString(2),
+                            NombreModulo = reader.GetString(1),
+                            Descripcion = reader.GetString(2),
                             Fecha_Alta = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3),
                             Fecha_Modificacion = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4)
                         };
-                        pais.Add(paisDto);
+                        modulo.Add(ModuloDto);
                     }
                 }
                 await connection.CloseAsync();
-                return pais;
+                return modulo;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener los países", ex);
+                throw new Exception("Error al obtener los módulos", ex);
             }
         }
-        public async Task<DtoPaises> GetPaisesById(int id)
+        public async Task<DtoModulo> GetModuloById(int id)
         {
             try
             {
@@ -174,10 +173,10 @@ namespace VeterinariaApi.Repositorio
                 await connection.OpenAsync();
 
                 var command = connection.CreateCommand();
-                command.CommandText = "ObtenerPaisPorId";
+                command.CommandText = "ObtenerModuloPorId";
                 command.CommandType = CommandType.StoredProcedure;
 
-                var idParam = new MySqlParameter("@p_Id", MySqlDbType.Int32)
+                var idParam = new MySqlParameter("@m_Id", MySqlDbType.Int32)
                 {
                     Value = id
                 };
@@ -186,28 +185,28 @@ namespace VeterinariaApi.Repositorio
                 using var reader = await command.ExecuteReaderAsync();
                 if(await reader.ReadAsync())
                 {
-                    var paisDto = new DtoPaises
+                    var moduloDto = new DtoModulo
                     {
                         Id = reader.GetInt32(0),
-                        Nombre = reader.IsDBNull(1) ? null : reader.GetString(1),
-                        Codigo = reader.IsDBNull(2) ? null : reader.GetString(2),
+                        NombreModulo = reader.IsDBNull(1) ? null : reader.GetString(1),
+                        Descripcion = reader.IsDBNull(2) ? null : reader.GetString(2),
                         Fecha_Alta = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3),
                         Fecha_Modificacion = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4)
                     };
                     await connection.CloseAsync();
-                    return paisDto;
+                    return moduloDto;
                 }
                 await connection.CloseAsync();
                 return null;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener el país por ID", ex);
+                throw new Exception("Error al obtener el módulo por ID", ex);
             }
         }
-        public async Task<bool> PaisesExists(int id)
+        public async Task<bool> ModuloExists(int id)
         {
-            return await _context.Paises.AnyAsync(p => p.Id == id);
+            return await _context.Modulos.AnyAsync(m => m.Id == id);
         }
     }
 }

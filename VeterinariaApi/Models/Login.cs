@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 namespace VeterinariaApi.Models
 {
-    public class Usuarios
+    public class Login
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -12,8 +12,8 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250620062659_Usuarios")]
-    partial class Usuarios
+    [Migration("20250627035222_Login")]
+    partial class Login
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -150,6 +150,67 @@ namespace VeterinariaApi.Migrations
                     b.ToTable("EspecialidadesMedicas");
                 });
 
+            modelBuilder.Entity("VeterinariaApi.Models.Login", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool?>("Activo")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Contrasena")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("Expiration")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("Fecha_Alta")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("Fecha_Modificacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("IdEmpleado")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdRol")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdSucursal")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NombreUsuario")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Tokens")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UltimoLogin")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdEmpleado");
+
+                    b.HasIndex("IdRol");
+
+                    b.HasIndex("IdSucursal");
+
+                    b.ToTable("Login");
+                });
+
             modelBuilder.Entity("VeterinariaApi.Models.Paises", b =>
                 {
                     b.Property<int>("Id")
@@ -263,67 +324,6 @@ namespace VeterinariaApi.Migrations
                     b.ToTable("Sucursales");
                 });
 
-            modelBuilder.Entity("VeterinariaApi.Models.Usuarios", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool?>("Activo")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Contrasena")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("Expiration")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("Fecha_Alta")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("Fecha_Modificacion")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int?>("IdEmpleado")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdRol")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdSucursal")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NombreUsuario")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("RefreshToken")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Tokens")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("UltimoLogin")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdEmpleado");
-
-                    b.HasIndex("IdRol");
-
-                    b.HasIndex("IdSucursal");
-
-                    b.ToTable("Usuarios");
-                });
-
             modelBuilder.Entity("VeterinariaApi.Models.Ciudad", b =>
                 {
                     b.HasOne("VeterinariaApi.Models.Regiones", "NombreRegion")
@@ -344,27 +344,7 @@ namespace VeterinariaApi.Migrations
                     b.Navigation("NombreDepartamento");
                 });
 
-            modelBuilder.Entity("VeterinariaApi.Models.Regiones", b =>
-                {
-                    b.HasOne("VeterinariaApi.Models.Paises", "NombrePais")
-                        .WithMany()
-                        .HasForeignKey("IdPais")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("NombrePais");
-                });
-
-            modelBuilder.Entity("VeterinariaApi.Models.Sucursales", b =>
-                {
-                    b.HasOne("VeterinariaApi.Models.Ciudad", "NombreCiudad")
-                        .WithMany()
-                        .HasForeignKey("IdCiudad");
-
-                    b.Navigation("NombreCiudad");
-                });
-
-            modelBuilder.Entity("VeterinariaApi.Models.Usuarios", b =>
+            modelBuilder.Entity("VeterinariaApi.Models.Login", b =>
                 {
                     b.HasOne("VeterinariaApi.Models.Empleados", "NombreEmpleado")
                         .WithMany()
@@ -383,6 +363,26 @@ namespace VeterinariaApi.Migrations
                     b.Navigation("NombreRol");
 
                     b.Navigation("NombreSucursal");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.Regiones", b =>
+                {
+                    b.HasOne("VeterinariaApi.Models.Paises", "NombrePais")
+                        .WithMany()
+                        .HasForeignKey("IdPais")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NombrePais");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.Sucursales", b =>
+                {
+                    b.HasOne("VeterinariaApi.Models.Ciudad", "NombreCiudad")
+                        .WithMany()
+                        .HasForeignKey("IdCiudad");
+
+                    b.Navigation("NombreCiudad");
                 });
 #pragma warning restore 612, 618
         }

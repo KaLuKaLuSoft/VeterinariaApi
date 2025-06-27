@@ -20,14 +20,16 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.Roles> Roles { get; set; }
         public DbSet<VeterinariaApi.Models.EspecialidadesMedicas> EspecialidadesMedicas { get; set; }
         public DbSet<VeterinariaApi.Models.Empleados> Empleados { get; set; }
-        public DbSet<VeterinariaApi.Models.Usuarios> Usuarios { get; set; }
+        public DbSet<VeterinariaApi.Models.Login> Login { get; set; }
+        public DbSet<VeterinariaApi.Models.Modulo> Modulos { get; set; }
+        public DbSet<VeterinariaApi.Models.SubModulo> SubModulos { get; set; }
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            // Ejemplo de configuración de un modelo
-            // modelBuilder.Entity<Producto>().ToTable("Productos");
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
+        //    // Ejemplo de configuración de un modelo
+        //    // modelBuilder.Entity<Producto>().ToTable("Productos");
+        //}
     // Renamed the class to avoid circular dependency with the base DbContext class
 
     }

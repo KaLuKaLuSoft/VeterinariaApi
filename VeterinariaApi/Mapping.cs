@@ -30,6 +30,15 @@ namespace VeterinariaApi
 
                 config.CreateMap<EspecialidadesMedicas, DtoEpecialidadesMedicas>();
                 config.CreateMap<DtoEpecialidadesMedicas, EspecialidadesMedicas>();
+
+                config.CreateMap<Modulo, DtoModulo>();
+                config.CreateMap<DtoModulo, Modulo>();
+
+                config.CreateMap<SubModulo, DtoSubModulo>();
+                config.CreateMap<DtoSubModulo, SubModulo>();
+
+                config.CreateMap<Login, DtoLogin>();
+                config.CreateMap<DtoLogin, Login>();
             });
             return mappingConfig;
         }

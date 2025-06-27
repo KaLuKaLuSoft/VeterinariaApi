@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VeterinariaApi.Data;
 
@@ -11,9 +12,11 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250627043939_Modulo")]
+    partial class Modulo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -310,36 +313,6 @@ namespace VeterinariaApi.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("VeterinariaApi.Models.SubModulo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("Fecha_Alta")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("Fecha_Modificacion")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("ModuloId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NombreSubModulo")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ModuloId");
-
-                    b.ToTable("SubModulos");
-                });
-
             modelBuilder.Entity("VeterinariaApi.Models.Sucursales", b =>
                 {
                     b.Property<int>("Id")
@@ -426,17 +399,6 @@ namespace VeterinariaApi.Migrations
                         .IsRequired();
 
                     b.Navigation("NombrePais");
-                });
-
-            modelBuilder.Entity("VeterinariaApi.Models.SubModulo", b =>
-                {
-                    b.HasOne("VeterinariaApi.Models.Modulo", "NombreModulo")
-                        .WithMany()
-                        .HasForeignKey("ModuloId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("NombreModulo");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.Sucursales", b =>

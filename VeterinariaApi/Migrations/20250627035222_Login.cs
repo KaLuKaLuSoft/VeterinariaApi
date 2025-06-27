@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VeterinariaApi.Migrations
 {
     /// <inheritdoc />
-    public partial class Usuarios : Migration
+    public partial class Login : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Usuarios",
+                name: "Login",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -40,19 +40,19 @@ namespace VeterinariaApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuarios", x => x.Id);
+                    table.PrimaryKey("PK_Login", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Usuarios_Empleados_IdEmpleado",
+                        name: "FK_Login_Empleados_IdEmpleado",
                         column: x => x.IdEmpleado,
                         principalTable: "Empleados",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Usuarios_Roles_IdRol",
+                        name: "FK_Login_Roles_IdRol",
                         column: x => x.IdRol,
                         principalTable: "Roles",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Usuarios_Sucursales_IdSucursal",
+                        name: "FK_Login_Sucursales_IdSucursal",
                         column: x => x.IdSucursal,
                         principalTable: "Sucursales",
                         principalColumn: "Id");
@@ -60,18 +60,18 @@ namespace VeterinariaApi.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Usuarios_IdEmpleado",
-                table: "Usuarios",
+                name: "IX_Login_IdEmpleado",
+                table: "Login",
                 column: "IdEmpleado");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Usuarios_IdRol",
-                table: "Usuarios",
+                name: "IX_Login_IdRol",
+                table: "Login",
                 column: "IdRol");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Usuarios_IdSucursal",
-                table: "Usuarios",
+                name: "IX_Login_IdSucursal",
+                table: "Login",
                 column: "IdSucursal");
         }
 
@@ -79,7 +79,7 @@ namespace VeterinariaApi.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Login");
         }
     }
 }
