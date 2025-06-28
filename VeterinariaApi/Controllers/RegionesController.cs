@@ -70,13 +70,13 @@ namespace VeterinariaApi.Controllers
                 if(region != null)
                 {
                     _response.Result = region;
-                    _response.DisplayMessage = "Región no encontrada.";
+                    _response.DisplayMessage = "Región encontrada.";
                     return Ok(_response);
                 }
                 else
                 {
                     _response.IsSuccess = false;
-                    _response.DisplayMessage = "Región encontrada.";
+                    _response.DisplayMessage = "Región no encontrada.";
                     return NotFound(_response);
                 }
             }

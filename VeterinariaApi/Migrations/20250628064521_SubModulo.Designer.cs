@@ -12,7 +12,7 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250627064036_SubModulo")]
+    [Migration("20250628064521_SubModulo")]
     partial class SubModulo
     {
         /// <inheritdoc />
