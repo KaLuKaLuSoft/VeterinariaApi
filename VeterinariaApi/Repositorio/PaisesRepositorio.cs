@@ -28,7 +28,7 @@ namespace VeterinariaApi.Repositorio
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
                 command.CommandText = "InsertarActualizarPais";
-                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandType = CommandType.StoredProcedure;
 
                 var idParam = new MySqlParameter("@p_Id", MySqlDbType.Int32)
                 {

@@ -70,13 +70,13 @@ namespace VeterinariaApi.Controllers
                 if (ciudad != null)
                 {
                     _response.Result = ciudad;
-                    _response.DisplayMessage = "Ciudad no encontrada.";
+                    _response.DisplayMessage = "Ciudad encontrada correctamente.";
                     return Ok(_response);
                 }
                 else
                 {
                     _response.IsSuccess = false;
-                    _response.DisplayMessage = "Ciudad encontrada.";
+                    _response.DisplayMessage = "Ciudad no encontrada.";
                     return NotFound(_response);
                 }
             }
@@ -84,7 +84,7 @@ namespace VeterinariaApi.Controllers
             {
                 _response.IsSuccess = false;
                 _response.ErrorMessages = new List<string> { ex.Message };
-                _logger.LogError(ex, "Error al obtener la ciudad con ID");
+                _logger.LogError(ex, "Error al obtener la ciudad.");
                 return StatusCode(500, _response);
             }
         }
@@ -136,15 +136,23 @@ namespace VeterinariaApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCiudad(int id)
         {
-            var ciudad = await _context.Ciudades.FindAsync(id);
-            if (ciudad == null)
+            try
             {
-                return NotFound();
+                bool deleted = await _ciudadRepositorio.DeleteCiudad(id);
+                if (deleted)
+                {
+                    return NoContent();
+                }
+                else
+                {
+                    return NotFound(new { message = "Ciudad no encontrada." });
+                }
             }
-
-            _context.Ciudades.Remove(ciudad);
-            await _context.SaveChangesAsync();
-            return NoContent();
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al eliminar la ciudad");
+                return StatusCode(500, new { message = "Error al eliminar la ciudad", Details = ex.Message });
+            }
         }
 
         private bool CiudadExists(int id)

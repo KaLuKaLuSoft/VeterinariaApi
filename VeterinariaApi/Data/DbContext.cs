@@ -23,14 +23,31 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.Login> Login { get; set; }
         public DbSet<VeterinariaApi.Models.Modulo> Modulos { get; set; }
         public DbSet<VeterinariaApi.Models.SubModulo> SubModulos { get; set; }
+        public DbSet<VeterinariaApi.Models.LoginMenu> LoginMenus { get; set; }
+        public DbSet<VeterinariaApi.Models.Acciones> Acciones { get; set; }
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-        //    // Ejemplo de configuración de un modelo
-        //    // modelBuilder.Entity<Producto>().ToTable("Productos");
-        //}
-    // Renamed the class to avoid circular dependency with the base DbContext class
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<LoginMenu>()
+                .HasKey(lm => new { lm.LoginId, lm.SubMenuId });
+
+            // Si quieres mantener las relaciones también:
+            modelBuilder.Entity<LoginMenu>()
+                .HasOne(lm => lm.Login)
+                .WithMany()
+                .HasForeignKey(lm => lm.LoginId);
+
+            modelBuilder.Entity<LoginMenu>()
+                .HasOne(lm => lm.SubModulo)
+                .WithMany()
+                .HasForeignKey(lm => lm.SubMenuId);
+
+            modelBuilder.Entity<Empleados>(entity =>
+            {
+                entity.Property(e => e.Salario)
+                      .HasColumnType("decimal(18,2)");
+            });
+        }
 
     }
 }

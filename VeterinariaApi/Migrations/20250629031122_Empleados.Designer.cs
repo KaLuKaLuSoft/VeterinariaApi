@@ -12,8 +12,8 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250620052106_EspecialidadesMedicas")]
-    partial class EspecialidadesMedicas
+    [Migration("20250629031122_Empleados")]
+    partial class Empleados
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,6 +77,54 @@ namespace VeterinariaApi.Migrations
                     b.ToTable("Departamentos");
                 });
 
+            modelBuilder.Entity("VeterinariaApi.Models.Empleados", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Apellido")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ci")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CodEmpleado")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("FechaContratacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("FechaNacimiento")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("Fecha_Alta")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("Fecha_Modificacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("IdDepartamento")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal?>("Salario")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Telefono")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdDepartamento");
+
+                    b.ToTable("Empleados");
+                });
+
             modelBuilder.Entity("VeterinariaApi.Models.EspecialidadesMedicas", b =>
                 {
                     b.Property<int>("Id")
@@ -100,6 +148,107 @@ namespace VeterinariaApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EspecialidadesMedicas");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.Login", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool?>("Activo")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Contrasena")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("Expiration")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("Fecha_Alta")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("Fecha_Modificacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("IdEmpleado")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdRol")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdSucursal")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NombreUsuario")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Tokens")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UltimoLogin")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdEmpleado");
+
+                    b.HasIndex("IdRol");
+
+                    b.HasIndex("IdSucursal");
+
+                    b.ToTable("Login");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.LoginMenu", b =>
+                {
+                    b.Property<int>("LoginId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubMenuId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LoginId", "SubMenuId");
+
+                    b.HasIndex("SubMenuId");
+
+                    b.ToTable("LoginMenus");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.Modulo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("Fecha_Alta")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("Fecha_Modificacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NombreModulo")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Modulos");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.Paises", b =>
@@ -179,6 +328,36 @@ namespace VeterinariaApi.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("VeterinariaApi.Models.SubModulo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("Fecha_Alta")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("Fecha_Modificacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("ModuloId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NombreSubModulo")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ModuloId");
+
+                    b.ToTable("SubModulos");
+                });
+
             modelBuilder.Entity("VeterinariaApi.Models.Sucursales", b =>
                 {
                     b.Property<int>("Id")
@@ -226,6 +405,55 @@ namespace VeterinariaApi.Migrations
                     b.Navigation("NombreRegion");
                 });
 
+            modelBuilder.Entity("VeterinariaApi.Models.Empleados", b =>
+                {
+                    b.HasOne("VeterinariaApi.Models.Departamentos", "NombreDepartamento")
+                        .WithMany()
+                        .HasForeignKey("IdDepartamento");
+
+                    b.Navigation("NombreDepartamento");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.Login", b =>
+                {
+                    b.HasOne("VeterinariaApi.Models.Empleados", "NombreEmpleado")
+                        .WithMany()
+                        .HasForeignKey("IdEmpleado");
+
+                    b.HasOne("VeterinariaApi.Models.Roles", "NombreRol")
+                        .WithMany()
+                        .HasForeignKey("IdRol");
+
+                    b.HasOne("VeterinariaApi.Models.Sucursales", "NombreSucursal")
+                        .WithMany()
+                        .HasForeignKey("IdSucursal");
+
+                    b.Navigation("NombreEmpleado");
+
+                    b.Navigation("NombreRol");
+
+                    b.Navigation("NombreSucursal");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.LoginMenu", b =>
+                {
+                    b.HasOne("VeterinariaApi.Models.Login", "Login")
+                        .WithMany()
+                        .HasForeignKey("LoginId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VeterinariaApi.Models.SubModulo", "SubModulo")
+                        .WithMany()
+                        .HasForeignKey("SubMenuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Login");
+
+                    b.Navigation("SubModulo");
+                });
+
             modelBuilder.Entity("VeterinariaApi.Models.Regiones", b =>
                 {
                     b.HasOne("VeterinariaApi.Models.Paises", "NombrePais")
@@ -235,6 +463,17 @@ namespace VeterinariaApi.Migrations
                         .IsRequired();
 
                     b.Navigation("NombrePais");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.SubModulo", b =>
+                {
+                    b.HasOne("VeterinariaApi.Models.Modulo", "NombreModulo")
+                        .WithMany()
+                        .HasForeignKey("ModuloId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NombreModulo");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.Sucursales", b =>

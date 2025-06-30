@@ -10,109 +10,111 @@ using VeterinariaApi.Interface;
 
 namespace VeterinariaApi.Repositorio
 {
-    public class CiudadRepositorio : ICiudadRepositorio
+    public class AccionesRepositorio : IAccionesRepositorio
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public CiudadRepositorio(ApplicationDbContext context, IMapper mapper)
+        public AccionesRepositorio(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<DtoCiudad> Create(DtoCiudad ciudadDto)
+        public async Task<DtoAcciones> Create(DtoAcciones accionesDto)
         {
             using var transaction = _context.Database.BeginTransaction();
             try
             {
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
-                command.CommandText = "InsertarActualizarCiudad";
+                command.CommandText = "InsertarActualizarAcciones";
                 command.CommandType = CommandType.StoredProcedure;
 
-                var idParam = new MySqlParameter("@c_Id", MySqlDbType.Int32)
+                var idParam = new MySqlParameter("@a_Id", MySqlDbType.Int32)
                 {
                     Value = (object)DBNull.Value
                 };
                 command.Parameters.Add(idParam);
 
-                var nombreCiudadParam = new MySqlParameter("@c_NombreCiudad", MySqlDbType.VarChar, 100)
+                var nombreAccionesParam = new MySqlParameter("@a_NombreAcciones", MySqlDbType.VarChar, 100)
                 {
-                    Value = ciudadDto.NombreCiudad ?? (object)DBNull.Value
+                    Value = accionesDto.NombreAcciones ?? (object)DBNull.Value
                 };
-                command.Parameters.Add(nombreCiudadParam);
+                command.Parameters.Add(nombreAccionesParam);
 
-                var idRegionParam = new MySqlParameter("@c_IdRegion", MySqlDbType.Int32)
+                var descripcionParam = new MySqlParameter("@a_Descripcion", MySqlDbType.VarChar, 100)
                 {
-                    Value = ciudadDto.IdRegion
+                    Value = accionesDto.Descripcion ?? (object)DBNull.Value
                 };
-                command.Parameters.Add(idRegionParam);
+                command.Parameters.Add(descripcionParam);
 
                 await command.ExecuteNonQueryAsync();
                 await transaction.CommitAsync();
-                return ciudadDto;
+                return accionesDto;
             }
             catch (Exception ex)
             {
-                transaction.Rollback();
-                throw new Exception("Error al crear la ciudad", ex);
+                await transaction.RollbackAsync();
+                throw new Exception("Error al crear la acción", ex);
             }
         }
 
-        public async Task<DtoCiudad> Update(DtoCiudad ciudadDto)
+        public async Task<DtoAcciones> Update(DtoAcciones accionesDto)
         {
             using var transaction = _context.Database.BeginTransaction();
             try
             {
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
-                command.CommandText = "InsertarActualizarCiudad";
+                command.CommandText = "InsertarActualizarAcciones";
                 command.CommandType = CommandType.StoredProcedure;
 
-                var idParam = new MySqlParameter("@c_Id", MySqlDbType.Int32)
+                var idParam = new MySqlParameter("@a_Id", MySqlDbType.Int32)
                 {
-                    Value = ciudadDto.Id > 0 ? (object)ciudadDto.Id : (object)DBNull.Value
+                    Value = accionesDto.Id > 0 ? (object)accionesDto.Id : (object)DBNull.Value
                 };
                 command.Parameters.Add(idParam);
 
-                var nombreCiudadParam = new MySqlParameter("@c_NombreCiudad", MySqlDbType.VarChar, 100)
+                var nombreAccionesParam = new MySqlParameter("@a_NombreAcciones", MySqlDbType.VarChar, 100)
                 {
-                    Value = ciudadDto.NombreCiudad ?? (object)DBNull.Value
+                    Value = accionesDto.NombreAcciones ?? (object)DBNull.Value
                 };
-                command.Parameters.Add(nombreCiudadParam);
+                command.Parameters.Add(nombreAccionesParam);
 
-                var idRegionParam = new MySqlParameter("@c_IdRegion", MySqlDbType.Int32)
+                var descripcionParam = new MySqlParameter("@a_Descripcion", MySqlDbType.VarChar, 255)
                 {
-                    Value = ciudadDto.IdRegion
+                    Value = accionesDto.Descripcion ?? (object)DBNull.Value
                 };
-                command.Parameters.Add(idRegionParam);
+                command.Parameters.Add(descripcionParam);
 
                 await command.ExecuteNonQueryAsync();
                 await transaction.CommitAsync();
-                return ciudadDto;
+                return accionesDto;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al actualizar la ciudad", ex);
+                await transaction.RollbackAsync();
+                throw new Exception("Error al actualizar la acción", ex);
             }
         }
 
-        public async Task<bool> DeleteCiudad(int id)
+        public async Task<bool> DeleteAcciones(int id)
         {
             using var transaction = _context.Database.BeginTransaction();
             try
             {
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
-                command.CommandText = "EliminarCiudad";
+                command.CommandText = "EliminarAcciones";
                 command.CommandType = CommandType.StoredProcedure;
-                var idParam = new MySqlParameter("@c_Id", MySqlDbType.Int32)
+
+                var idParam = new MySqlParameter("@a_Id", MySqlDbType.Int32)
                 {
                     Value = id
                 };
 
-                var resultParam = new MySqlParameter("@c_Resultado", MySqlDbType.Bit)
+                var resultParam = new MySqlParameter("@a_Resultado", MySqlDbType.Bit)
                 {
                     Direction = ParameterDirection.Output
                 };
@@ -120,19 +122,19 @@ namespace VeterinariaApi.Repositorio
                 command.Parameters.Add(resultParam);
 
                 await command.ExecuteNonQueryAsync();
-                await transaction.CommitAsync(); ;
-                
+                await transaction.CommitAsync();
+
                 int result = Convert.ToInt32(resultParam.Value);
                 return result == 1;
             }
             catch (Exception ex)
             {
-                transaction.Rollback();
-                throw new Exception("Error al eliminar la ciudad", ex); 
+                await transaction.RollbackAsync();
+                throw new Exception("Error al eliminar la acción", ex);
             }
         }
 
-        public async Task<List<DtoCiudad>> GetCiudad()
+        public async Task<List<DtoAcciones>> GetAcciones()
         {
             try
             {
@@ -140,36 +142,35 @@ namespace VeterinariaApi.Repositorio
                 await connection.OpenAsync();
 
                 var command = connection.CreateCommand();
-                command.CommandText = "ObtenerCiudad";
+                command.CommandText = "ObtenerAcciones";
                 command.CommandType = CommandType.StoredProcedure;
 
-                var region = new List<DtoCiudad>();
+                var acciones = new List<DtoAcciones>();
                 using (var reader = await command.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())
                     {
-                        var ciudad = new DtoCiudad
+                        var accion = new DtoAcciones
                         {
                             Id = reader.GetInt32(0),
-                            NombreCiudad = reader.GetString(1),
-                            IdRegion = reader.GetInt32(2),
-                            NombreRegion = reader.IsDBNull(3) ? null : reader.GetString(3),
-                            Fecha_Alta = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4),
-                            Fecha_Modificacion = reader.IsDBNull(5) ? (DateTime?)null : reader.GetDateTime(5)
+                            NombreAcciones = reader.GetString(1),
+                            Descripcion = reader.GetString(2),
+                            Fecha_Alta = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3),
+                            Fecha_Modificacion = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4)
                         };
-                        region.Add(ciudad);
+                        acciones.Add(accion);
                     }
-                    await connection.CloseAsync();
-                    return region;
+                    await reader.CloseAsync();
+                    return acciones;
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener las ciudades", ex);
+                throw new Exception("Error al obtener las acciones", ex);
             }
         }
 
-        public async Task<DtoCiudad> GetCiudadById(int id)
+        public async Task<DtoAcciones> GetAccionesById(int id)
         {
             try
             {
@@ -177,44 +178,41 @@ namespace VeterinariaApi.Repositorio
                 await connection.OpenAsync();
 
                 var command = connection.CreateCommand();
-                command.CommandText = "ObtenerCiudadPorId";
+                command.CommandText = "ObtenerAccionesPorId";
                 command.CommandType = CommandType.StoredProcedure;
-
-                var idParam = new MySqlParameter("@c_Id", MySqlDbType.Int32)
+                var idParam = new MySqlParameter("@a_Id", MySqlDbType.Int32)
                 {
                     Value = id
                 };
                 command.Parameters.Add(idParam);
-
                 using (var reader = await command.ExecuteReaderAsync())
                 {
                     if (await reader.ReadAsync())
                     {
-                        var ciudad = new DtoCiudad
+                        var acciones = new DtoAcciones
                         {
                             Id = reader.GetInt32(0),
-                            NombreCiudad = reader.GetString(1),
-                            IdRegion = reader.GetInt32(2),
-                            NombreRegion = reader.IsDBNull(3) ? null : reader.GetString(3),
-                            Fecha_Alta = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4),
-                            Fecha_Modificacion = reader.IsDBNull(5) ? (DateTime?)null : reader.GetDateTime(5)
+                            NombreAcciones = reader.GetString(1),
+                            Descripcion = reader.GetString(2),
+                            Fecha_Alta = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3),
+                            Fecha_Modificacion = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4)
                         };
                         await connection.CloseAsync();
-                        return ciudad;
+                        return acciones;
                     }
+                    await connection.CloseAsync();
+                    return null;
                 }
-                await connection.CloseAsync();
-                return null;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener la ciudad por ID", ex);
+                throw new Exception("Error al obtener la acción por ID", ex);
             }
         }
 
-        public async Task<bool> CiudadExists(int id)
+        public async Task<bool> AccionesExists(int id)
         {
-            return await _context.Ciudades.AnyAsync(c => c.Id == id);
+            return await _context.Acciones.AnyAsync(a => a.Id == id);
         }
     }
 }

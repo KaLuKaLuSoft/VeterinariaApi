@@ -12,8 +12,8 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250628064521_SubModulo")]
-    partial class SubModulo
+    [Migration("20250630140919_Acciones")]
+    partial class Acciones
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,31 @@ namespace VeterinariaApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("VeterinariaApi.Models.Acciones", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("Fecha_Alta")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("Fecha_Modificacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NombreAcciones")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Acciones");
+                });
 
             modelBuilder.Entity("VeterinariaApi.Models.Ciudad", b =>
                 {
@@ -113,7 +138,7 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<decimal?>("Salario")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Telefono")
                         .HasColumnType("longtext");
@@ -209,6 +234,21 @@ namespace VeterinariaApi.Migrations
                     b.HasIndex("IdSucursal");
 
                     b.ToTable("Login");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.LoginMenu", b =>
+                {
+                    b.Property<int>("LoginId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubMenuId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LoginId", "SubMenuId");
+
+                    b.HasIndex("SubMenuId");
+
+                    b.ToTable("LoginMenus");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.Modulo", b =>
@@ -418,6 +458,25 @@ namespace VeterinariaApi.Migrations
                     b.Navigation("NombreRol");
 
                     b.Navigation("NombreSucursal");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.LoginMenu", b =>
+                {
+                    b.HasOne("VeterinariaApi.Models.Login", "Login")
+                        .WithMany()
+                        .HasForeignKey("LoginId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VeterinariaApi.Models.SubModulo", "SubModulo")
+                        .WithMany()
+                        .HasForeignKey("SubMenuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Login");
+
+                    b.Navigation("SubModulo");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.Regiones", b =>

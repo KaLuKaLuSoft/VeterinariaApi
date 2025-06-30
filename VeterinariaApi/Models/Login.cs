@@ -24,7 +24,6 @@ namespace VeterinariaApi.Models
         public bool? Activo { get; set; }
         public string? Tokens { get; set; }
         public DateTime? Expiration { get; set; }
-
         public string? RefreshToken { get; set; }
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }
