@@ -45,6 +45,21 @@ namespace VeterinariaApi
 
                 config.CreateMap<Acciones, DtoAcciones>();
                 config.CreateMap<DtoAcciones, Acciones>();
+
+                config.CreateMap<LoginAcciones, DtoLoginAcciones>();
+                config.CreateMap<DtoLoginAcciones, LoginAcciones>();
+
+                config.CreateMap<LoginAcciones, DtoLoginAcciones>();
+                config.CreateMap<DtoLoginAcciones, LoginAcciones>();
+
+                config.CreateMap <Empleados, DtoEmpleado>();
+                config.CreateMap<DtoEmpleado, Empleados>();
+
+                config.CreateMap<EmpleadoEsepecialidad, DtoEmpleadoEspecialidad>();
+                config.CreateMap<DtoEmpleadoEspecialidad, EmpleadoEsepecialidad>();
+
+                config.CreateMap <TipoTurno, DtoTipoTurno>();
+                config.CreateMap<DtoTipoTurno, TipoTurno>();
             });
             return mappingConfig;
         }

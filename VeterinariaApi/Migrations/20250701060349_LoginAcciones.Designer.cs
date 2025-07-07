@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VeterinariaApi.Data;
 
@@ -11,9 +12,11 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250701060349_LoginAcciones")]
+    partial class LoginAcciones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,30 +100,6 @@ namespace VeterinariaApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Departamentos");
-                });
-
-            modelBuilder.Entity("VeterinariaApi.Models.EmpleadoEsepecialidad", b =>
-                {
-                    b.Property<int>("EmpleadoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EspecialidadId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("FechaCertificacion")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("Fecha_Alta")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("Fecha_Modificacion")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("EmpleadoId", "EspecialidadId");
-
-                    b.HasIndex("EspecialidadId");
-
-                    b.ToTable("EmpleadoEsepecialidad");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.Empleados", b =>
@@ -455,34 +434,6 @@ namespace VeterinariaApi.Migrations
                     b.ToTable("Sucursales");
                 });
 
-            modelBuilder.Entity("VeterinariaApi.Models.TipoTurno", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("Fecha_Alta")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("Fecha_Modificacion")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<TimeSpan?>("HoraFin")
-                        .HasColumnType("time(6)");
-
-                    b.Property<TimeSpan?>("HoraInicio")
-                        .HasColumnType("time(6)");
-
-                    b.Property<string>("NombreTurno")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TipoTurno");
-                });
-
             modelBuilder.Entity("VeterinariaApi.Models.Ciudad", b =>
                 {
                     b.HasOne("VeterinariaApi.Models.Regiones", "NombreRegion")
@@ -492,25 +443,6 @@ namespace VeterinariaApi.Migrations
                         .IsRequired();
 
                     b.Navigation("NombreRegion");
-                });
-
-            modelBuilder.Entity("VeterinariaApi.Models.EmpleadoEsepecialidad", b =>
-                {
-                    b.HasOne("VeterinariaApi.Models.Empleados", "Empleado")
-                        .WithMany()
-                        .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VeterinariaApi.Models.EspecialidadesMedicas", "Especialidad")
-                        .WithMany()
-                        .HasForeignKey("EspecialidadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Empleado");
-
-                    b.Navigation("Especialidad");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.Empleados", b =>

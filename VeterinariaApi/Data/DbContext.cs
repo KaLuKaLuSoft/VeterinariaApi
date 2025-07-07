@@ -25,13 +25,17 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.SubModulo> SubModulos { get; set; }
         public DbSet<VeterinariaApi.Models.LoginMenu> LoginMenus { get; set; }
         public DbSet<VeterinariaApi.Models.Acciones> Acciones { get; set; }
+        public DbSet<VeterinariaApi.Models.LoginAcciones> LoginAcciones { get; set; }
+        public DbSet<VeterinariaApi.Models.EmpleadoEsepecialidad> EmpleadoEsepecialidad { get; set; }
+        public DbSet<VeterinariaApi.Models.TipoTurno> TipoTurno { get; set; }
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region Menu
+            // Menu
             modelBuilder.Entity<LoginMenu>()
-                .HasKey(lm => new { lm.LoginId, lm.SubMenuId });
+            .HasKey(lm => new { lm.LoginId, lm.SubMenuId });
 
-            // Si quieres mantener las relaciones también:
             modelBuilder.Entity<LoginMenu>()
                 .HasOne(lm => lm.Login)
                 .WithMany()
@@ -40,8 +44,38 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<LoginMenu>()
                 .HasOne(lm => lm.SubModulo)
                 .WithMany()
-                .HasForeignKey(lm => lm.SubMenuId);
+                .HasForeignKey(lm => lm.SubMenuId); 
+            #endregion
 
+            modelBuilder.Entity<EmpleadoEsepecialidad>()
+                .HasKey(ee => new { ee.EmpleadoId, ee.EspecialidadId });
+
+            modelBuilder.Entity<EmpleadoEsepecialidad>()
+                .HasOne(ee => ee.Empleado)
+                .WithMany()
+                .HasForeignKey(ee => ee.EmpleadoId);
+
+            modelBuilder.Entity<EmpleadoEsepecialidad>()
+                .HasOne(ee => ee.Especialidad)
+                .WithMany()
+                .HasForeignKey(ee => ee.EspecialidadId);
+            #region Reglas
+            //Reglas
+            modelBuilder.Entity<LoginAcciones>()
+                .HasKey(lm => new { lm.LoginId, lm.ReglasId });
+
+            modelBuilder.Entity<LoginAcciones>()
+                .HasOne(lm => lm.Login)
+                .WithMany()
+                .HasForeignKey(lm => lm.LoginId);
+
+            modelBuilder.Entity<LoginAcciones>()
+                .HasOne(lm => lm.Regla)
+                .WithMany()
+                .HasForeignKey(lm => lm.ReglasId); 
+            #endregion
+
+            //Decimales
             modelBuilder.Entity<Empleados>(entity =>
             {
                 entity.Property(e => e.Salario)

@@ -36,6 +36,11 @@ builder.Services.AddScoped<ISubModuloRepositorio, SubModuloRepositorio>();
 builder.Services.AddScoped<ILoginRepositorio, LoginRepositorio>();
 builder.Services.AddScoped<ILoginMenuRepositorio, LoginMenuRepositorio>();
 builder.Services.AddScoped<IAccionesRepositorio, AccionesRepositorio>();
+builder.Services.AddScoped<ILoginAccionesRepositorio, LoginAccionesRepositorio>();
+builder.Services.AddScoped<IEmpleadoRepositorio, EmpleadoRepositorio>();
+builder.Services.AddScoped<IEmpleadoEspecialidadRepositorio, EmpleadoEspecialidadRepositorio>();
+builder.Services.AddScoped<ITipoTurnoRepositorio, TipoTurnoRepositorio>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
