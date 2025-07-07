@@ -28,6 +28,7 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.LoginAcciones> LoginAcciones { get; set; }
         public DbSet<VeterinariaApi.Models.EmpleadoEsepecialidad> EmpleadoEsepecialidad { get; set; }
         public DbSet<VeterinariaApi.Models.TipoTurno> TipoTurno { get; set; }
+        public DbSet<VeterinariaApi.Models.TurnosEmpleado> TurnosEmpleado { get; set; }
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

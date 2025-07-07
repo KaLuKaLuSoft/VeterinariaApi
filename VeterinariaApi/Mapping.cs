@@ -10,11 +10,11 @@ namespace VeterinariaApi
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<Paises, DtoPaises>(); // Define the mapping inside the constructor
-                config.CreateMap<DtoPaises, Paises>(); // Reverse mapping
+                config.CreateMap<Paises, DtoPaises>();
+                config.CreateMap<DtoPaises, Paises>();
 
-                config.CreateMap<Regiones, DtoRegiones>(); // Define the mapping for Regiones
-                config.CreateMap<DtoRegiones, Regiones>(); // Reverse mapping
+                config.CreateMap<Regiones, DtoRegiones>();
+                config.CreateMap<DtoRegiones, Regiones>();
 
                 config.CreateMap<Ciudad, DtoCiudad>();
                 config.CreateMap<DtoCiudad, Ciudad>();
@@ -58,8 +58,11 @@ namespace VeterinariaApi
                 config.CreateMap<EmpleadoEsepecialidad, DtoEmpleadoEspecialidad>();
                 config.CreateMap<DtoEmpleadoEspecialidad, EmpleadoEsepecialidad>();
 
-                config.CreateMap <TipoTurno, DtoTipoTurno>();
+                config.CreateMap<TipoTurno, DtoTipoTurno>();
                 config.CreateMap<DtoTipoTurno, TipoTurno>();
+
+                config.CreateMap<TurnosEmpleado, DtoTurnosEmpleado>();
+                config.CreateMap<DtoTurnosEmpleado, TurnosEmpleado>();
             });
             return mappingConfig;
         }
