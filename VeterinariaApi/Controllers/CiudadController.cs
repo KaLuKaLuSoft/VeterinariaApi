@@ -112,7 +112,7 @@ namespace VeterinariaApi.Controllers
                 _response.IsSuccess = false;
                 _response.ErrorMessages = new List<string> { ex.Message };
                 _response.DisplayMessage = "Error al actualizar la ciudad.";
-                return StatusCode(500, _response);
+                return BadRequest(_response);
             }
         }
 

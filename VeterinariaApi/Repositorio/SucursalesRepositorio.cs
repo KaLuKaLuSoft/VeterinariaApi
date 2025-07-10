@@ -148,7 +148,7 @@ namespace VeterinariaApi.Repositorio
                     Value = id
                 };
 
-                var resultParam = new MySqlParameter("@s_Resultado", MySqlDbType.Int32)
+                var resultParam = new MySqlParameter("@resultado", MySqlDbType.Int32)
                 {
                     Direction = ParameterDirection.Output
                 };

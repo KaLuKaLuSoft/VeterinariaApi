@@ -110,6 +110,7 @@ namespace VeterinariaApi.Controllers
             catch(Exception ex)
             {
                 _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.Message };
                 _response.DisplayMessage = "Error al actualizar la acción.";
                 return BadRequest(_response);
             }

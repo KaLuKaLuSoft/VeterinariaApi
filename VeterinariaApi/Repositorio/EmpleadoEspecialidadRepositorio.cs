@@ -116,7 +116,7 @@ namespace VeterinariaApi.Repositorio
                     Value = especialidadId
                 };
 
-                var resultParam = new MySqlParameter("@Resultado", MySqlDbType.Bit)
+                var resultParam = new MySqlParameter("@resultado", MySqlDbType.Bit)
                 {
                     Direction = ParameterDirection.Output
                 };
