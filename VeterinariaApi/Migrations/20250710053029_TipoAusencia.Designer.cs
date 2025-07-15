@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VeterinariaApi.Data;
 
@@ -11,9 +12,11 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250710053029_TipoAusencia")]
+    partial class TipoAusencia
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,58 +48,6 @@ namespace VeterinariaApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Acciones");
-                });
-
-            modelBuilder.Entity("VeterinariaApi.Models.AusenciaEmpleado", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AprobadoPorEmpleado")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmpleadoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Estado")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("FechaAprobacion")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("FechaFin")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("FechaInicio")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("FechaSolicitud")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("Fecha_Alta")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("Fecha_Modificacion")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Motivo")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("TipoAusenciaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AprobadoPorEmpleado");
-
-                    b.HasIndex("EmpleadoId");
-
-                    b.HasIndex("TipoAusenciaId");
-
-                    b.ToTable("AusenciaEmpleado");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.Ciudad", b =>
@@ -601,33 +552,6 @@ namespace VeterinariaApi.Migrations
                     b.HasIndex("TurnoId");
 
                     b.ToTable("TurnosEmpleado");
-                });
-
-            modelBuilder.Entity("VeterinariaApi.Models.AusenciaEmpleado", b =>
-                {
-                    b.HasOne("VeterinariaApi.Models.Empleados", "AprobadoPorEmpleados")
-                        .WithMany()
-                        .HasForeignKey("AprobadoPorEmpleado")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VeterinariaApi.Models.Empleados", "Empleado")
-                        .WithMany()
-                        .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VeterinariaApi.Models.TipoAusencia", "TipoAusencia")
-                        .WithMany()
-                        .HasForeignKey("TipoAusenciaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AprobadoPorEmpleados");
-
-                    b.Navigation("Empleado");
-
-                    b.Navigation("TipoAusencia");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.Ciudad", b =>

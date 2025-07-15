@@ -10,111 +10,108 @@ using VeterinariaApi.Interface;
 
 namespace VeterinariaApi.Repositorio
 {
-    public class AccionesRepositorio : IAccionesRepositorio
+    public class TipoAusenciaRepositorio : ITipoAusenciaRepositorio
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public AccionesRepositorio(ApplicationDbContext context, IMapper mapper)
+        public TipoAusenciaRepositorio(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
-
-        public async Task<DtoAcciones> Create(DtoAcciones accionesDto)
+        public async Task<DtoTipoAusencia> Create(DtoTipoAusencia tipoAusenciaDto)
         {
-            using var transaction = _context.Database.BeginTransaction();
+            using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
-                command.CommandText = "InsertarActualizarAcciones";
+                command.CommandText = "InsertarActualizarTipoAusencia";
                 command.CommandType = CommandType.StoredProcedure;
 
-                var idParam = new MySqlParameter("@a_Id", MySqlDbType.Int32)
+                var idParam = new MySqlParameter("@ta_Id", MySqlDbType.Int32)
                 {
                     Value = (object)DBNull.Value
                 };
                 command.Parameters.Add(idParam);
 
-                var nombreAccionesParam = new MySqlParameter("@a_NombreAcciones", MySqlDbType.VarChar, 100)
+                var nombreAusenciaParam = new MySqlParameter("@ta_NombreAusencia", MySqlDbType.VarChar, 100)
                 {
-                    Value = accionesDto.NombreAcciones ?? (object)DBNull.Value
+                    Value = tipoAusenciaDto.NombreAusencia ?? (object)DBNull.Value
                 };
-                command.Parameters.Add(nombreAccionesParam);
+                command.Parameters.Add(nombreAusenciaParam);
 
-                var descripcionParam = new MySqlParameter("@a_Descripcion", MySqlDbType.VarChar, 100)
+                var requiereAprobacionParam = new MySqlParameter("@ta_RequiereAprobacion", MySqlDbType.Bit)
                 {
-                    Value = accionesDto.Descripcion ?? (object)DBNull.Value
+                    Value = tipoAusenciaDto.RequiereAprobacion
                 };
-                command.Parameters.Add(descripcionParam);
+                command.Parameters.Add(requiereAprobacionParam);
 
                 await command.ExecuteNonQueryAsync();
                 await transaction.CommitAsync();
-                return accionesDto;
+                return tipoAusenciaDto;
             }
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-                throw new Exception("Error al crear la acción", ex);
+                throw new Exception("Error al crear el tipo de ausencia", ex);
             }
         }
-
-        public async Task<DtoAcciones> Update(DtoAcciones accionesDto)
+        public async Task<DtoTipoAusencia> Update(DtoTipoAusencia tipoAusenciaDto)
         {
-            using var transaction = _context.Database.BeginTransaction();
+            using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
-                command.CommandText = "InsertarActualizarAcciones";
+                command.CommandText = "InsertarActualizarTipoAusencia";
                 command.CommandType = CommandType.StoredProcedure;
 
-                var idParam = new MySqlParameter("@a_Id", MySqlDbType.Int32)
+                var idParam = new MySqlParameter("@ta_Id", MySqlDbType.Int32)
                 {
-                    Value = accionesDto.Id > 0 ? (object)accionesDto.Id : (object)DBNull.Value
+                    Value = tipoAusenciaDto.Id > 0 ? (object)tipoAusenciaDto.Id : (object)DBNull.Value
                 };
                 command.Parameters.Add(idParam);
 
-                var nombreAccionesParam = new MySqlParameter("@a_NombreAcciones", MySqlDbType.VarChar, 100)
+                var nombreAusenciaParam = new MySqlParameter("@ta_NombreAusencia", MySqlDbType.VarChar, 100)
                 {
-                    Value = accionesDto.NombreAcciones ?? (object)DBNull.Value
+                    Value = tipoAusenciaDto.NombreAusencia ?? (object)DBNull.Value
                 };
-                command.Parameters.Add(nombreAccionesParam);
+                command.Parameters.Add(nombreAusenciaParam);
 
-                var descripcionParam = new MySqlParameter("@a_Descripcion", MySqlDbType.VarChar, 255)
+                var requiereAprobacionParam = new MySqlParameter("@ta_RequiereAprobacion", MySqlDbType.Bit)
                 {
-                    Value = accionesDto.Descripcion ?? (object)DBNull.Value
+                    Value = tipoAusenciaDto.RequiereAprobacion
                 };
-                command.Parameters.Add(descripcionParam);
+                command.Parameters.Add(requiereAprobacionParam);
 
                 await command.ExecuteNonQueryAsync();
                 await transaction.CommitAsync();
-                return accionesDto;
+                return tipoAusenciaDto;
             }
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-                throw new Exception("Error al actualizar la acción", ex);
+                throw new Exception("Error al actualizar el tipo de ausencia", ex);
             }
         }
-
-        public async Task<bool> DeleteAcciones(int id)
+        public async Task<bool> DeleteTipoAusencia(int id)
         {
-            using var transaction = _context.Database.BeginTransaction();
+            using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
-                command.CommandText = "EliminarAcciones";
+                command.CommandText = "EliminarTipoAusencia";
                 command.CommandType = CommandType.StoredProcedure;
 
-                var idParam = new MySqlParameter("@a_Id", MySqlDbType.Int32)
+                var idParam = new MySqlParameter("@ta_Id", MySqlDbType.Int32)
                 {
                     Value = id
                 };
 
-                var resultParam = new MySqlParameter("@resultado", MySqlDbType.Bit)
+                var resultParam = new MySqlParameter("@resultado", MySqlDbType.Int32)
                 {
                     Direction = ParameterDirection.Output
                 };
@@ -130,11 +127,10 @@ namespace VeterinariaApi.Repositorio
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-                throw new Exception("Error al eliminar la acción", ex);
+                throw new Exception("Error al eliminar el tipo de ausencia", ex);
             }
         }
-
-        public async Task<List<DtoAcciones>> GetAcciones()
+        public async Task<List<DtoTipoAusencia>> GetTipoAusencia()
         {
             try
             {
@@ -142,45 +138,43 @@ namespace VeterinariaApi.Repositorio
                 await connection.OpenAsync();
 
                 var command = connection.CreateCommand();
-                command.CommandText = "ObtenerAcciones";
+                command.CommandText = "ObtenerTipoAusencia";
                 command.CommandType = CommandType.StoredProcedure;
 
-                var acciones = new List<DtoAcciones>();
+                var tipoasuencias = new List<DtoTipoAusencia>();
                 using (var reader = await command.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())
                     {
-                        var accion = new DtoAcciones
+                        var tipoAusencia = new DtoTipoAusencia
                         {
                             Id = reader.GetInt32(0),
-                            NombreAcciones = reader.GetString(1),
-                            Descripcion = reader.GetString(2),
+                            NombreAusencia = reader.IsDBNull(1) ? null : reader.GetString(1),
+                            RequiereAprobacion = reader.GetBoolean(2),
                             Fecha_Alta = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3),
                             Fecha_Modificacion = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4)
                         };
-                        acciones.Add(accion);
+                        tipoasuencias.Add(tipoAusencia);
                     }
                     await reader.CloseAsync();
-                    return acciones;
+                    return tipoasuencias;
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener las acciones", ex);
+                throw new Exception("Error al obtener los tipos de ausencia", ex);
             }
         }
-
-        public async Task<DtoAcciones> GetAccionesById(int id)
+        public async Task<DtoTipoAusencia> GetTipoAusenciaById(int id)
         {
             try
             {
                 var connection = _context.Database.GetDbConnection();
                 await connection.OpenAsync();
-
                 var command = connection.CreateCommand();
-                command.CommandText = "ObtenerAccionesPorId";
+                command.CommandText = "ObtenerTipoAusenciaPorId";
                 command.CommandType = CommandType.StoredProcedure;
-                var idParam = new MySqlParameter("@a_Id", MySqlDbType.Int32)
+                var idParam = new MySqlParameter("@ta_Id", MySqlDbType.Int32)
                 {
                     Value = id
                 };
@@ -189,16 +183,16 @@ namespace VeterinariaApi.Repositorio
                 {
                     if (await reader.ReadAsync())
                     {
-                        var acciones = new DtoAcciones
+                        var tipoausencias = new DtoTipoAusencia
                         {
                             Id = reader.GetInt32(0),
-                            NombreAcciones = reader.GetString(1),
-                            Descripcion = reader.GetString(2),
+                            NombreAusencia = reader.IsDBNull(1) ? null : reader.GetString(1),
+                            RequiereAprobacion = reader.GetBoolean(2),
                             Fecha_Alta = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3),
                             Fecha_Modificacion = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4)
                         };
                         await connection.CloseAsync();
-                        return acciones;
+                        return tipoausencias;
                     }
                     await connection.CloseAsync();
                     return null;
@@ -206,13 +200,12 @@ namespace VeterinariaApi.Repositorio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener la acción por ID", ex);
+                throw new Exception("Error al obtener el tipo de ausencia por ID", ex);
             }
         }
-
-        public async Task<bool> AccionesExists(int id)
+        public async Task<bool> TipoAusenciaExists(int id)
         {
-            return await _context.Acciones.AnyAsync(a => a.Id == id);
+            return await _context.TipoAusencia.AnyAsync(t => t.Id == id);
         }
     }
 }
