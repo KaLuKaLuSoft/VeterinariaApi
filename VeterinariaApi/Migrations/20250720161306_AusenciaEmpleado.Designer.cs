@@ -12,8 +12,8 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250713013444_AprobadoPorEmpleado")]
-    partial class AprobadoPorEmpleado
+    [Migration("20250720161306_AusenciaEmpleado")]
+    partial class AusenciaEmpleado
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,16 +67,16 @@ namespace VeterinariaApi.Migrations
                     b.Property<string>("Estado")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("FechaAprobacion")
+                    b.Property<DateTime?>("FechaAprobacion")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("FechaFin")
+                    b.Property<DateTime?>("FechaFin")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("FechaInicio")
+                    b.Property<DateTime?>("FechaInicio")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("FechaSolicitud")
+                    b.Property<DateTime?>("FechaSolicitud")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("Fecha_Alta")

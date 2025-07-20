@@ -42,6 +42,7 @@ builder.Services.AddScoped<IEmpleadoEspecialidadRepositorio, EmpleadoEspecialida
 builder.Services.AddScoped<ITipoTurnoRepositorio, TipoTurnoRepositorio>();
 builder.Services.AddScoped<ITurnosEmpleadoRepositorio, TurnosEmpleadoRepositorio>();
 builder.Services.AddScoped<ITipoAusenciaRepositorio, TipoAusenciaRepositorio>();
+builder.Services.AddScoped<IAusenciaEmpleadoRepositorio, AusenciaEmpleadoRepositorio>();
 
 var app = builder.Build();
 

@@ -64,8 +64,7 @@ namespace VeterinariaApi.Repositorio
                 transaction.Rollback();
                 throw new Exception("Error al crear el submódulo", ex);
             }
-        }
-        
+        }    
         public async Task<DtoSubModulo> Update(DtoSubModulo submoduloDto)
         {
             using var transaction = _context.Database.BeginTransaction();
@@ -145,7 +144,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al eliminar el submódulo", ex);
             }
         }
-
         public async Task<List<DtoSubModulo>> GetSubModulo()
         {
             try
@@ -183,7 +181,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al obtener los submódulos", ex);
             }
         }
-
         public async Task<DtoSubModulo> GetSubModuloById(int id)
         {
             try
@@ -225,7 +222,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al obtener el submódulo por ID", ex);
             }
         }
-
         public async Task<bool> SubModuloExists(int id)
         {
             return await _context.SubModulos.AnyAsync(sm => sm.Id == id);

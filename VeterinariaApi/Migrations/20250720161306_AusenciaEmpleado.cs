@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VeterinariaApi.Migrations
 {
     /// <inheritdoc />
-    public partial class AprobadoPorEmpleado : Migration
+    public partial class AusenciaEmpleado : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,13 +22,13 @@ namespace VeterinariaApi.Migrations
                     TipoAusenciaId = table.Column<int>(type: "int", nullable: false),
                     Estado = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    FechaInicio = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    FechaFin = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    FechaInicio = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    FechaFin = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     Motivo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     AprobadoPorEmpleado = table.Column<int>(type: "int", nullable: false),
-                    FechaSolicitud = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    FechaAprobacion = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    FechaSolicitud = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    FechaAprobacion = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },

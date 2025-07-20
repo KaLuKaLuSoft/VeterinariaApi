@@ -129,7 +129,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al eliminar el departamento: ", ex);
             }
         }
-
         public async Task<List<DtoDepartamentos>> GetDepartamentos()
         {
             try
