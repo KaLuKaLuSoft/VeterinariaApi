@@ -31,6 +31,7 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.TurnosEmpleado> TurnosEmpleado { get; set; }
         public DbSet<VeterinariaApi.Models.TipoAusencia> TipoAusencia { get; set; }
         public DbSet<VeterinariaApi.Models.AusenciaEmpleado> AusenciaEmpleado { get; set; }
+        public DbSet<VeterinariaApi.Models.UsuarioRol> UsuarioRol { get; set; }
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -47,11 +48,11 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<LoginMenu>()
                 .HasOne(lm => lm.SubModulo)
                 .WithMany()
-                .HasForeignKey(lm => lm.SubMenuId); 
+                .HasForeignKey(lm => lm.SubMenuId);
             #endregion
-
+            #region EmpleadoEspecialidad
             modelBuilder.Entity<EmpleadoEsepecialidad>()
-                .HasKey(ee => new { ee.EmpleadoId, ee.EspecialidadId });
+        .HasKey(ee => new { ee.EmpleadoId, ee.EspecialidadId });
 
             modelBuilder.Entity<EmpleadoEsepecialidad>()
                 .HasOne(ee => ee.Empleado)
@@ -61,7 +62,8 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<EmpleadoEsepecialidad>()
                 .HasOne(ee => ee.Especialidad)
                 .WithMany()
-                .HasForeignKey(ee => ee.EspecialidadId);
+                .HasForeignKey(ee => ee.EspecialidadId); 
+            #endregion
             #region Reglas
             //Reglas
             modelBuilder.Entity<LoginAcciones>()
@@ -75,9 +77,22 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<LoginAcciones>()
                 .HasOne(lm => lm.Regla)
                 .WithMany()
-                .HasForeignKey(lm => lm.ReglasId); 
+                .HasForeignKey(lm => lm.ReglasId);
             #endregion
+            #region UsuarioRol
+            modelBuilder.Entity<UsuarioRol>()
+        .HasKey(lm => new { lm.UsuarioId, lm.RolId });
 
+            modelBuilder.Entity<UsuarioRol>()
+                .HasOne(lm => lm.Usuario)
+                .WithMany()
+                .HasForeignKey(lm => lm.UsuarioId);
+
+            modelBuilder.Entity<UsuarioRol>()
+                .HasOne(lm => lm.Roles)
+                .WithMany()
+                .HasForeignKey(lm => lm.RolId); 
+            #endregion
             //Decimales
             modelBuilder.Entity<Empleados>(entity =>
             {

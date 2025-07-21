@@ -69,6 +69,9 @@ namespace VeterinariaApi
 
                 config.CreateMap<AusenciaEmpleado, DtoAusenciaEmpleado>();
                 config.CreateMap<DtoAusenciaEmpleado, AusenciaEmpleado>();
+
+                config.CreateMap<UsuarioRol, DtoUsuarioRol>();
+                config.CreateMap<DtoUsuarioRol, UsuarioRol>();
             });
             return mappingConfig;
         }

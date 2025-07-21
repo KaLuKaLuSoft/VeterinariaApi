@@ -215,7 +215,7 @@ namespace VeterinariaApi.Repositorio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener EmpleadoEspecialidad por ID", ex);
+                throw new Exception("Error al obtener EmpleadoEspecialidad", ex);
             }
         }
         public async Task<bool> EmpleadoEspecialidadExists(int empleadoId, int especialidadId)
