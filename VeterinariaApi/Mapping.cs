@@ -72,6 +72,9 @@ namespace VeterinariaApi
 
                 config.CreateMap<UsuarioRol, DtoUsuarioRol>();
                 config.CreateMap<DtoUsuarioRol, UsuarioRol>();
+
+                config.CreateMap<UsuarioSucursal, DtoUsuarioSucursal>();
+                config.CreateMap<DtoUsuarioSucursal, UsuarioSucursal>();
             });
             return mappingConfig;
         }

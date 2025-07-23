@@ -111,8 +111,9 @@ namespace VeterinariaApi.Controllers
             catch(Exception ex)
             {
                 _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.Message };
                 _response.DisplayMessage = "Error al actualizar UsuarioRol. ";
-                return StatusCode(500, _response);
+                return BadRequest(_response);
             }
         }
 
@@ -124,12 +125,12 @@ namespace VeterinariaApi.Controllers
             try
             {
                 DtoUsuarioRol usuarioRol = await _usuariorolRepositorio.Create(usuarioRolDto);
-                return StatusCode(201, new { Message = "UsuarioRol creada correctamente. " });
+                return StatusCode(201, new { Message = "UsuarioRol creada correctamente. ", Data = usuarioRol });
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error al crear el UsuarioRol. ");
-                return StatusCode(500, new { Message = "Error al crear UsuarioRol"});
+                return StatusCode(500, new { Message = "Error al crear UsuarioRol. ", Details = ex.Message });
             }
         }
 

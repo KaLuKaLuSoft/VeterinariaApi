@@ -32,6 +32,7 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.TipoAusencia> TipoAusencia { get; set; }
         public DbSet<VeterinariaApi.Models.AusenciaEmpleado> AusenciaEmpleado { get; set; }
         public DbSet<VeterinariaApi.Models.UsuarioRol> UsuarioRol { get; set; }
+        public DbSet<VeterinariaApi.Models.UsuarioSucursal> UsuarioSucursal { get; set; }
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -81,8 +82,8 @@ namespace VeterinariaApi.Data
             #endregion
             #region UsuarioRol
             modelBuilder.Entity<UsuarioRol>()
-        .HasKey(lm => new { lm.UsuarioId, lm.RolId });
-
+                .HasKey(lm => new { lm.UsuarioId, lm.RolId });
+    
             modelBuilder.Entity<UsuarioRol>()
                 .HasOne(lm => lm.Usuario)
                 .WithMany()
@@ -91,7 +92,21 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<UsuarioRol>()
                 .HasOne(lm => lm.Roles)
                 .WithMany()
-                .HasForeignKey(lm => lm.RolId); 
+                .HasForeignKey(lm => lm.RolId);
+            #endregion
+            #region UsuarioSucursal
+            modelBuilder.Entity<UsuarioSucursal>()
+                .HasKey(us => new { us.UsuarioId, us.SucursalId });
+
+            modelBuilder.Entity<UsuarioSucursal>()
+                .HasOne(us => us.Usuario)
+                .WithMany()
+                .HasForeignKey(us => us.UsuarioId);
+
+            modelBuilder.Entity<UsuarioSucursal>()
+                .HasOne(us => us.Sucursal)
+                .WithMany()
+                .HasForeignKey(us => us.SucursalId); 
             #endregion
             //Decimales
             modelBuilder.Entity<Empleados>(entity =>
