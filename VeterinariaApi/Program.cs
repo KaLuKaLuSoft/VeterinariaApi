@@ -45,6 +45,7 @@ builder.Services.AddScoped<ITipoAusenciaRepositorio, TipoAusenciaRepositorio>();
 builder.Services.AddScoped<IAusenciaEmpleadoRepositorio, AusenciaEmpleadoRepositorio>();
 builder.Services.AddScoped<IUsuarioRolRepositorio, UsuarioRolRepositorio>();
 builder.Services.AddScoped<IUsuarioSucursalRepositorio, UsuarioSucursalRepositorio>();
+builder.Services.AddScoped<ICriterioEvaluacionRepositorio, CriterioEvaluacionRepositorio>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

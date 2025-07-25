@@ -114,7 +114,7 @@ namespace VeterinariaApi.Repositorio
                     Value = id
                 };
 
-                var resultParam = new MySqlParameter("@resultado", MySqlDbType.Bit)
+                var resultParam = new MySqlParameter("@resultado", MySqlDbType.Int32)
                 {
                     Direction = ParameterDirection.Output
                 };
@@ -206,7 +206,7 @@ namespace VeterinariaApi.Repositorio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener la acción por ID", ex);
+                throw new Exception("Error al obtener la acción. ", ex);
             }
         }
 

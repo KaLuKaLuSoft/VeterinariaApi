@@ -70,7 +70,7 @@ namespace VeterinariaApi.Controllers
                 if(acciones != null)
                 {
                     _response.Result = acciones;
-                    _response.DisplayMessage = "Acciones encontrada correctamente.";
+                    _response.DisplayMessage = "Accion encontrada correctamente.";
                     return Ok(_response);
                 }
                 else
@@ -124,7 +124,7 @@ namespace VeterinariaApi.Controllers
             try
             {
                 DtoAcciones acciones = await _accionesRepositorio.Create(accionesDto);
-                return StatusCode(201, new { message = "Acción creada correctamente.", Data = acciones });
+                return StatusCode(201, new { Message = "Acción creada correctamente.", Data = acciones });
             }
             catch (Exception ex)
             {

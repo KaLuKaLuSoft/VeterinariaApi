@@ -33,6 +33,7 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.AusenciaEmpleado> AusenciaEmpleado { get; set; }
         public DbSet<VeterinariaApi.Models.UsuarioRol> UsuarioRol { get; set; }
         public DbSet<VeterinariaApi.Models.UsuarioSucursal> UsuarioSucursal { get; set; }
+        public DbSet<VeterinariaApi.Models.CriteriosEvaluacion> CriterioEvaluacion { get; set; }
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
