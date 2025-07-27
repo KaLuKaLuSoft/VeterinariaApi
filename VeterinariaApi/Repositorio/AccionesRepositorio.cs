@@ -20,7 +20,6 @@ namespace VeterinariaApi.Repositorio
             _context = context;
             _mapper = mapper;
         }
-
         public async Task<DtoAcciones> Create(DtoAcciones accionesDto)
         {
             using var transaction = _context.Database.BeginTransaction();
@@ -59,7 +58,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al crear la acción", ex);
             }
         }
-
         public async Task<DtoAcciones> Update(DtoAcciones accionesDto)
         {
             using var transaction = _context.Database.BeginTransaction();
@@ -98,7 +96,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al actualizar la acción", ex);
             }
         }
-
         public async Task<bool> DeleteAcciones(int id)
         {
             using var transaction = _context.Database.BeginTransaction();
@@ -133,7 +130,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al eliminar la acción", ex);
             }
         }
-
         public async Task<List<DtoAcciones>> GetAcciones()
         {
             try
@@ -169,7 +165,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al obtener las acciones", ex);
             }
         }
-
         public async Task<DtoAcciones> GetAccionesById(int id)
         {
             try
@@ -209,7 +204,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al obtener la acción. ", ex);
             }
         }
-
         public async Task<bool> AccionesExists(int id)
         {
             return await _context.Acciones.AnyAsync(a => a.Id == id);

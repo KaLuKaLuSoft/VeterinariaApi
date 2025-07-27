@@ -1,25 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using VeterinariaApi.Models;
 
-namespace VeterinariaApi.Models
+namespace VeterinariaApi.Dto
 {
-    public class EvaluacionEmpleado
+    public class DtoEvaluacionEmpleado
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int EmpleadoId { get; set; }
-        [ForeignKey("EmpleadoId")]
-        public Empleados? Empleado { get; set; }
+        public string? Empleado { get; set; }
         public int CriterioEvaluacionId { get; set; }
-        [ForeignKey("CriterioEvaluacionId")]
-        public CriteriosEvaluacion? CriterioEvaluacion { get; set; }
+        public string? CriterioEvaluacion { get; set; }
         public DateTime? Fecha_Evaluacion { get; set; }
         public decimal? Calificacion { get; set; }
         public string? Comentarios { get; set; }
         public int EvaluadoPorEmpleadoId { get; set; }
-        [ForeignKey("EvaluadoPorEmpleadoId")]
-        public Empleados? EmpleadoEvaluador { get; set; }
+        public string? EmpleadoEvaluador { get; set; }
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }
     }

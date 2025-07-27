@@ -34,6 +34,7 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.UsuarioRol> UsuarioRol { get; set; }
         public DbSet<VeterinariaApi.Models.UsuarioSucursal> UsuarioSucursal { get; set; }
         public DbSet<VeterinariaApi.Models.CriteriosEvaluacion> CriterioEvaluacion { get; set; }
+        public DbSet<VeterinariaApi.Models.EvaluacionEmpleado> EvaluacionEmpleado { get; set; }
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -113,6 +114,12 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<Empleados>(entity =>
             {
                 entity.Property(e => e.Salario)
+                      .HasColumnType("decimal(18,2)");
+            });
+            
+            modelBuilder.Entity<EvaluacionEmpleado>(entity =>
+            {
+                entity.Property(e => e.Calificacion)
                       .HasColumnType("decimal(18,2)");
             });
         }

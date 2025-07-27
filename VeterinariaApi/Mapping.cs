@@ -78,6 +78,9 @@ namespace VeterinariaApi
 
                 config.CreateMap<CriteriosEvaluacion, DtoCriterioEvaluacion>();
                 config.CreateMap<DtoCriterioEvaluacion, CriteriosEvaluacion>();
+
+                config.CreateMap<EvaluacionEmpleado, DtoEvaluacionEmpleado>();
+                config.CreateMap<DtoEvaluacionEmpleado, EvaluacionEmpleado>();
             });
             return mappingConfig;
         }
