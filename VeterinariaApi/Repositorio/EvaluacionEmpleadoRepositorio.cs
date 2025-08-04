@@ -91,7 +91,7 @@ namespace VeterinariaApi.Repositorio
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
                 command.CommandText = "InsertarActualizarEvaluacionEmpleado";
-                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandType = CommandType.StoredProcedure;
 
                 var idParam = new MySqlParameter("@ee_Id", MySqlDbType.Int32)
                 {
@@ -199,11 +199,14 @@ namespace VeterinariaApi.Repositorio
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             EmpleadoId = reader.GetInt32(reader.GetOrdinal("EmpleadoId")),
+                            Empleado = reader.IsDBNull(reader.GetOrdinal("Empleado")) ? null : reader.GetString(reader.GetOrdinal("Empleado")),
                             CriterioEvaluacionId = reader.GetInt32(reader.GetOrdinal("CriterioEvaluacionId")),
+                            CriterioEvaluacion = reader.IsDBNull(reader.GetOrdinal("CriterioEvaluacion")) ? null : reader.GetString(reader.GetOrdinal("CriterioEvaluacion")),
                             Fecha_Evaluacion = reader.IsDBNull(reader.GetOrdinal("Fecha_Evaluacion")) ? null : reader.GetDateTime(reader.GetOrdinal("Fecha_Evaluacion")),
                             Calificacion = reader.IsDBNull(reader.GetOrdinal("Calificacion")) ? null : reader.GetDecimal(reader.GetOrdinal("Calificacion")),
                             Comentarios = reader.IsDBNull(reader.GetOrdinal("Comentarios")) ? null : reader.GetString(reader.GetOrdinal("Comentarios")),
                             EvaluadoPorEmpleadoId = reader.GetInt32(reader.GetOrdinal("EvaluadoPorEmpleadoId")),
+                            EmpleadoEvaluador = reader.IsDBNull(reader.GetOrdinal("EmpleadoEvaluador")) ? null : reader.GetString(reader.GetOrdinal("EmpleadoEvaluador")),
                             Fecha_Alta = reader.IsDBNull(reader.GetOrdinal("Fecha_Alta")) ? null : reader.GetDateTime(reader.GetOrdinal("Fecha_Alta")),
                             Fecha_Modificacion = reader.IsDBNull(reader.GetOrdinal("Fecha_Modificacion")) ? null : reader.GetDateTime(reader.GetOrdinal("Fecha_Modificacion"))
                         };
@@ -233,8 +236,8 @@ namespace VeterinariaApi.Repositorio
                 {
                     Value = id
                 };
-
-                using(var reader = await command.ExecuteReaderAsync())
+                command.Parameters.Add(idParam);
+                using (var reader = await command.ExecuteReaderAsync())
                 {
                     if(await reader.ReadAsync())
                     {
@@ -242,11 +245,14 @@ namespace VeterinariaApi.Repositorio
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             EmpleadoId = reader.GetInt32(reader.GetOrdinal("EmpleadoId")),
+                            Empleado = reader.IsDBNull(reader.GetOrdinal("Empleado")) ? null : reader.GetString(reader.GetOrdinal("Empleado")),
                             CriterioEvaluacionId = reader.GetInt32(reader.GetOrdinal("CriterioEvaluacionId")),
+                            CriterioEvaluacion = reader.IsDBNull(reader.GetOrdinal("CriterioEvaluacion")) ? null : reader.GetString(reader.GetOrdinal("CriterioEvaluacion")),
                             Fecha_Evaluacion = reader.IsDBNull(reader.GetOrdinal("Fecha_Evaluacion")) ? null : reader.GetDateTime(reader.GetOrdinal("Fecha_Evaluacion")),
                             Calificacion = reader.IsDBNull(reader.GetOrdinal("Calificacion")) ? null : reader.GetDecimal(reader.GetOrdinal("Calificacion")),
                             Comentarios = reader.IsDBNull(reader.GetOrdinal("Comentarios")) ? null : reader.GetString(reader.GetOrdinal("Comentarios")),
                             EvaluadoPorEmpleadoId = reader.GetInt32(reader.GetOrdinal("EvaluadoPorEmpleadoId")),
+                            EmpleadoEvaluador = reader.IsDBNull(reader.GetOrdinal("EmpleadoEvaluador")) ? null : reader.GetString(reader.GetOrdinal("EmpleadoEvaluador")),
                             Fecha_Alta = reader.IsDBNull(reader.GetOrdinal("Fecha_Alta")) ? null : reader.GetDateTime(reader.GetOrdinal("Fecha_Alta")),
                             Fecha_Modificacion = reader.IsDBNull(reader.GetOrdinal("Fecha_Modificacion")) ? null : reader.GetDateTime(reader.GetOrdinal("Fecha_Modificacion"))
                         };

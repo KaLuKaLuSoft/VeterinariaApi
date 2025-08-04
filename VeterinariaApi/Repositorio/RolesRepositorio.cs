@@ -40,7 +40,7 @@ namespace VeterinariaApi.Repositorio
                 };
                 command.Parameters.Add(nombreRolParam);
                 
-                var descripcionParam = new MySqlParameter("@r_Descripcion", MySqlDbType.VarChar, 100)
+                var descripcionParam = new MySqlParameter("@r_Descripcion", MySqlDbType.VarChar, 255)
                 {
                     Value = rolesDto.Descripcion ?? (object)DBNull.Value
                 };

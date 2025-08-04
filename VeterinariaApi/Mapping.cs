@@ -81,6 +81,15 @@ namespace VeterinariaApi
 
                 config.CreateMap<EvaluacionEmpleado, DtoEvaluacionEmpleado>();
                 config.CreateMap<DtoEvaluacionEmpleado, EvaluacionEmpleado>();
+
+                config.CreateMap<CursoCapacitacion, DtoCursoCapacitacion>();
+                config.CreateMap<DtoCursoCapacitacion, CursoCapacitacion>();
+
+                config.CreateMap<EmpleadoCapacitacion, DtoEmpleadoCapacitacion>();
+                config.CreateMap<DtoEmpleadoCapacitacion, EmpleadoCapacitacion>();
+
+                config.CreateMap<CategoriaActivoFijo, DtoCategoriaActivoFijo>();
+                config.CreateMap<DtoCategoriaActivoFijo, CategoriaActivoFijo>();
             });
             return mappingConfig;
         }

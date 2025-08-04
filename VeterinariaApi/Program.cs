@@ -47,6 +47,8 @@ builder.Services.AddScoped<IUsuarioRolRepositorio, UsuarioRolRepositorio>();
 builder.Services.AddScoped<IUsuarioSucursalRepositorio, UsuarioSucursalRepositorio>();
 builder.Services.AddScoped<ICriterioEvaluacionRepositorio, CriterioEvaluacionRepositorio>();
 builder.Services.AddScoped<IEvaluacionEmpleadoRepositorio, EvaluacionEmpleadoRepositorio>();
+builder.Services.AddScoped<ICursoCapacitacionRepositorio, CursoCapacitacionRepositorio>();
+builder.Services.AddScoped<IEmpleadoCapacitacionRepositorio, EmpleadoCapacitacionRepositorio>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

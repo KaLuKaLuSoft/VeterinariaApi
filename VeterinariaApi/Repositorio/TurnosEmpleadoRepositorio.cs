@@ -66,7 +66,7 @@ namespace VeterinariaApi.Repositorio
                 };
                 command.Parameters.Add(confirmadoParam);
 
-                var observacionesParam = new MySqlParameter("@t_Observaciones", MySqlDbType.VarChar, 250)
+                var observacionesParam = new MySqlParameter("@t_Observaciones", MySqlDbType.VarChar, 255)
                 {
                     Value = turnosEmpleadoDto.Observaciones ?? (object)DBNull.Value
                 };
@@ -163,6 +163,7 @@ namespace VeterinariaApi.Repositorio
                     Direction = ParameterDirection.Output
                 };
                 command.Parameters.Add(idParam);
+                command.Parameters.Add(resultParam);
                 await command.ExecuteNonQueryAsync();
                 await transaction.CommitAsync();
 

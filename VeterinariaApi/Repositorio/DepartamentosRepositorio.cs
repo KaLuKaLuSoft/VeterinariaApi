@@ -79,7 +79,7 @@ namespace VeterinariaApi.Repositorio
                 };
                 command.Parameters.Add(nombredepartamentosParameter);
 
-                var descripcionParameter = new MySqlParameter("@d_Descripcion", MySqlDbType.VarChar, 500)
+                var descripcionParameter = new MySqlParameter("@d_Descripcion", MySqlDbType.VarChar, 255)
                 {
                     Value = departamentosDto.Descripcion ?? (object)DBNull.Value
                 };

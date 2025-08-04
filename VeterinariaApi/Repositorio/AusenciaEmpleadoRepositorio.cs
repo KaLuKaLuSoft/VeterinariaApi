@@ -31,61 +31,61 @@ namespace VeterinariaApi.Repositorio
                 command.CommandText = "InsertarActualizarAusenciaEmpleado";
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                var idParam = new MySqlConnector.MySqlParameter("@ae_Id", MySqlConnector.MySqlDbType.Int32)
+                var idParam = new MySqlConnector.MySqlParameter("@ae_Id",MySqlDbType.Int32)
                 {
                     Value = (object)DBNull.Value
                 };
                 command.Parameters.Add(idParam);
 
-                var empleadoIdParam = new MySqlConnector.MySqlParameter("@ae_EmpleadoId", MySqlConnector.MySqlDbType.Int32)
+                var empleadoIdParam = new MySqlConnector.MySqlParameter("@ae_EmpleadoId", MySqlDbType.Int32)
                 {
                     Value = ausenciaEmpleadoDto.EmpleadoId
                 };
                 command.Parameters.Add(empleadoIdParam);
 
-                var tipoAusenciaIdParam = new MySqlConnector.MySqlParameter("@ae_TipoAusenciaId", MySqlConnector.MySqlDbType.Int32)
+                var tipoAusenciaIdParam = new MySqlConnector.MySqlParameter("@ae_TipoAusenciaId", MySqlDbType.Int32)
                 {
                     Value = ausenciaEmpleadoDto.TipoAusenciaId
                 };
                 command.Parameters.Add(tipoAusenciaIdParam);
 
-                var estadoParam = new MySqlConnector.MySqlParameter("@ae_Estado", MySqlConnector.MySqlDbType.VarChar, 50)
+                var estadoParam = new MySqlConnector.MySqlParameter("@ae_Estado", MySqlDbType.VarChar, 50)
                 {
                     Value = ausenciaEmpleadoDto.Estado ?? (object)DBNull.Value
                 };
                 command.Parameters.Add(estadoParam);
 
-                var fechaInicioParam = new MySqlConnector.MySqlParameter("@ae_FechaInicio", MySqlConnector.MySqlDbType.DateTime)
+                var fechaInicioParam = new MySqlConnector.MySqlParameter("@ae_FechaInicio", MySqlDbType.DateTime)
                 {
                     Value = ausenciaEmpleadoDto.FechaInicio
                 };
                 command.Parameters.Add(fechaInicioParam);
 
-                var fechaFinParam = new MySqlConnector.MySqlParameter("@ae_FechaFin", MySqlConnector.MySqlDbType.DateTime)
+                var fechaFinParam = new MySqlConnector.MySqlParameter("@ae_FechaFin", MySqlDbType.DateTime)
                 {
                     Value = ausenciaEmpleadoDto.FechaFin
                 };
                 command.Parameters.Add(fechaFinParam);
 
-                var motivoParam = new MySqlConnector.MySqlParameter("@ae_Motivo", MySqlConnector.MySqlDbType.VarChar, 255)
+                var motivoParam = new MySqlConnector.MySqlParameter("@ae_Motivo", MySqlDbType.VarChar, 255)
                 {
                     Value = ausenciaEmpleadoDto.Motivo ?? (object)DBNull.Value
                 };
                 command.Parameters.Add(motivoParam);
 
-                var aprobadoPorEmpleadoParam = new MySqlConnector.MySqlParameter("@ae_AprobadoPorEmpleado", MySqlConnector.MySqlDbType.Int32)
+                var aprobadoPorEmpleadoParam = new MySqlConnector.MySqlParameter("@ae_AprobadoPorEmpleado", MySqlDbType.Int32)
                 {
                     Value = ausenciaEmpleadoDto.AprobadoPorEmpleado
                 };
                 command.Parameters.Add(aprobadoPorEmpleadoParam);
 
-                var fechaSolicitudParam = new MySqlConnector.MySqlParameter("@ae_FechaSolicitud", MySqlConnector.MySqlDbType.DateTime)
+                var fechaSolicitudParam = new MySqlConnector.MySqlParameter("@ae_FechaSolicitud", MySqlDbType.DateTime)
                 {
                     Value = ausenciaEmpleadoDto.FechaSolicitud
                 };
                 command.Parameters.Add(fechaSolicitudParam);
 
-                var fechaAprobacionParam = new MySqlConnector.MySqlParameter("@ae_FechaAprobacion", MySqlConnector.MySqlDbType.DateTime)
+                var fechaAprobacionParam = new MySqlConnector.MySqlParameter("@ae_FechaAprobacion", MySqlDbType.DateTime)
                 {
                     Value = ausenciaEmpleadoDto.FechaAprobacion
                 };

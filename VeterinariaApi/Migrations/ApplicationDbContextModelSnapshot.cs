@@ -31,7 +31,8 @@ namespace VeterinariaApi.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime(6)");
@@ -40,7 +41,8 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("NombreAcciones")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
@@ -62,7 +64,8 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Estado")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<DateTime?>("FechaAprobacion")
                         .HasColumnType("datetime(6)");
@@ -83,7 +86,8 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Motivo")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("TipoAusenciaId")
                         .HasColumnType("int");
@@ -97,6 +101,36 @@ namespace VeterinariaApi.Migrations
                     b.HasIndex("TipoAusenciaId");
 
                     b.ToTable("AusenciaEmpleado");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.CategoriaActivoFijo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("Fecha_Alta")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("Fecha_Modificacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NombreCategoriaActivoFijo")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NombreCategoriaActivoFijo")
+                        .IsUnique();
+
+                    b.ToTable("CategoriaActivoFijo");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.Ciudad", b =>
@@ -117,7 +151,8 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("NombreCiudad")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
@@ -135,7 +170,8 @@ namespace VeterinariaApi.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime(6)");
@@ -144,14 +180,57 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("NombreCriterio")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("TipoCriterio")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("NombreCriterio")
+                        .IsUnique();
+
                     b.ToTable("CriterioEvaluacion");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.CursoCapacitacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Duracion")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime?>("Fecha_Alta")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("Fecha_Modificacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NombreCurso")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Proveedor")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NombreCurso")
+                        .IsUnique();
+
+                    b.ToTable("CursoCapacitacion");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.Departamentos", b =>
@@ -163,7 +242,8 @@ namespace VeterinariaApi.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime(6)");
@@ -172,11 +252,59 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("NombreDepartamento")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("NombreDepartamento")
+                        .IsUnique();
+
                     b.ToTable("Departamentos");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.EmpleadoCapacitacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal?>("Calificacion")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CapacitacionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmpleadoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EstadoAprobacion")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<DateTime?>("Fecha_Alta")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("Fecha_Capacitacion")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("Fecha_Modificacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CapacitacionId")
+                        .IsUnique();
+
+                    b.HasIndex("EmpleadoId")
+                        .IsUnique();
+
+                    b.HasIndex("Fecha_Capacitacion")
+                        .IsUnique();
+
+                    b.ToTable("EmpleadoCapacitacion");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.EmpleadoEsepecialidad", b =>
@@ -212,13 +340,16 @@ namespace VeterinariaApi.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Apellido")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Ci")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("CodEmpleado")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<DateTime>("FechaContratacion")
                         .HasColumnType("datetime(6)");
@@ -236,15 +367,20 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<decimal?>("Salario")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar(15)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CodEmpleado")
+                        .IsUnique();
 
                     b.HasIndex("IdDepartamento");
 
@@ -260,7 +396,8 @@ namespace VeterinariaApi.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime(6)");
@@ -269,9 +406,13 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("NombreEspecialidad")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NombreEspecialidad")
+                        .IsUnique();
 
                     b.ToTable("EspecialidadesMedicas");
                 });
@@ -327,14 +468,19 @@ namespace VeterinariaApi.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool?>("Activo")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<ulong?>("Activo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Contrasena")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime?>("Expiration")
                         .HasColumnType("datetime(6)");
@@ -358,13 +504,16 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("NombreUsuario")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("RefreshToken")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(1000)
+                        .HasColumnType("varchar(1000)");
 
                     b.Property<string>("Tokens")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(1000)
+                        .HasColumnType("varchar(1000)");
 
                     b.Property<DateTime>("UltimoLogin")
                         .HasColumnType("datetime(6)");
@@ -376,6 +525,9 @@ namespace VeterinariaApi.Migrations
                     b.HasIndex("IdRol");
 
                     b.HasIndex("IdSucursal");
+
+                    b.HasIndex("NombreUsuario")
+                        .IsUnique();
 
                     b.ToTable("Login");
                 });
@@ -419,7 +571,8 @@ namespace VeterinariaApi.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime(6)");
@@ -428,9 +581,13 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("NombreModulo")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NombreModulo")
+                        .IsUnique();
 
                     b.ToTable("Modulos");
                 });
@@ -444,7 +601,8 @@ namespace VeterinariaApi.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Codigo")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime(6)");
@@ -453,7 +611,8 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
@@ -478,11 +637,15 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("NombreDepartamento")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdPais");
+
+                    b.HasIndex("NombreDepartamento")
+                        .IsUnique();
 
                     b.ToTable("Regiones");
                 });
@@ -496,7 +659,8 @@ namespace VeterinariaApi.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime(6)");
@@ -505,9 +669,13 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("NombreRol")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NombreRol")
+                        .IsUnique();
 
                     b.ToTable("Roles");
                 });
@@ -521,7 +689,8 @@ namespace VeterinariaApi.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime(6)");
@@ -533,11 +702,15 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("NombreSubModulo")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ModuloId");
+
+                    b.HasIndex("NombreSubModulo")
+                        .IsUnique();
 
                     b.ToTable("SubModulos");
                 });
@@ -551,10 +724,12 @@ namespace VeterinariaApi.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Direccion")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("EmailContacto")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime(6)");
@@ -566,12 +741,17 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("NombreSucursal")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar(15)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmailContacto")
+                        .IsUnique();
 
                     b.HasIndex("IdCiudad");
 
@@ -593,12 +773,18 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("NombreAusencia")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
-                    b.Property<bool>("RequiereAprobacion")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<ulong>("RequiereAprobacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(0ul);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NombreAusencia")
+                        .IsUnique();
 
                     b.ToTable("TipoAusencia");
                 });
@@ -624,9 +810,13 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("time(6)");
 
                     b.Property<string>("NombreTurno")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NombreTurno")
+                        .IsUnique();
 
                     b.ToTable("TipoTurno");
                 });
@@ -639,14 +829,16 @@ namespace VeterinariaApi.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Confirmado")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<ulong>("Confirmado")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(0ul);
 
                     b.Property<int>("EmpleadoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("Fecha")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime(6)");
@@ -655,7 +847,8 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Observaciones")
-                        .HasColumnType("longtext");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("SucursalId")
                         .HasColumnType("int");
@@ -752,6 +945,25 @@ namespace VeterinariaApi.Migrations
                         .IsRequired();
 
                     b.Navigation("NombreRegion");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.EmpleadoCapacitacion", b =>
+                {
+                    b.HasOne("VeterinariaApi.Models.CursoCapacitacion", "CursoCapacitacion")
+                        .WithMany()
+                        .HasForeignKey("CapacitacionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VeterinariaApi.Models.Empleados", "Empleado")
+                        .WithMany()
+                        .HasForeignKey("EmpleadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CursoCapacitacion");
+
+                    b.Navigation("Empleado");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.EmpleadoEsepecialidad", b =>
