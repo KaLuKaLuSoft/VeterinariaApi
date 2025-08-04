@@ -68,7 +68,7 @@ namespace VeterinariaApi.Controllers
             try
             {
                 var categoriaActivoFijo = await _categoriaActivoFijoRepositorio.GetCategoriaActivoFijoById(id);
-                if (categoriaActivoFijo == null)
+                if (categoriaActivoFijo != null)
                 {
                     _response.Result = categoriaActivoFijo;
                     _response.DisplayMessage = "Categoría de activo fijo encontrada.";

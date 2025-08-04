@@ -38,6 +38,7 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.CursoCapacitacion> CursoCapacitacion { get; set; }
         public DbSet<VeterinariaApi.Models.EmpleadoCapacitacion> EmpleadoCapacitacion { get; set; } 
         public DbSet<VeterinariaApi.Models.CategoriaActivoFijo> CategoriaActivoFijo { get; set; }
+        public DbSet<VeterinariaApi.Models.ActivosFijos> ActivosFijos { get; set; }
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -129,6 +130,11 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<EmpleadoCapacitacion>(entity =>
             {
                 entity.Property(e => e.Calificacion)
+                      .HasColumnType("decimal(18,2)");
+            });
+            modelBuilder.Entity<ActivosFijos>(entity =>
+            {
+                entity.Property(e => e.CostoAdquisicion)
                       .HasColumnType("decimal(18,2)");
             });
             #endregion
@@ -362,6 +368,25 @@ namespace VeterinariaApi.Data
                 .HasMaxLength(255);
             modelBuilder.Entity<CategoriaActivoFijo>()
                 .HasIndex(c => c.NombreCategoriaActivoFijo)
+                .IsUnique();
+
+            modelBuilder.Entity<ActivosFijos>()
+                .Property(a => a.NombreActivo)
+                .HasMaxLength(100);
+            modelBuilder.Entity<ActivosFijos>()
+                .Property(a => a.NumeroSerie)
+                .HasMaxLength(100);
+            modelBuilder.Entity<ActivosFijos>()
+                .Property(a => a.UbicacionFisica)
+                .HasMaxLength(255);
+            modelBuilder.Entity<ActivosFijos>()
+                .Property(a => a.Estado)
+                .HasMaxLength(100); // Activo, Inactivo, En Mantenimiento, Retirado
+            modelBuilder.Entity<ActivosFijos>()
+                .Property(a => a.Observaciones)
+                .HasMaxLength(255);
+            modelBuilder.Entity<ActivosFijos>()
+                .HasIndex(a => a.NumeroSerie)
                 .IsUnique();
             #endregion
         }

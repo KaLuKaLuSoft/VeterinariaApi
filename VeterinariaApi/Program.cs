@@ -49,6 +49,8 @@ builder.Services.AddScoped<ICriterioEvaluacionRepositorio, CriterioEvaluacionRep
 builder.Services.AddScoped<IEvaluacionEmpleadoRepositorio, EvaluacionEmpleadoRepositorio>();
 builder.Services.AddScoped<ICursoCapacitacionRepositorio, CursoCapacitacionRepositorio>();
 builder.Services.AddScoped<IEmpleadoCapacitacionRepositorio, EmpleadoCapacitacionRepositorio>();
+builder.Services.AddScoped<ICategoriaActivoFijoRepositorio, CategoriaActivoFijoRepositorio>();
+builder.Services.AddScoped<IActivosFijosRepositorio, ActivosFijosRepositorio>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

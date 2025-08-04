@@ -148,11 +148,11 @@ namespace VeterinariaApi.Repositorio
                     {
                         var categoriaActivoFijo = new DtoCategoriaActivoFijo
                         {
-                            Id = reader.GetInt32("caf_Id"),
-                            NombreCategoriaActivoFijo = reader.IsDBNull("caf_NombreCategoriaFijo") ? null : reader.GetString("caf_NombreCategoriaFijo"),
-                            Descripcion = reader.IsDBNull("caf_Descripcion") ? null : reader.GetString("caf_Descripcion"),
-                            Fecha_Alta = reader.IsDBNull("caf_Fecha_Alta") ? (DateTime?)null : reader.GetDateTime("caf_Fecha_Alta"),
-                            Fecha_Modificacion = reader.IsDBNull("caf_Fecha_Modificacion") ? (DateTime?)null : reader.GetDateTime("caf_Fecha_Modificacion")
+                            Id = reader.GetInt32("Id"),
+                            NombreCategoriaActivoFijo = reader.IsDBNull("NombreCategoriaActivoFijo") ? null : reader.GetString("NombreCategoriaActivoFijo"),
+                            Descripcion = reader.IsDBNull("Descripcion") ? null : reader.GetString("Descripcion"),
+                            Fecha_Alta = reader.IsDBNull("Fecha_Alta") ? (DateTime?)null : reader.GetDateTime("Fecha_Alta"),
+                            Fecha_Modificacion = reader.IsDBNull("Fecha_Modificacion") ? (DateTime?)null : reader.GetDateTime("Fecha_Modificacion")
                         };
                         categoriaActivoFijos.Add(categoriaActivoFijo);
                     }
