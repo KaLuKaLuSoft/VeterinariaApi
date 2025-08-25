@@ -9,8 +9,8 @@ namespace VeterinariaApi.Repositorio
 {
     public class ActivosFijosRepositorio : IActivosFijosRepositorio
     {
-        public readonly ApplicationDbContext _context;
-        public readonly IMapper _mapper;
+        private readonly ApplicationDbContext _context;
+        private IMapper _mapper;
 
         public ActivosFijosRepositorio(ApplicationDbContext context, IMapper mapper)
         {

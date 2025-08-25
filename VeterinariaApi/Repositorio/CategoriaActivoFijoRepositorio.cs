@@ -12,7 +12,7 @@ namespace VeterinariaApi.Repositorio
     public class CategoriaActivoFijoRepositorio : ICategoriaActivoFijoRepositorio
     {
         private readonly ApplicationDbContext _context;
-        private readonly IMapper _mapper;
+        private IMapper _mapper;
 
         public CategoriaActivoFijoRepositorio(ApplicationDbContext context, IMapper mapper)
         {

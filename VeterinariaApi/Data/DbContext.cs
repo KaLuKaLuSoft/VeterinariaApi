@@ -39,6 +39,7 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.EmpleadoCapacitacion> EmpleadoCapacitacion { get; set; } 
         public DbSet<VeterinariaApi.Models.CategoriaActivoFijo> CategoriaActivoFijo { get; set; }
         public DbSet<VeterinariaApi.Models.ActivosFijos> ActivosFijos { get; set; }
+        public DbSet<VeterinariaApi.Models.ConceptoNominas> ConceptoNominas { get; set; }
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -388,8 +389,24 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<ActivosFijos>()
                 .HasIndex(a => a.NumeroSerie)
                 .IsUnique();
+
+            modelBuilder.Entity<ConceptoNominas>()
+                .Property(cn => cn.NombreNomina)
+                .HasMaxLength(100);
+            modelBuilder.Entity<ConceptoNominas>()
+                .Property(cn => cn.TipoConcepto)
+                .HasMaxLength(100);
+            modelBuilder.Entity<ConceptoNominas>()
+                .Property(cn => cn.EsFijo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<ConceptoNominas>()
+                .Property(cn => cn.Descripcion)
+                .HasMaxLength(255);
+            modelBuilder.Entity<ConceptoNominas>()
+                .HasIndex(cn => cn.NombreNomina)
+                .IsUnique();
             #endregion
         }
-
     }
 }
