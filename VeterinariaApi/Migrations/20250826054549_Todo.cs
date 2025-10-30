@@ -22,12 +22,53 @@ namespace VeterinariaApi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Descripcion = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Acciones", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "CategoriaActivoFijo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NombreCategoriaActivoFijo = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Descripcion = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoriaActivoFijo", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ConceptoNominas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NombreNomina = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    TipoConcepto = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    EsFijo = table.Column<ulong>(type: "bit", nullable: true, defaultValue: 0ul),
+                    Descripcion = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ConceptoNominas", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -43,8 +84,8 @@ namespace VeterinariaApi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     TipoCriterio = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,8 +107,8 @@ namespace VeterinariaApi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Proveedor = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -85,8 +126,8 @@ namespace VeterinariaApi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Descripcion = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,8 +145,8 @@ namespace VeterinariaApi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Descripcion = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -123,8 +164,8 @@ namespace VeterinariaApi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Descripcion = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -142,8 +183,8 @@ namespace VeterinariaApi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Codigo = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -161,8 +202,8 @@ namespace VeterinariaApi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Descripcion = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -179,8 +220,8 @@ namespace VeterinariaApi.Migrations
                     NombreAusencia = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     RequiereAprobacion = table.Column<ulong>(type: "bit", nullable: false, defaultValue: 0ul),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -198,8 +239,8 @@ namespace VeterinariaApi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     HoraInicio = table.Column<TimeSpan>(type: "time(6)", nullable: true),
                     HoraFin = table.Column<TimeSpan>(type: "time(6)", nullable: true),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -227,8 +268,8 @@ namespace VeterinariaApi.Migrations
                     FechaContratacion = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Salario = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     IdDepartamento = table.Column<int>(type: "int", nullable: true),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -252,8 +293,8 @@ namespace VeterinariaApi.Migrations
                     Descripcion = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ModuloId = table.Column<int>(type: "int", nullable: false),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -276,8 +317,8 @@ namespace VeterinariaApi.Migrations
                     NombreDepartamento = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IdPais = table.Column<int>(type: "int", nullable: false),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -301,15 +342,15 @@ namespace VeterinariaApi.Migrations
                     TipoAusenciaId = table.Column<int>(type: "int", nullable: false),
                     Estado = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    FechaInicio = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    FechaFin = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    FechaInicio = table.Column<DateTime>(type: "datetime", nullable: true),
+                    FechaFin = table.Column<DateTime>(type: "datetime", nullable: true),
                     Motivo = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     AprobadoPorEmpleado = table.Column<int>(type: "int", nullable: false),
-                    FechaSolicitud = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    FechaAprobacion = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    FechaSolicitud = table.Column<DateTime>(type: "datetime", nullable: true),
+                    FechaAprobacion = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -347,8 +388,8 @@ namespace VeterinariaApi.Migrations
                     EstadoAprobacion = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Calificacion = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -437,6 +478,42 @@ namespace VeterinariaApi.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "MovimientosNomina",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    EmpleadoId = table.Column<int>(type: "int", nullable: false),
+                    ConceptoNominaId = table.Column<int>(type: "int", nullable: false),
+                    FechaMovimiento = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Monto = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PeriodoNomina = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RegistradorPorEmpleado = table.Column<int>(type: "int", nullable: false),
+                    Observaciones = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MovimientosNomina", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MovimientosNomina_Empleados_EmpleadoId",
+                        column: x => x.EmpleadoId,
+                        principalTable: "Empleados",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MovimientosNomina_Empleados_RegistradorPorEmpleado",
+                        column: x => x.RegistradorPorEmpleado,
+                        principalTable: "Empleados",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Ciudades",
                 columns: table => new
                 {
@@ -445,8 +522,8 @@ namespace VeterinariaApi.Migrations
                     NombreCiudad = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IdRegion = table.Column<int>(type: "int", nullable: false),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -475,8 +552,8 @@ namespace VeterinariaApi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     EmailContacto = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -486,6 +563,48 @@ namespace VeterinariaApi.Migrations
                         column: x => x.IdCiudad,
                         principalTable: "Ciudades",
                         principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ActivosFijos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NombreActivo = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NumeroSerie = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CategoriaActivoId = table.Column<int>(type: "int", nullable: false),
+                    SucursalId = table.Column<int>(type: "int", nullable: false),
+                    FechaAdquisicion = table.Column<DateTime>(type: "datetime", nullable: true),
+                    CostoAdquisicion = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    VidaUtil = table.Column<int>(type: "int", nullable: true),
+                    UbicacionFisica = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Estado = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Observaciones = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActivosFijos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ActivosFijos_CategoriaActivoFijo_CategoriaActivoId",
+                        column: x => x.CategoriaActivoId,
+                        principalTable: "CategoriaActivoFijo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ActivosFijos_Sucursales_SucursalId",
+                        column: x => x.SucursalId,
+                        principalTable: "Sucursales",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -512,8 +631,8 @@ namespace VeterinariaApi.Migrations
                     Expiration = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     RefreshToken = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -549,8 +668,8 @@ namespace VeterinariaApi.Migrations
                     Confirmado = table.Column<ulong>(type: "bit", nullable: false, defaultValue: 0ul),
                     Observaciones = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -681,6 +800,22 @@ namespace VeterinariaApi.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ActivosFijos_CategoriaActivoId",
+                table: "ActivosFijos",
+                column: "CategoriaActivoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ActivosFijos_NumeroSerie",
+                table: "ActivosFijos",
+                column: "NumeroSerie",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ActivosFijos_SucursalId",
+                table: "ActivosFijos",
+                column: "SucursalId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AusenciaEmpleado_AprobadoPorEmpleado",
                 table: "AusenciaEmpleado",
                 column: "AprobadoPorEmpleado");
@@ -696,9 +831,21 @@ namespace VeterinariaApi.Migrations
                 column: "TipoAusenciaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CategoriaActivoFijo_NombreCategoriaActivoFijo",
+                table: "CategoriaActivoFijo",
+                column: "NombreCategoriaActivoFijo",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ciudades_IdRegion",
                 table: "Ciudades",
                 column: "IdRegion");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ConceptoNominas_NombreNomina",
+                table: "ConceptoNominas",
+                column: "NombreNomina",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_CriterioEvaluacion_NombreCriterio",
@@ -811,6 +958,16 @@ namespace VeterinariaApi.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_MovimientosNomina_EmpleadoId",
+                table: "MovimientosNomina",
+                column: "EmpleadoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MovimientosNomina_RegistradorPorEmpleado",
+                table: "MovimientosNomina",
+                column: "RegistradorPorEmpleado");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Regiones_IdPais",
                 table: "Regiones",
                 column: "IdPais");
@@ -891,7 +1048,13 @@ namespace VeterinariaApi.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ActivosFijos");
+
+            migrationBuilder.DropTable(
                 name: "AusenciaEmpleado");
+
+            migrationBuilder.DropTable(
+                name: "ConceptoNominas");
 
             migrationBuilder.DropTable(
                 name: "EmpleadoCapacitacion");
@@ -909,6 +1072,9 @@ namespace VeterinariaApi.Migrations
                 name: "LoginMenus");
 
             migrationBuilder.DropTable(
+                name: "MovimientosNomina");
+
+            migrationBuilder.DropTable(
                 name: "TurnosEmpleado");
 
             migrationBuilder.DropTable(
@@ -916,6 +1082,9 @@ namespace VeterinariaApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "UsuarioSucursal");
+
+            migrationBuilder.DropTable(
+                name: "CategoriaActivoFijo");
 
             migrationBuilder.DropTable(
                 name: "TipoAusencia");

@@ -5,7 +5,7 @@ namespace VeterinariaApi.Dto
 {
     public class DtoLoginAcciones
     {
-        public int ReglasId { get; set; }
+        public int? ReglasId { get; set; }
         public int LoginId { get; set; }
         public List<int> LoginAccion { get; set; }
     }

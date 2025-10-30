@@ -175,10 +175,10 @@ namespace VeterinariaApi.Repositorio
                 await transaction.CommitAsync();
                 return ausenciaEmpleadoDto;
             }
-            catch
+            catch (Exception ex)
             {
                 transaction.Rollback();
-                throw new Exception("Error al actualizar la ausencia del empleado");
+                throw new Exception("Error al actualizar la ausencia del empleado", ex);
             }
         }
         public async Task<bool> DeleteAusenciaEmpleado(int id)
@@ -188,7 +188,7 @@ namespace VeterinariaApi.Repositorio
             {
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
-                command.CommandText = " ";
+                command.CommandText = "EliminarAusenciaEmpleado";
                 command.CommandType = CommandType.StoredProcedure;
 
                 var idParam = new MySqlConnector.MySqlParameter("@ae_Id", MySqlConnector.MySqlDbType.Int32)

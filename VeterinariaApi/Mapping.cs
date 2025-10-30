@@ -96,6 +96,15 @@ namespace VeterinariaApi
 
                 config.CreateMap<ConceptoNominas, DtoConceptoNominas>();
                 config.CreateMap<DtoConceptoNominas, ConceptoNominas>();
+
+                config.CreateMap<MovimientosNomina, DtoMovimientosNomina>();
+                config.CreateMap<DtoMovimientosNomina, MovimientosNomina>();
+                
+                config.CreateMap<Login, DtoLogin>();
+                config.CreateMap<DtoLogin, Login>();
+
+                config.CreateMap<Login, DtoLogueo>();
+                config.CreateMap<DtoLogueo, Login>();
             });
             return mappingConfig;
         }

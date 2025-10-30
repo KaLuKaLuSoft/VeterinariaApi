@@ -150,7 +150,7 @@ namespace VeterinariaApi.Repositorio
                         {
                             Id = reader.GetInt32(0),
                             NombreAcciones = reader.GetString(1),
-                            Descripcion = reader.GetString(2),
+                            Descripcion = reader.IsDBNull(2) ? null: reader.GetString(2),
                             Fecha_Alta = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3),
                             Fecha_Modificacion = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4)
                         };
@@ -188,7 +188,7 @@ namespace VeterinariaApi.Repositorio
                         {
                             Id = reader.GetInt32(0),
                             NombreAcciones = reader.GetString(1),
-                            Descripcion = reader.GetString(2),
+                            Descripcion = reader.IsDBNull(2) ? null : reader.GetString(2),
                             Fecha_Alta = reader.IsDBNull(3) ? (DateTime?)null : reader.GetDateTime(3),
                             Fecha_Modificacion = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4)
                         };

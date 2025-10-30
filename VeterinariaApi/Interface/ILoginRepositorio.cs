@@ -10,5 +10,8 @@ namespace VeterinariaApi.Interface
         Task<DtoLogin> Update(DtoLogin loginDto);
         Task<bool> DeleteLogin(int id);
         Task<bool> LoginExists(int id);
+
+        Task UpdateLogin(int loginId, RefreshTokens refreshTokens);
+        Task<DtoLogin> GetLoginByRefreshToken(string refreshToken);
     }
 }
