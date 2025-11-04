@@ -76,15 +76,21 @@ namespace VeterinariaApi.Repositorio
                         Id = reader.GetInt32(reader.GetOrdinal("id_sucursal")),
                         NombreSucursal = reader.GetString(reader.GetOrdinal("Sucursal"))
                     };
+                    string reglasStr = reader.IsDBNull(reader.GetOrdinal("Reglas"))
+                    ? string.Empty
+    :               reader.GetString(reader.GetOrdinal("Reglas"));
 
-                    var reglas = reader.GetString(reader.GetOrdinal("Reglas"))
+                    var reglas = reglasStr
                                        .Split(',')
                                        .Where(x => !string.IsNullOrWhiteSpace(x))
                                        .Select(int.Parse)
                                        .ToList();
 
                     var reglasDto = new DtoLoginAcciones { LoginAccion = reglas };
-                    var menus = reader.GetString(reader.GetOrdinal("Menu"))
+                    string menuStr = reader.IsDBNull(reader.GetOrdinal("Menu"))
+                    ? string.Empty
+    :               reader.GetString(reader.GetOrdinal("Menu"));
+                    var menus = menuStr
                   .Split(',')
                   .Where(x => !string.IsNullOrWhiteSpace(x))
                   .Select(int.Parse)
