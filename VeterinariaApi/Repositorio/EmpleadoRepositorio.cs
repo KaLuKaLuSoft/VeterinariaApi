@@ -61,7 +61,7 @@ namespace VeterinariaApi.Repositorio
 
                 var telefonoParam = new MySqlParameter("@e_Telefono", MySqlDbType.VarChar, 15)
                 {
-                    Value = empleadoDto.Telefono ?? (object)DBNull.Value
+                    Value = empleadoDto.Celular ?? (object)DBNull.Value
                 };
                 command.Parameters.Add(telefonoParam);
 
@@ -141,7 +141,7 @@ namespace VeterinariaApi.Repositorio
 
                 var telefonoParam = new MySqlParameter("@e_Telefono", MySqlDbType.VarChar, 15)
                 {
-                    Value = empleadoDto.Telefono ?? (object)DBNull.Value
+                    Value = empleadoDto.Celular ?? (object)DBNull.Value
                 };
                 command.Parameters.Add(telefonoParam);
 
@@ -235,7 +235,7 @@ namespace VeterinariaApi.Repositorio
                             Nombre = reader.IsDBNull(2) ? null : reader.GetString(2),
                             Apellido = reader.IsDBNull(3) ? null : reader.GetString(3),
                             FechaNacimiento = reader.IsDBNull(4) ? null : reader.GetDateTime(4),
-                            Telefono = reader.IsDBNull(5) ? null : reader.GetString(5),
+                            Celular = reader.IsDBNull(5) ? null : reader.GetString(5),
                             Ci = reader.IsDBNull(6) ? null : reader.GetString(6),
                             FechaContratacion = reader.IsDBNull(7) ? (DateTime?)null : reader.GetDateTime(7),
                             Salario = reader.IsDBNull(8) ? null : reader.GetDecimal(8),
@@ -283,7 +283,7 @@ namespace VeterinariaApi.Repositorio
                             Nombre = reader.IsDBNull(2) ? null : reader.GetString(2),
                             Apellido = reader.IsDBNull(3) ? null : reader.GetString(3),
                             FechaNacimiento = reader.IsDBNull(4) ? null : reader.GetDateTime(4),
-                            Telefono = reader.IsDBNull(5) ? null : reader.GetString(5),
+                            Celular = reader.IsDBNull(5) ? null : reader.GetString(5),
                             Ci = reader.IsDBNull(6) ? null : reader.GetString(6),
                             FechaContratacion = reader.IsDBNull(7) ? (DateTime?)null : reader.GetDateTime(7),
                             Salario = reader.IsDBNull(8) ? null : reader.GetDecimal(8),

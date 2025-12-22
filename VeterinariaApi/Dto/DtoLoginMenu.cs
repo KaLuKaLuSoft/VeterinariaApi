@@ -4,8 +4,7 @@ namespace VeterinariaApi.Dto
 {
     public class DtoLoginMenu
     {
-        public int SubMenuId { get; set; }
         public int LoginId { get; set; }
-        public List<int> LoginMenu { get; set; }
+        public List<int> MenuId { get; set; }
     }
 }

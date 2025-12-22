@@ -30,7 +30,7 @@ namespace VeterinariaApi.Repositorio
                 command.CommandType = CommandType.StoredProcedure;
 
                 // Cadena separada por comas
-                var permisoIds = string.Join(",", loginmenuDto.LoginMenu);
+                var permisoIds = string.Join(",", loginmenuDto.MenuId);
 
                 var loginIdParam = new MySqlParameter("@p_LoginId", MySqlDbType.Int32)
                 {
@@ -66,9 +66,43 @@ namespace VeterinariaApi.Repositorio
             throw new NotImplementedException();
         }
 
-        public Task<DtoLoginMenu> GetLoginMenuById(int id)
+        public async Task<DtoLoginMenu> GetLoginMenuById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var connection = _context.Database.GetDbConnection();
+                await connection.OpenAsync();
+
+                var command = connection.CreateCommand();
+                command.CommandText = "ObtenerLoginMenuById";
+                command.CommandType = CommandType.StoredProcedure;
+
+                var loginIdParam = new MySqlParameter("@p_LoginId", MySqlDbType.Int32)
+                {
+                    Value = id
+                };
+                command.Parameters.Add(loginIdParam);
+
+                var loginMenuDto = new DtoLoginMenu
+                {
+                    LoginId = id,
+                    MenuId = new List<int>()
+                };
+
+                using var reader = await command.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    loginMenuDto.MenuId.Add(reader.GetInt32(1));
+                }
+
+                await connection.CloseAsync();
+
+                return loginMenuDto.MenuId.Count > 0 ? loginMenuDto : null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los menús del usuario ", ex);
+            }
         }
 
         public Task<bool> LoginMenuExists(int id)

@@ -46,7 +46,7 @@ namespace VeterinariaApi.Repositorio
             return new DtoLogin
             {
                 Id = loginEntity.Id,
-                NombreUsuario = loginEntity.NombreUsuario,
+                Usuario = loginEntity.Usuario,
                 Contrasena = loginEntity.Contrasena
             };
         }

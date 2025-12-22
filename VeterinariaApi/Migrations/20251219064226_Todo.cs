@@ -249,40 +249,6 @@ namespace VeterinariaApi.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Empleados",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CodEmpleado = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Nombre = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Apellido = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FechaNacimiento = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Telefono = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Ci = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FechaContratacion = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Salario = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    IdDepartamento = table.Column<int>(type: "int", nullable: true),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Empleados", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Empleados_Departamentos_IdDepartamento",
-                        column: x => x.IdDepartamento,
-                        principalTable: "Departamentos",
-                        principalColumn: "Id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "SubModulos",
                 columns: table => new
                 {
@@ -329,6 +295,143 @@ namespace VeterinariaApi.Migrations
                         principalTable: "Paises",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Ciudades",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NombreCiudad = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IdRegion = table.Column<int>(type: "int", nullable: false),
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ciudades", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ciudades_Regiones_IdRegion",
+                        column: x => x.IdRegion,
+                        principalTable: "Regiones",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Sucursales",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NombreSucursal = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Direccion = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IdCiudad = table.Column<int>(type: "int", nullable: true),
+                    Telefono = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    EmailContacto = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sucursales", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sucursales_Ciudades_IdCiudad",
+                        column: x => x.IdCiudad,
+                        principalTable: "Ciudades",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ActivosFijos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NombreActivo = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NumeroSerie = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CategoriaActivoId = table.Column<int>(type: "int", nullable: false),
+                    SucursalId = table.Column<int>(type: "int", nullable: false),
+                    FechaAdquisicion = table.Column<DateTime>(type: "datetime", nullable: true),
+                    CostoAdquisicion = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    VidaUtil = table.Column<int>(type: "int", nullable: true),
+                    UbicacionFisica = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Estado = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Observaciones = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActivosFijos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ActivosFijos_CategoriaActivoFijo_CategoriaActivoId",
+                        column: x => x.CategoriaActivoId,
+                        principalTable: "CategoriaActivoFijo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ActivosFijos_Sucursales_SucursalId",
+                        column: x => x.SucursalId,
+                        principalTable: "Sucursales",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Empleados",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CodEmpleado = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Nombre = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Apellido = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Direccion = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FechaNacimiento = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Celular = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Ci = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FechaContratacion = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Salario = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    IdDepartamento = table.Column<int>(type: "int", nullable: true),
+                    IdSucursal = table.Column<int>(type: "int", nullable: true),
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Empleados", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Empleados_Departamentos_IdDepartamento",
+                        column: x => x.IdDepartamento,
+                        principalTable: "Departamentos",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Empleados_Sucursales_IdSucursal",
+                        column: x => x.IdSucursal,
+                        principalTable: "Sucursales",
+                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -478,6 +581,45 @@ namespace VeterinariaApi.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Login",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Usuario = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Contrasena = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IdRol = table.Column<int>(type: "int", nullable: true),
+                    Activo = table.Column<ulong>(type: "bit", nullable: true, defaultValue: 0ul),
+                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true),
+                    IdEmpleado = table.Column<int>(type: "int", nullable: true),
+                    Tokens = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Expiration = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    RefreshToken = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FechaCreacion = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UltimoLogin = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Login", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Login_Empleados_IdEmpleado",
+                        column: x => x.IdEmpleado,
+                        principalTable: "Empleados",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Login_Roles_IdRol",
+                        column: x => x.IdRol,
+                        principalTable: "Roles",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "MovimientosNomina",
                 columns: table => new
                 {
@@ -510,148 +652,6 @@ namespace VeterinariaApi.Migrations
                         principalTable: "Empleados",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Ciudades",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NombreCiudad = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IdRegion = table.Column<int>(type: "int", nullable: false),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ciudades", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Ciudades_Regiones_IdRegion",
-                        column: x => x.IdRegion,
-                        principalTable: "Regiones",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Sucursales",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NombreSucursal = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Direccion = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IdCiudad = table.Column<int>(type: "int", nullable: true),
-                    Telefono = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    EmailContacto = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sucursales", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Sucursales_Ciudades_IdCiudad",
-                        column: x => x.IdCiudad,
-                        principalTable: "Ciudades",
-                        principalColumn: "Id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "ActivosFijos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NombreActivo = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    NumeroSerie = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CategoriaActivoId = table.Column<int>(type: "int", nullable: false),
-                    SucursalId = table.Column<int>(type: "int", nullable: false),
-                    FechaAdquisicion = table.Column<DateTime>(type: "datetime", nullable: true),
-                    CostoAdquisicion = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    VidaUtil = table.Column<int>(type: "int", nullable: true),
-                    UbicacionFisica = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Estado = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Observaciones = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ActivosFijos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ActivosFijos_CategoriaActivoFijo_CategoriaActivoId",
-                        column: x => x.CategoriaActivoId,
-                        principalTable: "CategoriaActivoFijo",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ActivosFijos_Sucursales_SucursalId",
-                        column: x => x.SucursalId,
-                        principalTable: "Sucursales",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Login",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NombreUsuario = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Contrasena = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FechaCreacion = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UltimoLogin = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    IdSucursal = table.Column<int>(type: "int", nullable: true),
-                    IdRol = table.Column<int>(type: "int", nullable: true),
-                    IdEmpleado = table.Column<int>(type: "int", nullable: true),
-                    Activo = table.Column<ulong>(type: "bit", nullable: true, defaultValue: 0ul),
-                    Tokens = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Expiration = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    RefreshToken = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fecha_Alta = table.Column<DateTime>(type: "datetime", nullable: true),
-                    Fecha_Modificacion = table.Column<DateTime>(type: "datetime", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Login", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Login_Empleados_IdEmpleado",
-                        column: x => x.IdEmpleado,
-                        principalTable: "Empleados",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Login_Roles_IdRol",
-                        column: x => x.IdRol,
-                        principalTable: "Roles",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Login_Sucursales_IdSucursal",
-                        column: x => x.IdSucursal,
-                        principalTable: "Sucursales",
-                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -724,12 +724,12 @@ namespace VeterinariaApi.Migrations
                 name: "LoginMenus",
                 columns: table => new
                 {
-                    SubMenuId = table.Column<int>(type: "int", nullable: false),
+                    MenuId = table.Column<int>(type: "int", nullable: false),
                     LoginId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LoginMenus", x => new { x.LoginId, x.SubMenuId });
+                    table.PrimaryKey("PK_LoginMenus", x => new { x.LoginId, x.MenuId });
                     table.ForeignKey(
                         name: "FK_LoginMenus_Login_LoginId",
                         column: x => x.LoginId,
@@ -737,8 +737,8 @@ namespace VeterinariaApi.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_LoginMenus_SubModulos_SubMenuId",
-                        column: x => x.SubMenuId,
+                        name: "FK_LoginMenus_SubModulos_MenuId",
+                        column: x => x.MenuId,
                         principalTable: "SubModulos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -900,6 +900,11 @@ namespace VeterinariaApi.Migrations
                 column: "IdDepartamento");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Empleados_IdSucursal",
+                table: "Empleados",
+                column: "IdSucursal");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EspecialidadesMedicas_NombreEspecialidad",
                 table: "EspecialidadesMedicas",
                 column: "NombreEspecialidad",
@@ -931,14 +936,9 @@ namespace VeterinariaApi.Migrations
                 column: "IdRol");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Login_IdSucursal",
+                name: "IX_Login_Usuario",
                 table: "Login",
-                column: "IdSucursal");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Login_NombreUsuario",
-                table: "Login",
-                column: "NombreUsuario",
+                column: "Usuario",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -947,9 +947,9 @@ namespace VeterinariaApi.Migrations
                 column: "ReglasId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LoginMenus_SubMenuId",
+                name: "IX_LoginMenus_MenuId",
                 table: "LoginMenus",
-                column: "SubMenuId");
+                column: "MenuId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Modulos_NombreModulo",
@@ -1120,10 +1120,10 @@ namespace VeterinariaApi.Migrations
                 name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "Sucursales");
+                name: "Departamentos");
 
             migrationBuilder.DropTable(
-                name: "Departamentos");
+                name: "Sucursales");
 
             migrationBuilder.DropTable(
                 name: "Ciudades");

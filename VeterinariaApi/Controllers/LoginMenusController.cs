@@ -41,14 +41,29 @@ namespace VeterinariaApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<LoginMenu>> GetLoginMenu(int id)
         {
-            var loginMenu = await _context.LoginMenus.FindAsync(id);
-
-            if (loginMenu == null)
+            try
             {
-                return NotFound();
+                var lista = await _loginMenuRepositorio.GetLoginMenuById(id);
+
+                if(lista == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.DisplayMessage = "No se encontraron registros.";
+                }
+                else
+                {
+                    _response.IsSuccess = true;
+                    _response.Result = lista;
+                    _response.DisplayMessage = "Lista de LoginMenu obtenida exitosamente.";
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
 
-            return loginMenu;
+            return Ok(_response);
         }
 
         // PUT: api/LoginMenus/5

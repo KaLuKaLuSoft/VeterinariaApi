@@ -12,7 +12,7 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250826054549_Todo")]
+    [Migration("20251219064226_Todo")]
     partial class Todo
     {
         /// <inheritdoc />
@@ -446,6 +446,10 @@ namespace VeterinariaApi.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("Celular")
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar(15)");
+
                     b.Property<string>("Ci")
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
@@ -453,6 +457,9 @@ namespace VeterinariaApi.Migrations
                     b.Property<string>("CodEmpleado")
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Direccion")
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("FechaContratacion")
                         .HasColumnType("datetime(6)");
@@ -469,6 +476,9 @@ namespace VeterinariaApi.Migrations
                     b.Property<int?>("IdDepartamento")
                         .HasColumnType("int");
 
+                    b.Property<int?>("IdSucursal")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nombre")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
@@ -476,16 +486,14 @@ namespace VeterinariaApi.Migrations
                     b.Property<decimal?>("Salario")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Telefono")
-                        .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CodEmpleado")
                         .IsUnique();
 
                     b.HasIndex("IdDepartamento");
+
+                    b.HasIndex("IdSucursal");
 
                     b.ToTable("Empleados");
                 });
@@ -580,11 +588,6 @@ namespace VeterinariaApi.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
                     b.Property<DateTime?>("Expiration")
                         .HasColumnType("datetime(6)");
 
@@ -603,13 +606,6 @@ namespace VeterinariaApi.Migrations
                     b.Property<int?>("IdRol")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdSucursal")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NombreUsuario")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
                     b.Property<string>("RefreshToken")
                         .HasMaxLength(1000)
                         .HasColumnType("varchar(1000)");
@@ -621,15 +617,17 @@ namespace VeterinariaApi.Migrations
                     b.Property<DateTime>("UltimoLogin")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("Usuario")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IdEmpleado");
 
                     b.HasIndex("IdRol");
 
-                    b.HasIndex("IdSucursal");
-
-                    b.HasIndex("NombreUsuario")
+                    b.HasIndex("Usuario")
                         .IsUnique();
 
                     b.ToTable("Login");
@@ -655,12 +653,12 @@ namespace VeterinariaApi.Migrations
                     b.Property<int>("LoginId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubMenuId")
+                    b.Property<int>("MenuId")
                         .HasColumnType("int");
 
-                    b.HasKey("LoginId", "SubMenuId");
+                    b.HasKey("LoginId", "MenuId");
 
-                    b.HasIndex("SubMenuId");
+                    b.HasIndex("MenuId");
 
                     b.ToTable("LoginMenus");
                 });
@@ -1159,7 +1157,13 @@ namespace VeterinariaApi.Migrations
                         .WithMany()
                         .HasForeignKey("IdDepartamento");
 
+                    b.HasOne("VeterinariaApi.Models.Sucursales", "Sucursal")
+                        .WithMany()
+                        .HasForeignKey("IdSucursal");
+
                     b.Navigation("NombreDepartamento");
+
+                    b.Navigation("Sucursal");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.EvaluacionEmpleado", b =>
@@ -1195,19 +1199,13 @@ namespace VeterinariaApi.Migrations
                         .WithMany()
                         .HasForeignKey("IdEmpleado");
 
-                    b.HasOne("VeterinariaApi.Models.Roles", "NombreRol")
+                    b.HasOne("VeterinariaApi.Models.Roles", "Roles")
                         .WithMany()
                         .HasForeignKey("IdRol");
 
-                    b.HasOne("VeterinariaApi.Models.Sucursales", "NombreSucursal")
-                        .WithMany()
-                        .HasForeignKey("IdSucursal");
-
                     b.Navigation("NombreEmpleado");
 
-                    b.Navigation("NombreRol");
-
-                    b.Navigation("NombreSucursal");
+                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.LoginAcciones", b =>
@@ -1239,7 +1237,7 @@ namespace VeterinariaApi.Migrations
 
                     b.HasOne("VeterinariaApi.Models.SubModulo", "SubModulo")
                         .WithMany()
-                        .HasForeignKey("SubMenuId")
+                        .HasForeignKey("MenuId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

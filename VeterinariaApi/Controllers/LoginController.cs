@@ -124,14 +124,14 @@ namespace VeterinariaApi.Controllers
         [HttpPost("Authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] DtoLogueo loginRequest)
         {
-            if (loginRequest == null || string.IsNullOrEmpty(loginRequest.NombreUsuario) || string.IsNullOrEmpty(loginRequest.Contrasena))
+            if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Usuario) || string.IsNullOrEmpty(loginRequest.Contrasena))
             {
                 return BadRequest("Usuario o contraseña no pueden estar vacíos.");
             }
 
             try
             {
-                var loginDto = await _logueoRepositorio.AuthenticateUser(loginRequest.NombreUsuario, loginRequest.Contrasena);
+                var loginDto = await _logueoRepositorio.AuthenticateUser(loginRequest.Usuario, loginRequest.Contrasena);
 
                 if (loginDto == null)
                 {
@@ -141,7 +141,7 @@ namespace VeterinariaApi.Controllers
                 var login = new Login
                 {
                     Id = loginDto.Id,
-                    NombreUsuario    = loginDto.NombreUsuario,
+                    Usuario    = loginDto.Usuario,
                     Contrasena = loginDto.Contrasena
                 };
 
@@ -196,7 +196,7 @@ namespace VeterinariaApi.Controllers
                 var (newJwtToken, newRefreshToken, newExpiration) = _tokenService.GenerarTokens(new Login
                 {
                     Id = loginDto.Id,
-                    NombreUsuario = loginDto.NombreUsuario,
+                    Usuario = loginDto.Usuario,
                     Contrasena = loginDto.Contrasena
                 });
 

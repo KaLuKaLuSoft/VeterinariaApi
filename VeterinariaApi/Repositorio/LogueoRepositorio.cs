@@ -48,10 +48,11 @@ namespace VeterinariaApi.Repositorio
                     var loginDto = new DtoLogin
                     {
                         Id = reader.GetInt32(reader.GetOrdinal("LoginId")),
-                        NombreUsuario = reader.GetString(reader.GetOrdinal("Usuario")),
+                        Usuario = reader.GetString(reader.GetOrdinal("Usuario")),
+                        Empleado = reader.GetString(reader.GetOrdinal("Empleado")),
                         Contrasena = reader.GetString(reader.GetOrdinal("Contrasena")),
                         IdRol = reader.GetInt32(reader.GetOrdinal("IdRol")),
-                        NombreRol = reader.GetString(reader.GetOrdinal("Roles")),
+                        Roles = reader.GetString(reader.GetOrdinal("Roles")),
                         IdEmpleado = reader.GetInt32(reader.GetOrdinal("idUsuario")),
                         Activo = reader.GetBoolean(reader.GetOrdinal("Activo")),
                     };
@@ -100,7 +101,7 @@ namespace VeterinariaApi.Repositorio
 
                     var menuDto = new DtoLoginMenu
                     {
-                        LoginMenu = menus,
+                        MenuId = menus,
                         LoginId = loginId  // Agregamos el LoginId al DTO
                     };
                     //var cajaDto = new CajasDto { Id = reader.GetInt32(reader.GetOrdinal("Caja")) };

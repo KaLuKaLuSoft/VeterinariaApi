@@ -26,7 +26,7 @@ namespace VeterinariaApi.Seguridad
             var userClaims = new[]
             {
             new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
-            new Claim(ClaimTypes.Name, usuario.NombreUsuario!)
+            new Claim(ClaimTypes.Name, usuario.Usuario!)
         };
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:key"]!));

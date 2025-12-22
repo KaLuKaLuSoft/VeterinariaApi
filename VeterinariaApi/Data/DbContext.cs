@@ -49,7 +49,7 @@ namespace VeterinariaApi.Data
             #region Menu
             // Menu
             modelBuilder.Entity<LoginMenu>()
-            .HasKey(lm => new { lm.LoginId, lm.SubMenuId });
+            .HasKey(lm => new { lm.LoginId, lm.MenuId });
 
             modelBuilder.Entity<LoginMenu>()
                 .HasOne(lm => lm.Login)
@@ -59,7 +59,7 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<LoginMenu>()
                 .HasOne(lm => lm.SubModulo)
                 .WithMany()
-                .HasForeignKey(lm => lm.SubMenuId);
+                .HasForeignKey(lm => lm.MenuId);
             #endregion
             #region EmpleadoEspecialidad
             modelBuilder.Entity<EmpleadoEsepecialidad>()
@@ -266,7 +266,7 @@ namespace VeterinariaApi.Data
                 .Property(e => e.Apellido)
                 .HasMaxLength(100);
             modelBuilder.Entity<Empleados>()
-                .Property(e => e.Telefono)
+                .Property(e => e.Celular)
                 .HasMaxLength(15);
             modelBuilder.Entity<Empleados>()
                 .Property(e => e.Ci)
@@ -295,20 +295,14 @@ namespace VeterinariaApi.Data
                 .HasColumnType("datetime");
 
             modelBuilder.Entity<Login>()
-                .Property(l => l.NombreUsuario)
+                .Property(l => l.Usuario)
                 .HasMaxLength(50);
             modelBuilder.Entity<Login>()
-                .HasIndex(l => l.NombreUsuario)
+                .HasIndex(l => l.Usuario)
                 .IsUnique();
             modelBuilder.Entity<Login>()
                 .Property(l => l.Contrasena)
                 .HasMaxLength(255);
-            modelBuilder.Entity<Login>()
-                .Property(l => l.Email)
-                .HasMaxLength(100);
-            modelBuilder.Entity<Login>()
-                .Property(l => l.Email)
-                .IsRequired();
             modelBuilder.Entity<Login>()
                 .Property(l => l.Tokens)
                 .HasMaxLength(1000);
