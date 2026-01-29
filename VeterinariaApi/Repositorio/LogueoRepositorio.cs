@@ -28,7 +28,7 @@ namespace VeterinariaApi.Repositorio
             {
                 var command = _context.Database.GetDbConnection().CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
-                command.CommandText = "Logueo";
+                command.CommandText = "Logueo3";
                 command.CommandType = CommandType.StoredProcedure;
 
                 var usuarioParam = new MySqlParameter("@Usuario", MySqlDbType.VarChar, 100) { Value = usuario };
@@ -51,8 +51,8 @@ namespace VeterinariaApi.Repositorio
                         Usuario = reader.GetString(reader.GetOrdinal("Usuario")),
                         Empleado = reader.GetString(reader.GetOrdinal("Empleado")),
                         Contrasena = reader.GetString(reader.GetOrdinal("Contrasena")),
-                        IdRol = reader.GetInt32(reader.GetOrdinal("IdRol")),
-                        Roles = reader.GetString(reader.GetOrdinal("Roles")),
+                        //IdRol = reader.GetInt32(reader.GetOrdinal("IdRol")),
+                        //Roles = reader.GetString(reader.GetOrdinal("Roles")),
                         IdEmpleado = reader.GetInt32(reader.GetOrdinal("idUsuario")),
                         Activo = reader.GetBoolean(reader.GetOrdinal("Activo")),
                     };

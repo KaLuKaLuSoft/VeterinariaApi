@@ -15,6 +15,7 @@ namespace VeterinariaApi.Dto
         public string? Motivo { get; set; }
         public int AprobadoPorEmpleado { get; set; }
         public string? AprobadoPorEmpleados { get; set; }
+        public bool? Activo { get; set; } = false;
         public DateTime? FechaSolicitud { get; set; }
         public DateTime? FechaAprobacion { get; set; }
         public DateTime? Fecha_Alta { get; set; }

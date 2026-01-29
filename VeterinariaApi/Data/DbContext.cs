@@ -6,7 +6,7 @@ using VeterinariaApi.Models;
 namespace VeterinariaApi.Data
 {
     // Renamed the class to avoid circular dependency with the base DbContext class
-    public class ApplicationDbContext : Microsoft.EntityFrameworkCore.DbContext
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -43,6 +43,7 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.ActivosFijos> ActivosFijos { get; set; }
         public DbSet<VeterinariaApi.Models.ConceptoNominas> ConceptoNominas { get; set; }
         public DbSet<VeterinariaApi.Models.MovimientosNomina> MovimientosNomina { get; set; }
+        public DbSet<VeterinariaApi.Models.TipoCliente> TipoClientes { get; set; }
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -153,6 +154,10 @@ namespace VeterinariaApi.Data
                 .Property(l => l.NombreAcciones)
                 .HasMaxLength(100);
             modelBuilder.Entity<Acciones>()
+                .Property(l => l.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<Acciones>()
                 .Property(l => l.Descripcion)
                 .HasMaxLength(255);
             modelBuilder.Entity<Acciones>()
@@ -168,6 +173,10 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<AusenciaEmpleado>()
                 .Property(r => r.Motivo)
                 .HasMaxLength(255);
+            modelBuilder.Entity<AusenciaEmpleado>()
+                .Property(r => r.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
             modelBuilder.Entity<AusenciaEmpleado>()
                 .Property(r => r.FechaInicio)
                 .HasColumnType("datetime");
@@ -186,9 +195,14 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<AusenciaEmpleado>()
                 .Property(r => r.Fecha_Modificacion)
                 .HasColumnType("datetime");
+
             modelBuilder.Entity<Ciudad>()
                 .Property(c => c.NombreCiudad)
                 .HasMaxLength(100);
+            modelBuilder.Entity<Ciudad>()
+                .Property(c => c.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
             modelBuilder.Entity<Ciudad>()
                 .Property(c => c.Fecha_Alta)
                 .HasColumnType("datetime");
@@ -202,6 +216,10 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<CriteriosEvaluacion>()
                 .Property(c => c.Descripcion)
                 .HasMaxLength(255);
+            modelBuilder.Entity<CriteriosEvaluacion>()
+                .Property(c => c.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
             modelBuilder.Entity<CriteriosEvaluacion>()
                 .Property(c => c.TipoCriterio)
                 .HasMaxLength(50);
@@ -221,6 +239,10 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<CursoCapacitacion>()
                 .Property(c => c.Descripcion)
                 .HasMaxLength(100);
+            modelBuilder.Entity<CursoCapacitacion>()
+                .Property(c => c.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
             modelBuilder.Entity<CursoCapacitacion>()
                 .HasIndex(c => c.NombreCurso)
                 .IsUnique();
@@ -243,6 +265,10 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<Departamentos>()
                 .Property(d => d.Descripcion)
                 .HasMaxLength(255);
+            modelBuilder.Entity<Departamentos>()
+                .Property(d => d.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
             modelBuilder.Entity<Departamentos>()
                 .HasIndex(d => d.NombreDepartamento)
                 .IsUnique();
@@ -271,6 +297,10 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<Empleados>()
                 .Property(e => e.Ci)
                 .HasMaxLength(20);
+            modelBuilder.Entity<Empleados>()
+                .Property(e => e.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
             modelBuilder.Entity<Empleados>()
                 .Property(e => e.Fecha_Alta)
                 .HasColumnType("datetime");
@@ -330,6 +360,10 @@ namespace VeterinariaApi.Data
                 .Property(m => m.Descripcion)
                 .HasMaxLength(255);
             modelBuilder.Entity<Modulo>()
+                .Property(m => m.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<Modulo>()
                 .Property(m => m.Fecha_Alta)
                 .HasColumnType("datetime");
             modelBuilder.Entity<Modulo>()
@@ -346,6 +380,10 @@ namespace VeterinariaApi.Data
                 .Property(p => p.Codigo)
                 .HasMaxLength(10);
             modelBuilder.Entity<Paises>()
+                .Property(p => p.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<Paises>()
                 .Property(p => p.Fecha_Alta)
                 .HasColumnType("datetime");
             modelBuilder.Entity<Paises>()
@@ -358,6 +396,10 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<Regiones>()
                 .HasIndex(r => r.NombreDepartamento)
                 .IsUnique();
+            modelBuilder.Entity<Regiones>()
+                .Property(r => r.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
             modelBuilder.Entity<Regiones>()
                 .Property(r => r.Fecha_Alta)
                 .HasColumnType("datetime");
@@ -375,6 +417,10 @@ namespace VeterinariaApi.Data
                 .Property(r => r.Descripcion)
                 .HasMaxLength(255);
             modelBuilder.Entity<Roles>()
+                .Property(r => r.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<Roles>()
                 .Property(r => r.Fecha_Alta)
                 .HasColumnType("datetime");
             modelBuilder.Entity<Roles>()
@@ -390,6 +436,10 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<SubModulo>()
                 .Property(sm => sm.Descripcion)
                 .HasMaxLength(255);
+            modelBuilder.Entity<SubModulo>()
+                .Property(sm => sm.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
             modelBuilder.Entity<SubModulo>()
                 .Property(sm => sm.Fecha_Alta)
                 .HasColumnType("datetime");
@@ -413,6 +463,10 @@ namespace VeterinariaApi.Data
                 .Property(s => s.EmailContacto)
                 .HasMaxLength(100);
             modelBuilder.Entity<Sucursales>()
+                .Property(s => s.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<Sucursales>()
                 .Property(s => s.Fecha_Alta)
                 .HasColumnType("datetime");
             modelBuilder.Entity<Sucursales>()
@@ -430,6 +484,10 @@ namespace VeterinariaApi.Data
                 .HasColumnType("bit")
                 .HasDefaultValue(false);
             modelBuilder.Entity<TipoAusencia>()
+                .Property(t => t.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<TipoAusencia>()
                 .Property(t => t.Fecha_Alta)
                 .HasColumnType("datetime");
             modelBuilder.Entity<TipoAusencia>()
@@ -442,6 +500,10 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<TipoTurno>()
                 .HasIndex(t => t.NombreTurno)
                 .IsUnique();
+            modelBuilder.Entity<TipoTurno>()
+                .Property(t => t.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
             modelBuilder.Entity<TipoTurno>()
                 .Property(t => t.Fecha_Alta)
                 .HasColumnType("datetime");
@@ -457,6 +519,10 @@ namespace VeterinariaApi.Data
                 .HasMaxLength(255);
             modelBuilder.Entity<TurnosEmpleado>()
                 .Property(t => t.Confirmado)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<TurnosEmpleado>()
+                .Property(t => t.Activo)
                 .HasColumnType("bit")
                 .HasDefaultValue(false);
             modelBuilder.Entity<TurnosEmpleado>()
@@ -482,6 +548,10 @@ namespace VeterinariaApi.Data
                 .HasIndex(ec => ec.CapacitacionId)
                 .IsUnique();
             modelBuilder.Entity<EmpleadoCapacitacion>()
+                .Property(ec => ec.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<EmpleadoCapacitacion>()
                 .Property(ec => ec.Fecha_Alta)
                 .HasColumnType("datetime");
             modelBuilder.Entity<EmpleadoCapacitacion>()
@@ -497,6 +567,10 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<CategoriaActivoFijo>()
                 .HasIndex(c => c.NombreCategoriaActivoFijo)
                 .IsUnique();
+            modelBuilder.Entity<CategoriaActivoFijo>()
+                .Property(c => c.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
             modelBuilder.Entity<CategoriaActivoFijo>()
                 .Property(c => c.Fecha_Alta)
                 .HasColumnType("datetime");
@@ -516,6 +590,10 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<ActivosFijos>()
                 .Property(a => a.Estado)
                 .HasMaxLength(100); // Activo, Inactivo, En Mantenimiento, Retirado
+            modelBuilder.Entity<ActivosFijos>()
+                .Property(a => a.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
             modelBuilder.Entity<ActivosFijos>()
                 .Property(a => a.Observaciones)
                 .HasMaxLength(255);
@@ -543,6 +621,10 @@ namespace VeterinariaApi.Data
                 .HasColumnType("bit")
                 .HasDefaultValue(false);
             modelBuilder.Entity<ConceptoNominas>()
+                .Property(cn => cn.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<ConceptoNominas>()
                 .Property(cn => cn.Descripcion)
                 .HasMaxLength(255);
             modelBuilder.Entity<ConceptoNominas>()
@@ -562,6 +644,10 @@ namespace VeterinariaApi.Data
                 .Property(mn => mn.Observaciones)
                 .HasMaxLength(255);
             modelBuilder.Entity<MovimientosNomina>()
+                .Property(mn => mn.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<MovimientosNomina>()
                 .Property(mn => mn.FechaMovimiento)
                 .HasColumnType("datetime");
             modelBuilder.Entity<MovimientosNomina>()
@@ -570,6 +656,43 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<MovimientosNomina>()
                 .Property(mn => mn.Fecha_Modificacion)
                 .HasColumnType("datetime");
+
+            modelBuilder.Entity<TipoCliente>()
+                .Property(tc => tc.NombreTipo)
+                .HasMaxLength(100);
+            modelBuilder.Entity<TipoCliente>()
+                .Property(tc => tc.Descripcion)
+                .HasMaxLength(255);
+            modelBuilder.Entity<TipoCliente>()
+                .Property(tc => tc.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<TipoCliente>()
+                .Property(tc => tc.Fecha_Alta)
+                .HasColumnType("datetime");
+            modelBuilder.Entity<TipoCliente>()
+                .Property(tc => tc.Fecha_Modificacion)
+                .HasColumnType("datetime");
+
+            modelBuilder.Entity<EmpleadoEsepecialidad>()
+                .Property(ee => ee.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+
+            modelBuilder.Entity<EvaluacionEmpleado>()
+                .Property(e => e.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+
+            modelBuilder.Entity<UsuarioRol>()
+                .Property(lm => lm.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+
+            modelBuilder.Entity<UsuarioSucursal>()
+                .Property(us => us.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
             #endregion
         }
     }

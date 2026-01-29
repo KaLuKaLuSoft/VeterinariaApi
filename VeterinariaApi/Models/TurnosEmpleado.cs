@@ -19,6 +19,7 @@ namespace VeterinariaApi.Models
         public TipoTurno? Turnos { get; set; }
         public DateTime? Fecha { get; set; }
         public bool Confirmado { get; set; } = false;
+        public bool? Activo { get; set; } = false;
         public string? Observaciones { get; set; }
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }

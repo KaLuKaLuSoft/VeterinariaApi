@@ -12,6 +12,7 @@ namespace VeterinariaApi.Models
         public int IdPais { get; set; }
         [ForeignKey("IdPais")]
         public Paises? NombrePais { get; set; }
+        public bool? Activo { get; set; } = false;
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }
     }

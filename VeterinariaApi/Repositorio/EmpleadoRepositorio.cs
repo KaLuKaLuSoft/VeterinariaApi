@@ -241,8 +241,9 @@ namespace VeterinariaApi.Repositorio
                             Salario = reader.IsDBNull(8) ? null : reader.GetDecimal(8),
                             IdDepartamento = reader.GetInt32(9),
                             NombreDepartamento = reader.IsDBNull(10) ? null : reader.GetString(10),
-                            Fecha_Alta = reader.IsDBNull(11) ? (DateTime?)null : reader.GetDateTime(11),
-                            Fecha_Modificacion = reader.IsDBNull(12) ? (DateTime?)null : reader.GetDateTime(12)
+                            Activo = reader.IsDBNull(11) ? (bool?)null : reader.GetBoolean(11),
+                            Fecha_Alta = reader.IsDBNull(12) ? (DateTime?)null : reader.GetDateTime(12),
+                            Fecha_Modificacion = reader.IsDBNull(13) ? (DateTime?)null : reader.GetDateTime(13)
                         };
                         empleados.Add(empleado);
                     }

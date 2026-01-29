@@ -11,7 +11,7 @@ namespace VeterinariaApi.Models
         public int RolId { get; set; }
         [ForeignKey("RolId")]
         public Roles? Roles { get; set; }
-
+        public bool? Activo { get; set; } = false;
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }
     }

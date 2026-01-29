@@ -105,6 +105,9 @@ namespace VeterinariaApi
 
                 config.CreateMap<Login, DtoLogueo>();
                 config.CreateMap<DtoLogueo, Login>();
+
+                config.CreateMap<TipoCliente, DtoTipoCliente>();
+                config.CreateMap<DtoTipoCliente, TipoCliente>();
             });
             return mappingConfig;
         }

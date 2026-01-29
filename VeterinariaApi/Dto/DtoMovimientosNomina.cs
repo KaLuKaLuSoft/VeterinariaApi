@@ -15,6 +15,7 @@ namespace VeterinariaApi.Dto
         public int RegistradorPorEmpleado { get; set; }
         public string? RegistradorPorEmpleados { get; set; }
         public string? Observaciones { get; set; }
+        public bool? Activo { get; set; } = false;
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }
     }

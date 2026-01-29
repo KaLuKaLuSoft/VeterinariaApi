@@ -12,6 +12,7 @@ namespace VeterinariaApi.Dto
         public DateTime? Fecha_Capacitacion { get; set; }
         public string? EstadoAprobacion { get; set; }
         public decimal? Calificacion { get; set; }
+        public bool? Activo { get; set; } = false;
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }
     }

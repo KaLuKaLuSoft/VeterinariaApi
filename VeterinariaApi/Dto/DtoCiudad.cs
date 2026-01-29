@@ -6,6 +6,7 @@
         public string? NombreCiudad { get; set; }
         public int IdRegion { get; set; }
         public string? NombreRegion { get; set; } // Assuming you want to include the region name
+        public bool? Activo { get; set; } = false;
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set;}
     }

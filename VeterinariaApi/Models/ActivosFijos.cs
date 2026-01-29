@@ -21,6 +21,7 @@ namespace VeterinariaApi.Models
         public int? VidaUtil { get; set; }
         public string? UbicacionFisica { get; set; }
         public string? Estado { get; set; } // Activo, Inactivo, En Mantenimiento, Retirado
+        public bool? Activo { get; set; } = false;
         public string? Observaciones { get; set; }
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }

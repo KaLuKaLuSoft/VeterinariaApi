@@ -9,6 +9,7 @@ namespace VeterinariaApi.Dto
         public string? NombreDepartamento { get; set; }
         public int IdPais { get; set; }
         public string? NombrePais { get; set; }
+        public bool? Activo { get; set; } = false;
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }
     }

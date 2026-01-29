@@ -10,9 +10,9 @@ namespace VeterinariaApi.Models
         public string? Usuario { get; set; }
         public string? Contrasena { get; set; }
 
-        public int? IdRol { get; set; }
-        [ForeignKey("IdRol")]
-        public Roles? Roles { get; set; }
+        //public int? IdRol { get; set; }
+        //[ForeignKey("IdRol")]
+        //public Roles? Roles { get; set; }
         public bool? Activo { get; set; }
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }

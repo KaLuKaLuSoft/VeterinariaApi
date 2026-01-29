@@ -13,6 +13,7 @@ namespace VeterinariaApi.Models
         public int ModuloId { get; set; }
         [ForeignKey("ModuloId")]
         public Modulo? NombreModulo { get; set; }
+        public bool? Activo { get; set; } = false;
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }
     }

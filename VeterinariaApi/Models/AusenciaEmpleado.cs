@@ -21,6 +21,7 @@ namespace VeterinariaApi.Models
         public int AprobadoPorEmpleado { get; set; }
         [ForeignKey("AprobadoPorEmpleado")]
         public Empleados? AprobadoPorEmpleados { get; set; }
+        public bool? Activo { get; set; } = false;
         public DateTime? FechaSolicitud { get; set; }
         public DateTime? FechaAprobacion { get; set; }
         public DateTime? Fecha_Alta { get; set; }

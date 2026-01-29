@@ -128,6 +128,8 @@ builder.Services.AddScoped<IConceptoNominasRepositorio, ConceptoNominasRepositor
 builder.Services.AddScoped<IMovimientoNominaRepositorio, MovimientoNominaRepositorio>();
 builder.Services.AddScoped<ILogueoRepositorio, LogueoRepositorio>();
 builder.Services.AddScoped<ILoginAccionesRepositorio, LoginAccionesRepositorio>();
+builder.Services.AddScoped<ITipoClientesRepositorio, TipoClientesRepositorio>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -13,6 +13,7 @@ namespace VeterinariaApi.Dto
         public string? NombreCiudad { get; set; }
         public string? Telefono { get; set; }
         public string? EmailContacto { get; set; }
+        public bool? Activo { get; set; } = false;
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }
     }

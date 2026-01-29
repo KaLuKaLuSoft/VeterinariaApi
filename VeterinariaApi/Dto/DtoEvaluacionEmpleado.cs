@@ -16,6 +16,7 @@ namespace VeterinariaApi.Dto
         public string? Comentarios { get; set; }
         public int EvaluadoPorEmpleadoId { get; set; }
         public string? EmpleadoEvaluador { get; set; }
+        public bool? Activo { get; set; } = false;
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }
     }

@@ -9,8 +9,8 @@ namespace VeterinariaApi.Dto
         public string? Usuario { get; set; }
         public string? Empleado { get; set; }
         public string? Contrasena { get; set; }
-        public int? IdRol { get; set; }
-        public string? Roles { get; set; }
+        //public int? IdRol { get; set; }
+        //public string? Roles { get; set; }
         public bool? Activo { get; set; }
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }
