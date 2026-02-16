@@ -125,12 +125,18 @@ namespace VeterinariaApi.Controllers
         // POST: api/TipoClientes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TipoCliente>> PostTipoCliente(TipoCliente tipoCliente)
+        public async Task<ActionResult<TipoCliente>> PostTipoCliente(DtoTipoCliente tipoClienteDto)
         {
-            _context.TipoClientes.Add(tipoCliente);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTipoCliente", new { id = tipoCliente.Id }, tipoCliente);
+            try
+            {
+                DtoTipoCliente tipoCliente = await _tipoClienteRepositorio.Create(tipoClienteDto);
+                return StatusCode(201, new { Message = "Tipo Cliente creado exitosamente", Data = tipoCliente });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al crear el tipo cliente. ");
+                return BadRequest(new { Message = "Error al crear el tipo cliente", Details = ex.Message });
+            }
         }
 
         // DELETE: api/TipoClientes/5

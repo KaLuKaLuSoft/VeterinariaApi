@@ -51,16 +51,16 @@ namespace VeterinariaApi.Repositorio
                         Usuario = reader.GetString(reader.GetOrdinal("Usuario")),
                         Empleado = reader.GetString(reader.GetOrdinal("Empleado")),
                         Contrasena = reader.GetString(reader.GetOrdinal("Contrasena")),
-                        //IdRol = reader.GetInt32(reader.GetOrdinal("IdRol")),
-                        //Roles = reader.GetString(reader.GetOrdinal("Roles")),
+                        IdRol = reader.GetInt32(reader.GetOrdinal("IdRol")),
+                        Roles = reader.GetString(reader.GetOrdinal("Roles")),
                         IdEmpleado = reader.GetInt32(reader.GetOrdinal("idUsuario")),
                         Activo = reader.GetBoolean(reader.GetOrdinal("Activo")),
                     };
 
-                    // Lanzar una excepción si el usuario está inactivo
+                    // Lanzar una excepción específica si el usuario está inactivo
                     if (loginDto.Activo != true)
                     {
-                        throw new InvalidOperationException("El usuario está inactivo.");
+                        throw new UserBlockedException("Usuario bloqueado, póngase en contacto con el administrador.");
                     }
 
                     var passwordHelper = new PasswordHelper();
@@ -72,11 +72,18 @@ namespace VeterinariaApi.Repositorio
                         return null;
                     }
 
+                    var rolDto = new DtoRoles
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal("IdRol")),
+                        NombreRol = reader.GetString(reader.GetOrdinal("Roles"))
+                    };
+
                     var sucursalDto = new DtoSucursales
                     {
                         Id = reader.GetInt32(reader.GetOrdinal("id_sucursal")),
                         NombreSucursal = reader.GetString(reader.GetOrdinal("Sucursal"))
                     };
+
                     string reglasStr = reader.IsDBNull(reader.GetOrdinal("Reglas"))
                     ? string.Empty
     :               reader.GetString(reader.GetOrdinal("Reglas"));
@@ -112,6 +119,7 @@ namespace VeterinariaApi.Repositorio
                     loginDto.Sucursal = sucursalDto;
                     loginDto.Reglas = new List<DtoLoginAcciones> { reglasDto };
                     loginDto.Menus = new List<DtoLoginMenu> { menuDto };
+                    //loginDto.Roles = rolDto;
                     //loginDto.Caja = cajaDto;
 
                     return loginDto;
@@ -122,7 +130,7 @@ namespace VeterinariaApi.Repositorio
                     return null;
                 }
             }
-            catch (InvalidOperationException ex) when (ex.Message == "El usuario está inactivo.")
+            catch (UserBlockedException)
             {
                 await transaction.RollbackAsync();
                 throw;

@@ -6,6 +6,7 @@ using System.Data;
 using VeterinariaApi.Data;
 using VeterinariaApi.Dto;
 using VeterinariaApi.Interface;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace VeterinariaApi.Repositorio
 {
@@ -48,6 +49,12 @@ namespace VeterinariaApi.Repositorio
                 };
                 comand.Parameters.Add(descripcionParam);
 
+                var ActivoParam = new MySqlParameter("@tc_Activo", MySqlDbType.Bit)
+                {
+                    Value = tipoclientesDto.Activo
+                };
+                comand.Parameters.Add(ActivoParam);
+
                 await comand.ExecuteNonQueryAsync();
                 await transaction.CommitAsync();
                 return tipoclientesDto;
@@ -86,6 +93,12 @@ namespace VeterinariaApi.Repositorio
                     Value = tipoclientesDto.Descripcion ?? (object)DBNull.Value
                 };
                 comand.Parameters.Add(descripcionParam);
+
+                var ActivoParam = new MySqlParameter("@tc_Activo", MySqlDbType.Bit)
+                {
+                    Value = tipoclientesDto.Activo
+                };
+                comand.Parameters.Add(ActivoParam);
 
                 await comand.ExecuteNonQueryAsync();
                 await transaction.CommitAsync();
@@ -213,5 +226,54 @@ namespace VeterinariaApi.Repositorio
             return await _context.TipoClientes.AnyAsync(e => e.Id == id);
         }
 
+        public async Task<DtoTipoCliente> Delete(DtoTipoCliente tipoclientesDto)
+        {
+            using var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                var command = _context.Database.GetDbConnection().CreateCommand();
+                command.Transaction = transaction.GetDbTransaction();
+                command.CommandText = "EliminarTipoClientes";
+                command.CommandType = CommandType.StoredProcedure;
+
+                var idParam = new MySqlConnector.MySqlParameter("@tc_Id", MySqlConnector.MySqlDbType.Int32)
+                {
+                    Value = tipoclientesDto.Id
+                };
+
+                var resultParam = new MySqlConnector.MySqlParameter("@resultado", MySqlConnector.MySqlDbType.Int32)
+                {
+                    Direction = System.Data.ParameterDirection.Output
+                };
+
+                command.Parameters.Add(idParam);
+                command.Parameters.Add(resultParam);
+
+                if (command.Connection.State != ConnectionState.Open)
+                {
+                    await command.Connection.OpenAsync();
+                }
+
+                await command.ExecuteNonQueryAsync();
+                await transaction.CommitAsync();
+
+                var resultado = resultParam.Value != null && int.TryParse(resultParam.Value.ToString(), out var r) ? r : 0;
+
+                if (resultado == 1)
+                {
+                    tipoclientesDto.Activo = false;
+                    // si usas IsDeleted en DTO/modelo, marcarlo también
+                    // tipoclientesDto.IsDeleted = true; // si existe en DTO
+                    return tipoclientesDto;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                throw new Exception("Error al eliminar el tipo de cliente", ex);
+            }
+        }
     }
 }

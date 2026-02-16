@@ -135,7 +135,7 @@ namespace VeterinariaApi.Controllers
 
                 if (loginDto == null)
                 {
-                    return Unauthorized("Usuario o contraseña incorrectos.");
+                    return Unauthorized(new { Message = "Usuario o contraseña incorrectos." });
                 }
 
                 var login = new Login
@@ -167,12 +167,20 @@ namespace VeterinariaApi.Controllers
 
                 return Ok(response);
             }
-            catch (InvalidOperationException ex) when (ex.Message == "El usuario está inactivo.")
+            catch (VeterinariaApi.Seguridad.UserBlockedException)
             {
-                return Unauthorized("El usuario está inactivo. Contacte al administrador.");
+                return StatusCode(StatusCodes.Status403Forbidden, new { Message = "Usuario bloqueado, póngase en contacto con el administrador." });
             }
             catch (Exception ex)
             {
+                // Si el repositorio envuelve el error con el mensaje "Error al ingresar",
+                // devolvemos 401 con un objeto JSON consistente para que el frontend pueda mostrarlo.
+                if ((ex.Message != null && ex.Message.Contains("Error al ingresar")) ||
+                    (ex.InnerException != null && ex.InnerException.Message != null && ex.InnerException.Message.Contains("Error al ingresar")))
+                {
+                    return Unauthorized(new { Message = "Usuario o contraseña incorrectos." });
+                }
+
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error al autenticar: {ex.Message}");
             }
         }

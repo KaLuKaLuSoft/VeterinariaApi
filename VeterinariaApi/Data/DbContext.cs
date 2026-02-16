@@ -668,6 +668,10 @@ namespace VeterinariaApi.Data
                 .HasColumnType("bit")
                 .HasDefaultValue(false);
             modelBuilder.Entity<TipoCliente>()
+                .Property(tc => tc.IsDeleted)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<TipoCliente>()
                 .Property(tc => tc.Fecha_Alta)
                 .HasColumnType("datetime");
             modelBuilder.Entity<TipoCliente>()
