@@ -8,9 +8,9 @@ namespace VeterinariaApi.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? NombreCiudad { get; set; }
-        public int IdRegion { get; set; }
-        [ForeignKey("IdRegion")]
-        public Regiones? NombreRegion { get; set; }
+        public int IdPais { get; set; }
+        [ForeignKey("IdPais")]
+        public Paises? NombrePaises { get; set; }
         public bool? Activo { get; set; } = false;
         public DateTime? Fecha_Alta { get; set; }
         public DateTime? Fecha_Modificacion { get; set; }

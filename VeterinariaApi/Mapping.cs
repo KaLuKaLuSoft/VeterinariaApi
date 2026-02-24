@@ -108,6 +108,9 @@ namespace VeterinariaApi
 
                 config.CreateMap<TipoCliente, DtoTipoCliente>();
                 config.CreateMap<DtoTipoCliente, TipoCliente>();
+
+                config.CreateMap<Empresa, DtoEmpresa>();
+                config.CreateMap<DtoEmpresa, Empresa>();
             });
             return mappingConfig;
         }

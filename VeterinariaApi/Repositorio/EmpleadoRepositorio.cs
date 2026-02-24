@@ -41,17 +41,11 @@ namespace VeterinariaApi.Repositorio
                 };
                 command.Parameters.Add(codEmpleadoParam);
 
-                var nombreParam = new MySqlParameter("@e_Nombre", MySqlDbType.VarChar, 100)
+                var nombreParam = new MySqlParameter("@e_Empleado", MySqlDbType.VarChar, 100)
                 {
-                    Value = empleadoDto.Nombre ?? (object)DBNull.Value
+                    Value = empleadoDto.Empleado ?? (object)DBNull.Value
                 };
                 command.Parameters.Add(nombreParam);
-
-                var apellidoParam = new MySqlParameter("@e_Apellido", MySqlDbType.VarChar, 100)
-                {
-                    Value = empleadoDto.Apellido ?? (object)DBNull.Value
-                };
-                command.Parameters.Add(apellidoParam);
 
                 var fechaNacimientoParam = new MySqlParameter("@e_FechaNacimiento", MySqlDbType.Date)
                 {
@@ -121,17 +115,11 @@ namespace VeterinariaApi.Repositorio
                 };
                 command.Parameters.Add(codEmpleadoParam);
 
-                var nombreParam = new MySqlParameter("@e_Nombre", MySqlDbType.VarChar, 100)
+                var nombreParam = new MySqlParameter("@e_Empleado", MySqlDbType.VarChar, 100)
                 {
-                    Value = empleadoDto.Nombre ?? (object)DBNull.Value
+                    Value = empleadoDto.Empleado ?? (object)DBNull.Value
                 };
                 command.Parameters.Add(nombreParam);
-
-                var apellidoParam = new MySqlParameter("@e_Apellido", MySqlDbType.VarChar, 100)
-                {
-                    Value = empleadoDto.Apellido ?? (object)DBNull.Value
-                };
-                command.Parameters.Add(apellidoParam);
 
                 var fechaNacimientoParam = new MySqlParameter("@e_FechaNacimiento", MySqlDbType.Date)
                 {
@@ -232,18 +220,17 @@ namespace VeterinariaApi.Repositorio
                         {
                             Id = reader.GetInt32(0),
                             CodEmpleado = reader.IsDBNull(1) ? null : reader.GetString(1),
-                            Nombre = reader.IsDBNull(2) ? null : reader.GetString(2),
-                            Apellido = reader.IsDBNull(3) ? null : reader.GetString(3),
-                            FechaNacimiento = reader.IsDBNull(4) ? null : reader.GetDateTime(4),
-                            Celular = reader.IsDBNull(5) ? null : reader.GetString(5),
-                            Ci = reader.IsDBNull(6) ? null : reader.GetString(6),
-                            FechaContratacion = reader.IsDBNull(7) ? (DateTime?)null : reader.GetDateTime(7),
-                            Salario = reader.IsDBNull(8) ? null : reader.GetDecimal(8),
-                            IdDepartamento = reader.GetInt32(9),
-                            NombreDepartamento = reader.IsDBNull(10) ? null : reader.GetString(10),
-                            Activo = reader.IsDBNull(11) ? (bool?)null : reader.GetBoolean(11),
-                            Fecha_Alta = reader.IsDBNull(12) ? (DateTime?)null : reader.GetDateTime(12),
-                            Fecha_Modificacion = reader.IsDBNull(13) ? (DateTime?)null : reader.GetDateTime(13)
+                            Empleado = reader.IsDBNull(2) ? null : reader.GetString(2),
+                            FechaNacimiento = reader.IsDBNull(3) ? null : reader.GetDateTime(3),
+                            Celular = reader.IsDBNull(4) ? null : reader.GetString(4),
+                            Ci = reader.IsDBNull(5) ? null : reader.GetString(5),
+                            FechaContratacion = reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6),
+                            Salario = reader.IsDBNull(7) ? null : reader.GetDecimal(7),
+                            IdDepartamento = reader.GetInt32(8),
+                            NombreDepartamento = reader.IsDBNull(9) ? null : reader.GetString(9),
+                            Activo = reader.IsDBNull(10) ? (bool?)null : reader.GetBoolean(10),
+                            Fecha_Alta = reader.IsDBNull(11) ? (DateTime?)null : reader.GetDateTime(11),
+                            Fecha_Modificacion = reader.IsDBNull(12) ? (DateTime?)null : reader.GetDateTime(12)
                         };
                         empleados.Add(empleado);
                     }
@@ -281,15 +268,15 @@ namespace VeterinariaApi.Repositorio
                         {
                             Id = reader.GetInt32(0),
                             CodEmpleado = reader.IsDBNull(1) ? null : reader.GetString(1),
-                            Nombre = reader.IsDBNull(2) ? null : reader.GetString(2),
-                            Apellido = reader.IsDBNull(3) ? null : reader.GetString(3),
-                            FechaNacimiento = reader.IsDBNull(4) ? null : reader.GetDateTime(4),
-                            Celular = reader.IsDBNull(5) ? null : reader.GetString(5),
-                            Ci = reader.IsDBNull(6) ? null : reader.GetString(6),
-                            FechaContratacion = reader.IsDBNull(7) ? (DateTime?)null : reader.GetDateTime(7),
-                            Salario = reader.IsDBNull(8) ? null : reader.GetDecimal(8),
-                            IdDepartamento = reader.GetInt32(9),
-                            NombreDepartamento = reader.IsDBNull(10) ? null : reader.GetString(10),
+                            Empleado = reader.IsDBNull(2) ? null : reader.GetString(2),
+                            FechaNacimiento = reader.IsDBNull(3) ? null : reader.GetDateTime(3),
+                            Celular = reader.IsDBNull(4) ? null : reader.GetString(4),
+                            Ci = reader.IsDBNull(5) ? null : reader.GetString(5),
+                            FechaContratacion = reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6),
+                            Salario = reader.IsDBNull(7) ? null : reader.GetDecimal(7),
+                            IdDepartamento = reader.GetInt32(8),
+                            NombreDepartamento = reader.IsDBNull(9) ? null : reader.GetString(9),
+                            Activo = reader.IsDBNull(10) ? (bool?)null : reader.GetBoolean(10),
                             Fecha_Alta = reader.IsDBNull(11) ? (DateTime?)null : reader.GetDateTime(11),
                             Fecha_Modificacion = reader.IsDBNull(12) ? (DateTime?)null : reader.GetDateTime(12)
                         };

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VeterinariaApi.Data;
 
@@ -11,9 +12,11 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260217145006_Empresa")]
+    partial class Empresa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +36,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Descripcion")
                         .HasMaxLength(255)
@@ -65,7 +68,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<int>("CategoriaActivoId")
                         .HasColumnType("int");
@@ -131,7 +134,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<int>("AprobadoPorEmpleado")
                         .HasColumnType("int");
@@ -190,7 +193,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Descripcion")
                         .HasMaxLength(255)
@@ -225,7 +228,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime");
@@ -233,7 +236,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<DateTime?>("Fecha_Modificacion")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("IdPais")
+                    b.Property<int>("IdRegion")
                         .HasColumnType("int");
 
                     b.Property<string>("NombreCiudad")
@@ -242,7 +245,7 @@ namespace VeterinariaApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdPais");
+                    b.HasIndex("IdRegion");
 
                     b.ToTable("Ciudades");
                 });
@@ -258,7 +261,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Descripcion")
                         .HasMaxLength(255)
@@ -302,7 +305,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Descripcion")
                         .HasMaxLength(255)
@@ -341,7 +344,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Descripcion")
                         .HasMaxLength(100)
@@ -384,7 +387,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Descripcion")
                         .HasMaxLength(255)
@@ -419,7 +422,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<decimal?>("Calificacion")
                         .HasColumnType("decimal(18,2)");
@@ -468,7 +471,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<DateTime?>("FechaCertificacion")
                         .HasColumnType("datetime(6)");
@@ -497,7 +500,11 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
+
+                    b.Property<string>("Apellido")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Celular")
                         .HasMaxLength(15)
@@ -513,10 +520,6 @@ namespace VeterinariaApi.Migrations
 
                     b.Property<string>("Direccion")
                         .HasColumnType("longtext");
-
-                    b.Property<string>("Empleado")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime>("FechaContratacion")
                         .HasColumnType("datetime(6)");
@@ -535,6 +538,10 @@ namespace VeterinariaApi.Migrations
 
                     b.Property<int?>("IdSucursal")
                         .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<decimal?>("Salario")
                         .HasColumnType("decimal(18,2)");
@@ -642,7 +649,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<decimal?>("Calificacion")
                         .HasColumnType("decimal(18,2)");
@@ -690,7 +697,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Contrasena")
                         .HasMaxLength(255)
@@ -777,7 +784,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Descripcion")
                         .HasMaxLength(255)
@@ -812,7 +819,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<int>("ConceptoNominaId")
                         .HasColumnType("int");
@@ -863,7 +870,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Codigo")
                         .HasMaxLength(10)
@@ -895,7 +902,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime");
@@ -931,7 +938,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Descripcion")
                         .HasMaxLength(255)
@@ -966,7 +973,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Descripcion")
                         .HasMaxLength(255)
@@ -1006,7 +1013,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Direccion")
                         .HasMaxLength(200)
@@ -1054,7 +1061,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime");
@@ -1090,7 +1097,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<string>("Descripcion")
                         .HasMaxLength(255)
@@ -1127,7 +1134,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime");
@@ -1164,7 +1171,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<ulong>("Confirmado")
                         .ValueGeneratedOnAdd()
@@ -1215,7 +1222,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime(6)");
@@ -1241,7 +1248,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<ulong?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(1ul);
+                        .HasDefaultValue(0ul);
 
                     b.Property<DateTime?>("Fecha_Alta")
                         .HasColumnType("datetime(6)");
@@ -1304,13 +1311,13 @@ namespace VeterinariaApi.Migrations
 
             modelBuilder.Entity("VeterinariaApi.Models.Ciudad", b =>
                 {
-                    b.HasOne("VeterinariaApi.Models.Paises", "NombrePaises")
+                    b.HasOne("VeterinariaApi.Models.Regiones", "NombreRegion")
                         .WithMany()
-                        .HasForeignKey("IdPais")
+                        .HasForeignKey("IdRegion")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("NombrePaises");
+                    b.Navigation("NombreRegion");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.EmpleadoCapacitacion", b =>

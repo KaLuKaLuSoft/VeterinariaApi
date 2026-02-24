@@ -9,8 +9,7 @@ namespace VeterinariaApi.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? CodEmpleado { get; set; }
-        public string? Nombre { get; set; }
-        public string? Apellido { get; set; }
+        public string? Empleado { get; set; }
         public string? Direccion { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string? Celular { get; set; }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VeterinariaApi.Data;
 
@@ -11,9 +12,11 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260224033620_Update-Ciudad")]
+    partial class UpdateCiudad
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -499,6 +502,10 @@ namespace VeterinariaApi.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(1ul);
 
+                    b.Property<string>("Apellido")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
                     b.Property<string>("Celular")
                         .HasMaxLength(15)
                         .HasColumnType("varchar(15)");
@@ -513,10 +520,6 @@ namespace VeterinariaApi.Migrations
 
                     b.Property<string>("Direccion")
                         .HasColumnType("longtext");
-
-                    b.Property<string>("Empleado")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime>("FechaContratacion")
                         .HasColumnType("datetime(6)");
@@ -535,6 +538,10 @@ namespace VeterinariaApi.Migrations
 
                     b.Property<int?>("IdSucursal")
                         .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<decimal?>("Salario")
                         .HasColumnType("decimal(18,2)");

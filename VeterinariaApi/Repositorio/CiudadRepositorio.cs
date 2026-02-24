@@ -43,9 +43,9 @@ namespace VeterinariaApi.Repositorio
                 };
                 command.Parameters.Add(nombreCiudadParam);
 
-                var idRegionParam = new MySqlParameter("@c_IdRegion", MySqlDbType.Int32)
+                var idRegionParam = new MySqlParameter("@c_IdPais", MySqlDbType.Int32)
                 {
-                    Value = ciudadDto.IdRegion
+                    Value = ciudadDto.IdPais
                 };
                 command.Parameters.Add(idRegionParam);
 
@@ -82,9 +82,9 @@ namespace VeterinariaApi.Repositorio
                 };
                 command.Parameters.Add(nombreCiudadParam);
 
-                var idRegionParam = new MySqlParameter("@c_IdRegion", MySqlDbType.Int32)
+                var idRegionParam = new MySqlParameter("@c_IdPais", MySqlDbType.Int32)
                 {
-                    Value = ciudadDto.IdRegion
+                    Value = ciudadDto.IdPais
                 };
                 command.Parameters.Add(idRegionParam);
 
@@ -152,8 +152,8 @@ namespace VeterinariaApi.Repositorio
                         {
                             Id = reader.GetInt32(0),
                             NombreCiudad = reader.GetString(1),
-                            IdRegion = reader.GetInt32(2),
-                            NombreRegion = reader.IsDBNull(3) ? null : reader.GetString(3),
+                            IdPais = reader.GetInt32(2),
+                            NombrePaises = reader.IsDBNull(3) ? null : reader.GetString(3),
                             Fecha_Alta = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4),
                             Fecha_Modificacion = reader.IsDBNull(5) ? (DateTime?)null : reader.GetDateTime(5)
                         };
@@ -194,8 +194,8 @@ namespace VeterinariaApi.Repositorio
                         {
                             Id = reader.GetInt32(0),
                             NombreCiudad = reader.GetString(1),
-                            IdRegion = reader.GetInt32(2),
-                            NombreRegion = reader.IsDBNull(3) ? null : reader.GetString(3),
+                            IdPais = reader.GetInt32(2),
+                            NombrePaises = reader.IsDBNull(3) ? null : reader.GetString(3),
                             Fecha_Alta = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4),
                             Fecha_Modificacion = reader.IsDBNull(5) ? (DateTime?)null : reader.GetDateTime(5)
                         };

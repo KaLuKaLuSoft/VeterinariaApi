@@ -9,8 +9,8 @@ using VeterinariaApi.Seguridad;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-var builder = WebApplication.CreateBuilder(args);
 
+var builder = WebApplication.CreateBuilder(args);
 // CORS
 builder.Services.AddCors(options =>
 {
@@ -22,9 +22,11 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Add services to the container.
-builder.Services.AddControllers();
-
+// Add services to the container and serialize enums as strings in JSON
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+});
 // Configuración de Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -129,6 +131,7 @@ builder.Services.AddScoped<IMovimientoNominaRepositorio, MovimientoNominaReposit
 builder.Services.AddScoped<ILogueoRepositorio, LogueoRepositorio>();
 builder.Services.AddScoped<ILoginAccionesRepositorio, LoginAccionesRepositorio>();
 builder.Services.AddScoped<ITipoClientesRepositorio, TipoClientesRepositorio>();
+builder.Services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
 
 var app = builder.Build();
 
@@ -142,11 +145,13 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty;
     });
 }
-
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseCors("PermitirTodo");
 
+// Authentication middleware must run before Authorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
