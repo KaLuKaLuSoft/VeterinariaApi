@@ -11,10 +11,10 @@ namespace VeterinariaApi.Models
         public string? CodEmpleado { get; set; }
         public string? Empleado { get; set; }
         public string? Direccion { get; set; }
-        public DateTime FechaNacimiento { get; set; }
+        public DateTime? FechaNacimiento { get; set; }
         public string? Celular { get; set; }
         public string? Ci { get; set; }
-        public DateTime FechaContratacion { get; set; }
+        public DateTime? FechaContratacion { get; set; }
         public decimal? Salario { get; set; }
         public int? IdDepartamento { get; set; }
         [ForeignKey("IdDepartamento")]
@@ -22,6 +22,9 @@ namespace VeterinariaApi.Models
         public int? IdSucursal { get; set; }
         [ForeignKey("IdSucursal")]
         public Sucursales? Sucursal { get; set; }
+        public int? IdEmpresa { get; set; }
+        [ForeignKey("IdEmpresa")]
+        public Empresa? NombreEmpresa { get; set; }
         //public int CajaId { get; set; }
         //[ForeignKey("CajaId")]
         //public Caja Caja { get; set; }

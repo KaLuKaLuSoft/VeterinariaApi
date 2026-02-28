@@ -14,6 +14,9 @@ namespace VeterinariaApi.Dto
         public string? Ci { get; set; }
         public DateTime? FechaContratacion { get; set; }
         public int? IdSucursal { get; set; }
+        public string? NombreSucursal { get; set; }
+        public int? IdPias { get; set; }
+        public string? NombrePais { get; set; }
         //public int CajaId { get; set; }
         //[ForeignKey("CajaId")]
         //public Caja Caja { get; set; }

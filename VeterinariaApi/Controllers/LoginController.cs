@@ -138,14 +138,7 @@ namespace VeterinariaApi.Controllers
                     return Unauthorized(new { Message = "Usuario o contraseña incorrectos." });
                 }
 
-                var login = new Login
-                {
-                    Id = loginDto.Id,
-                    Usuario    = loginDto.Usuario,
-                    Contrasena = loginDto.Contrasena
-                };
-
-                var (jwtToken, refreshToken, expiration) = _tokenService.GenerarTokens(login);
+                var (jwtToken, refreshToken, expiration) = _tokenService.GenerarTokens(loginDto);
 
                 var refreshTokens = new RefreshTokens
                 {
@@ -201,12 +194,13 @@ namespace VeterinariaApi.Controllers
                     return Unauthorized("Refresh token inválido.");
                 }
 
-                var (newJwtToken, newRefreshToken, newExpiration) = _tokenService.GenerarTokens(new Login
-                {
-                    Id = loginDto.Id,
-                    Usuario = loginDto.Usuario,
-                    Contrasena = loginDto.Contrasena
-                });
+                var (newJwtToken, newRefreshToken, newExpiration) = _tokenService.GenerarTokens(loginDto);
+                //var (newJwtToken, newRefreshToken, newExpiration) = _tokenService.GenerarTokens(new Login
+                //{
+                //    Id = loginDto.Id,
+                //    Usuario = loginDto.Usuario,
+                //    Contrasena = loginDto.Contrasena
+                //});
 
                 var newRefreshTokens = new RefreshTokens
                 {

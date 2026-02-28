@@ -55,6 +55,8 @@ namespace VeterinariaApi.Repositorio
                         Roles = reader.GetString(reader.GetOrdinal("Roles")),
                         IdEmpleado = reader.GetInt32(reader.GetOrdinal("idUsuario")),
                         Activo = reader.GetBoolean(reader.GetOrdinal("Activo")),
+                        IdEmpresa = reader.GetInt32(reader.GetOrdinal("IdEmpresa")),
+                        Empresa = reader.GetString(reader.GetOrdinal("Empresa")),
                     };
 
                     // Lanzar una excepción específica si el usuario está inactivo

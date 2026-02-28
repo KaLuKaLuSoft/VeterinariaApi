@@ -16,13 +16,13 @@ namespace VeterinariaApi.Dto
 
         public string? LogoUrl { get; set; }
 
-        public PlanSuscripcion PlanSuscripcion { get; set; } = PlanSuscripcion.Basico;
+        public PlanSuscripcion PlanSuscripcion { get; set; } = PlanSuscripcion.Demo;
 
         public EstadoCuenta EstadoCuenta { get; set; } = EstadoCuenta.Activo;
 
         public DateTime FechaRegistro { get; set; }
 
-        public int IdCiudad { get; set; }
-        public string? NombreCiudad { get; set; }
+        public int IdPais { get; set; }
+        public string? NombrePais { get; set; }
     }
 }

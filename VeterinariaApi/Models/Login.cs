@@ -27,6 +27,6 @@ namespace VeterinariaApi.Models
 
 
         public DateTime FechaCreacion { get; set; }
-        public DateTime UltimoLogin { get; set; }
+        public DateTime? UltimoLogin { get; set; }
     }
 }

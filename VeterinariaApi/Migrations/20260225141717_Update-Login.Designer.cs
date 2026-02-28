@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VeterinariaApi.Data;
 
@@ -11,9 +12,11 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260225141717_Update-Login")]
+    partial class UpdateLogin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -533,9 +536,6 @@ namespace VeterinariaApi.Migrations
                     b.Property<int?>("IdDepartamento")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdEmpresa")
-                        .HasColumnType("int");
-
                     b.Property<int?>("IdSucursal")
                         .HasColumnType("int");
 
@@ -548,8 +548,6 @@ namespace VeterinariaApi.Migrations
                         .IsUnique();
 
                     b.HasIndex("IdDepartamento");
-
-                    b.HasIndex("IdEmpresa");
 
                     b.HasIndex("IdSucursal");
 
@@ -1030,9 +1028,6 @@ namespace VeterinariaApi.Migrations
                     b.Property<int?>("IdCiudad")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdEmpresa")
-                        .HasColumnType("int");
-
                     b.Property<string>("NombreSucursal")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
@@ -1047,8 +1042,6 @@ namespace VeterinariaApi.Migrations
                         .IsUnique();
 
                     b.HasIndex("IdCiudad");
-
-                    b.HasIndex("IdEmpresa");
 
                     b.ToTable("Sucursales");
                 });
@@ -1367,17 +1360,11 @@ namespace VeterinariaApi.Migrations
                         .WithMany()
                         .HasForeignKey("IdDepartamento");
 
-                    b.HasOne("VeterinariaApi.Models.Empresa", "NombreEmpresa")
-                        .WithMany()
-                        .HasForeignKey("IdEmpresa");
-
                     b.HasOne("VeterinariaApi.Models.Sucursales", "Sucursal")
                         .WithMany()
                         .HasForeignKey("IdSucursal");
 
                     b.Navigation("NombreDepartamento");
-
-                    b.Navigation("NombreEmpresa");
 
                     b.Navigation("Sucursal");
                 });
@@ -1514,13 +1501,7 @@ namespace VeterinariaApi.Migrations
                         .WithMany()
                         .HasForeignKey("IdCiudad");
 
-                    b.HasOne("VeterinariaApi.Models.Empresa", "NombreEmpresa")
-                        .WithMany()
-                        .HasForeignKey("IdEmpresa");
-
                     b.Navigation("NombreCiudad");
-
-                    b.Navigation("NombreEmpresa");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.TurnosEmpleado", b =>

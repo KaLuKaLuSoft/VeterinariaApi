@@ -53,8 +53,8 @@ namespace VeterinariaApi.Repositorio
                 command.Parameters.Add(new MySqlParameter("@e_LogoUrl", MySqlDbType.VarChar, 500)
                 { Value = empresaDto.LogoUrl ?? (object)DBNull.Value });
 
-                command.Parameters.Add(new MySqlParameter("@e_IdCiudad", MySqlDbType.Int32)
-                { Value = empresaDto.IdCiudad });
+                command.Parameters.Add(new MySqlParameter("@e_IdPais", MySqlDbType.Int32)
+                { Value = empresaDto.IdPais });
 
                 // Enums convertidos a string según tu configuración de Fluent API
                 command.Parameters.Add(new MySqlParameter("@e_PlanSuscripcion", MySqlDbType.VarChar, 50)

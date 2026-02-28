@@ -11,6 +11,8 @@ namespace VeterinariaApi.Dto
         public string? Direccion { get; set; }
         public int? IdCiudad { get; set; }
         public string? NombreCiudad { get; set; }
+        public int? IdPais { get; set; }
+        public string? NombrePais { get; set; }
         public string? Telefono { get; set; }
         public string? EmailContacto { get; set; }
         public bool? Activo { get; set; } = false;

@@ -73,7 +73,7 @@ IMapper mapper = MappingConfiguration.RegisterMap().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<Token>();
-
+builder.Services.AddSingleton<PasswordHelper>();
 builder.Services.AddAuthentication(config =>
 {
     config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -132,6 +132,7 @@ builder.Services.AddScoped<ILogueoRepositorio, LogueoRepositorio>();
 builder.Services.AddScoped<ILoginAccionesRepositorio, LoginAccionesRepositorio>();
 builder.Services.AddScoped<ITipoClientesRepositorio, TipoClientesRepositorio>();
 builder.Services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
+builder.Services.AddScoped<IRegistroRepositorio, RegistroRepositorio>();
 
 var app = builder.Build();
 

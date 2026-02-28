@@ -22,13 +22,14 @@ namespace VeterinariaApi.Models
 
         public DateTime FechaRegistro { get; set; } = DateTime.UtcNow;
 
-        public int IdCiudad { get; set; }
-        [ForeignKey("IdCiudad")]
-        public Ciudad? NombreCiudad { get; set; }
+        public int IdPais { get; set; }
+        [ForeignKey("IdPais")]
+        public Paises? NombrePais { get; set; }
     }
 
     public enum PlanSuscripcion
     {
+        Demo,
         Basico,
         Pro,
         Premium

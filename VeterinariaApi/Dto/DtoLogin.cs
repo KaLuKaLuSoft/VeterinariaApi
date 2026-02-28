@@ -21,9 +21,12 @@ namespace VeterinariaApi.Dto
         public List<DtoLoginMenu> Menus { get; set; }
         
         public DateTime FechaCreacion { get; set; }
-        public DateTime UltimoLogin { get; set; }
+        public DateTime? UltimoLogin { get; set; }
 
         public string? Tokens { get; set; }
+
+        public int? IdEmpresa { get; set; }
+        public string? Empresa { get; set; }
     }
     public class RefreshTokens
     {

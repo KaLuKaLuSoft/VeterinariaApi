@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VeterinariaApi.Data;
 
@@ -11,9 +12,11 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260227013926_UpdateIdEmpresaEmpleadoSucursal")]
+    partial class UpdateIdEmpresaEmpleadoSucursal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -533,7 +536,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<int?>("IdDepartamento")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdEmpresa")
+                    b.Property<int?>("IdPias")
                         .HasColumnType("int");
 
                     b.Property<int?>("IdSucursal")
@@ -549,7 +552,7 @@ namespace VeterinariaApi.Migrations
 
                     b.HasIndex("IdDepartamento");
 
-                    b.HasIndex("IdEmpresa");
+                    b.HasIndex("IdPias");
 
                     b.HasIndex("IdSucursal");
 
@@ -1030,7 +1033,7 @@ namespace VeterinariaApi.Migrations
                     b.Property<int?>("IdCiudad")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdEmpresa")
+                    b.Property<int?>("IdPais")
                         .HasColumnType("int");
 
                     b.Property<string>("NombreSucursal")
@@ -1041,6 +1044,9 @@ namespace VeterinariaApi.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("varchar(15)");
 
+                    b.Property<int?>("public int? IdPais { get; set; }")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EmailContacto")
@@ -1048,7 +1054,7 @@ namespace VeterinariaApi.Migrations
 
                     b.HasIndex("IdCiudad");
 
-                    b.HasIndex("IdEmpresa");
+                    b.HasIndex("public int? IdPais { get; set; }");
 
                     b.ToTable("Sucursales");
                 });
@@ -1367,9 +1373,9 @@ namespace VeterinariaApi.Migrations
                         .WithMany()
                         .HasForeignKey("IdDepartamento");
 
-                    b.HasOne("VeterinariaApi.Models.Empresa", "NombreEmpresa")
+                    b.HasOne("VeterinariaApi.Models.Paises", "NombrePais")
                         .WithMany()
-                        .HasForeignKey("IdEmpresa");
+                        .HasForeignKey("IdPias");
 
                     b.HasOne("VeterinariaApi.Models.Sucursales", "Sucursal")
                         .WithMany()
@@ -1377,7 +1383,7 @@ namespace VeterinariaApi.Migrations
 
                     b.Navigation("NombreDepartamento");
 
-                    b.Navigation("NombreEmpresa");
+                    b.Navigation("NombrePais");
 
                     b.Navigation("Sucursal");
                 });
@@ -1514,13 +1520,13 @@ namespace VeterinariaApi.Migrations
                         .WithMany()
                         .HasForeignKey("IdCiudad");
 
-                    b.HasOne("VeterinariaApi.Models.Empresa", "NombreEmpresa")
+                    b.HasOne("VeterinariaApi.Models.Paises", "NombrePais")
                         .WithMany()
-                        .HasForeignKey("IdEmpresa");
+                        .HasForeignKey("public int? IdPais { get; set; }");
 
                     b.Navigation("NombreCiudad");
 
-                    b.Navigation("NombreEmpresa");
+                    b.Navigation("NombrePais");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.TurnosEmpleado", b =>

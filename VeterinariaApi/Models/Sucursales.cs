@@ -13,6 +13,9 @@ namespace VeterinariaApi.Models
         public int? IdCiudad { get; set; }
         [ForeignKey("IdCiudad")]
         public Ciudad? NombreCiudad { get; set; }
+        public int? IdEmpresa { get; set; }
+        [ForeignKey("IdEmpresa")]
+        public Empresa? NombreEmpresa { get; set; }
         public string? Telefono { get; set; }
         public string? EmailContacto { get; set; }
         public bool? Activo { get; set; } = false;
