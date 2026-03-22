@@ -133,6 +133,14 @@ builder.Services.AddScoped<ILoginAccionesRepositorio, LoginAccionesRepositorio>(
 builder.Services.AddScoped<ITipoClientesRepositorio, TipoClientesRepositorio>();
 builder.Services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
 builder.Services.AddScoped<IRegistroRepositorio, RegistroRepositorio>();
+builder.Services.AddScoped<IClientesRepositorio, ClientesRepositorio>();
+builder.Services.AddScoped<IEspecieMascotaRepositorio, EspecieMascotaRepositorio>();
+builder.Services.AddScoped<IDueñosRepositorio, DueñosRepositorio>();
+builder.Services.AddScoped<ITipoDocumentoRepositorio, TipoDocumentoRepositorio>();
+builder.Services.AddScoped<IRazaMascotaRepositorio, RazaMascotaRepositorio>();
+builder.Services.AddScoped<ITipoAlimentacionRepositorio, TipoAlimentacionRepositorio>();
+builder.Services.AddScoped<IConvivenciaMascotaRepositorio, ConvivenciaMascotaRepositorio>();
+builder.Services.AddScoped<IProcedenciaMascotaRepositorio, ProcedenciaMascotaRepositorio>();
 
 var app = builder.Build();
 

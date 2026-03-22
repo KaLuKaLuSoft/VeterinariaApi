@@ -42,12 +42,17 @@ namespace VeterinariaApi.Seguridad
                 claims.Add(new Claim("IdEmpresa", usuario.IdEmpresa.Value.ToString()));
             }
 
+            if (usuario.IdPais.HasValue)
+            {
+                claims.Add(new Claim("IdPais", usuario.IdPais.Value.ToString()));
+            }
+
             var userClaims = claims.ToArray();
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:key"]!));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
 
-            var expiration = DateTime.UtcNow.AddMinutes(60); // Expiración del JWT
+            var expiration = DateTime.UtcNow.AddMinutes(2); // Expiración del JWT
 
             var jwtToken = new JwtSecurityToken(
                 claims: userClaims,

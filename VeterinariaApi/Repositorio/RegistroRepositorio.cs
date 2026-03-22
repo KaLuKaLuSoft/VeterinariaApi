@@ -29,6 +29,26 @@ namespace VeterinariaApi.Repositorio
                 var connection = _context.Database.GetDbConnection();
                 if (connection.State != ConnectionState.Open) await connection.OpenAsync();
 
+                // 🔴 VALIDAR SI EL CORREO YA EXISTE
+                using var checkCommand = connection.CreateCommand();
+                checkCommand.Transaction = transaction.GetDbTransaction(); // 👈 agregar
+                checkCommand.CommandText = "SELECT COUNT(*) FROM login WHERE Usuario = @Usuario";
+                checkCommand.CommandType = CommandType.Text;
+
+                var usuarioParam = new MySqlParameter("@Usuario", MySqlDbType.VarChar)
+                {
+                    Value = registroDto.Usuario
+                };
+
+                checkCommand.Parameters.Add(usuarioParam);
+
+                var existe = Convert.ToInt32(await checkCommand.ExecuteScalarAsync());
+
+                if (existe > 0)
+                {
+                    throw new Exception("El correo ya se encuentra registrado");
+                }
+
                 using var command = connection.CreateCommand();
                 command.Transaction = transaction.GetDbTransaction();
                 command.CommandText = "registro"; // Tu SP
@@ -93,10 +113,16 @@ namespace VeterinariaApi.Repositorio
 
                 return registroDto;
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
                 await transaction.RollbackAsync();
-                throw new Exception("Error en el registro integral", ex);
+
+                if (ex.Number == 1062) // Duplicate entry
+                {
+                    throw new Exception("El correo ya está registrado");
+                }
+
+                throw;
             }
         }
     }

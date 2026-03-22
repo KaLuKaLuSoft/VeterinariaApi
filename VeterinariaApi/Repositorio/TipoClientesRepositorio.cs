@@ -178,7 +178,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al obtener los tipos de clientes", ex);
             }
         }
-
         public async Task<DtoTipoCliente> GetTipoClientesById(int id)
         {
             try
@@ -190,11 +189,7 @@ namespace VeterinariaApi.Repositorio
                 command.CommandText = "ObtenerTipoClientesById";
                 command.CommandType = CommandType.StoredProcedure;
 
-                var idParam = new MySqlConnector.MySqlParameter("@tc_Id", MySqlDbType.Int32)
-                {
-                    Value = id
-                };
-                command.Parameters.Add(idParam);
+                command.Parameters.Add(new MySqlParameter("@c_Id", id));
 
                 using (var reader = await command.ExecuteReaderAsync())
                 {
@@ -240,6 +235,7 @@ namespace VeterinariaApi.Repositorio
                 {
                     Value = tipoclientesDto.Id
                 };
+
 
                 var resultParam = new MySqlConnector.MySqlParameter("@resultado", MySqlConnector.MySqlDbType.Int32)
                 {

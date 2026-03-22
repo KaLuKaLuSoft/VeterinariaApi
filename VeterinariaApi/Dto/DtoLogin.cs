@@ -27,6 +27,9 @@ namespace VeterinariaApi.Dto
 
         public int? IdEmpresa { get; set; }
         public string? Empresa { get; set; }
+
+        public int? IdPais { get; set; }
+        public string? Pais { get; set; }
     }
     public class RefreshTokens
     {

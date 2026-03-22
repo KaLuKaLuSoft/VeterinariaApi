@@ -132,7 +132,7 @@ namespace VeterinariaApi.Repositorio
             }
         }
 
-        public async Task<List<DtoCiudad>> GetCiudad()
+        public async Task<List<DtoCiudad>> GetCiudad(int? idPais)
         {
             try
             {
@@ -142,6 +142,12 @@ namespace VeterinariaApi.Repositorio
                 var command = connection.CreateCommand();
                 command.CommandText = "ObtenerCiudad";
                 command.CommandType = CommandType.StoredProcedure;
+                // Pasar el idPais al procedimiento almacenado para filtrar las ciudades (puede ser null)
+                var idPaisParam = new MySqlParameter("c_IdPais", MySqlDbType.Int32)
+                {
+                    Value = idPais.HasValue ? (object)idPais.Value : DBNull.Value
+                };
+                command.Parameters.Add(idPaisParam);
 
                 var region = new List<DtoCiudad>();
                 using (var reader = await command.ExecuteReaderAsync())

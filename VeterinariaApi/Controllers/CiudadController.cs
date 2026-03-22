@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using VeterinariaApi.Data;
 using VeterinariaApi.Dto;
 using VeterinariaApi.Interface;
+using VeterinariaApi.Migrations;
 using VeterinariaApi.Models;
 
 namespace VeterinariaApi.Controllers
@@ -32,25 +33,42 @@ namespace VeterinariaApi.Controllers
 
         // GET: api/Ciudad
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Ciudad>>> GetCiudades()
+        public async Task<ActionResult<IEnumerable<Ciudad>>> GetCiudades([FromQuery] int? idPais)
         {
             try
             {
-                var ciudades = await _ciudadRepositorio.GetCiudad();
-                if(ciudades == null || !ciudades.Any())
+                // Si se recibe idPais por query, usarlo. Si no, intentar obtener del claim.
+                int? idPaisToUse = idPais;
+                if (!idPaisToUse.HasValue)
+                {
+                    var idPaisClaim = User.FindFirst("IdPais")?.Value;
+                    if (!string.IsNullOrEmpty(idPaisClaim))
+                    {
+                        idPaisToUse = int.Parse(idPaisClaim);
+                    }
+                }
+
+                var ciudad = await _ciudadRepositorio.GetCiudad(idPaisToUse);
+
+                if(ciudad == null || !ciudad.Any())
                 {
                     _response.IsSuccess = false;
-                    _response.DisplayMessage = "No se encontraron ciudades.";
+                    _response.DisplayMessage = "No se encontraron la ciudad para este Pais.";
                     return NotFound(_response);
                 }
-                return Ok(ciudades);
+
+                _response.IsSuccess = true;
+                _response.Result = ciudad;
+                _response.DisplayMessage = "Lista de ciudades obtenida con éxito";
+            
+                return Ok(_response);
             }
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
                 _response.DisplayMessage = "Error al obtener las ciudades.";
                 _response.ErrorMessages = new List<string> { ex.Message };
-                return StatusCode(500, new { Message = "Error al obtener todos los Proveedores", Details = ex.Message });
+                return StatusCode(500, new { Message = "Error al obtener las ciudades", Details = ex.Message });
             }
         }
 

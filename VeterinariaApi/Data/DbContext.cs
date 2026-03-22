@@ -45,6 +45,17 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.MovimientosNomina> MovimientosNomina { get; set; }
         public DbSet<VeterinariaApi.Models.TipoCliente> TipoClientes { get; set; }
         public DbSet<VeterinariaApi.Models.Empresa> Empresas { get; set; }
+        public DbSet<VeterinariaApi.Models.Clientes> Clientes { get; set; }
+        public DbSet<VeterinariaApi.Models.EspecieMascota> EspecieMascotas { get; set; }
+        public DbSet<VeterinariaApi.Models.Dueños> Dueños { get; set; }
+        public DbSet<VeterinariaApi.Models.TipoDocumentos> TipoDocumentos { get; set; }
+        public DbSet<VeterinariaApi.Models.RazaMascota> RazaMascotas { get; set; }
+        public DbSet<VeterinariaApi.Models.TipoAlimentacion> TipoAlimentacion { get; set; }
+        public DbSet<VeterinariaApi.Models.ConsumoAlimento> ConsumoAlimento { get; set; }
+        public DbSet<VeterinariaApi.Models.ConvivenciaMascota> ConvivenciaMascota { get; set; }
+        public DbSet<VeterinariaApi.Models.ProcedenciaMascota> ProcedenciaMascota { get; set; }
+        public DbSet<VeterinariaApi.Models.HabitatMascota> HabitatMascota { get; set; }
+
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -714,6 +725,128 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<Empresa>()
                 .Property(e => e.FechaRegistro)
                 .HasColumnType("datetime");
+
+            modelBuilder.Entity<Clientes>()
+                .Property(c => c.CodCliente)
+                .HasMaxLength(100);
+            modelBuilder.Entity<Clientes>()
+                .Property(c => c.NombreCliente)
+                .HasMaxLength(100);
+            modelBuilder.Entity<Clientes>()
+                .Property(c => c.DireccionCliente)
+                .HasMaxLength(150);
+            modelBuilder.Entity<Clientes>()
+                .Property(c => c.Email)
+                .HasMaxLength(100);
+            modelBuilder.Entity<Clientes>()
+                .Property(c => c.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(true);
+            modelBuilder.Entity<Clientes>()
+                .Property(c => c.IsDeleted)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<Clientes>()
+                .Property(c => c.Fecha_Registro)
+                .HasColumnType("datetime");
+            modelBuilder.Entity<Clientes>()
+                .Property(c => c.Fecha_Alta)
+                .HasColumnType("datetime");
+            modelBuilder.Entity<Clientes>()
+                .Property(c => c.Fecha_Modificacion)
+                .HasColumnType("datetime");
+            modelBuilder.Entity<Clientes>()
+                .Property(c => c.Observaciones)
+                .HasMaxLength(255);
+
+            modelBuilder.Entity<EspecieMascota>()
+                .HasIndex(es => es.NombreEspecie)
+                .IsUnique();
+            modelBuilder.Entity<EspecieMascota>()
+                .Property(es => es.NombreEspecie)
+                .HasMaxLength(100);
+            modelBuilder.Entity<EspecieMascota>()
+                .Property(es => es.Descripcion)
+                .HasMaxLength(255);
+            modelBuilder.Entity<EspecieMascota>()
+                .Property(es => es.Fecha_Alta)
+                .HasColumnType("datetime");
+            modelBuilder.Entity<EspecieMascota>()
+                .Property(es => es.Fecha_Modificacion)
+                .HasColumnType("datetime");
+
+            modelBuilder.Entity<RazaMascota>()
+                .Property(rm => rm.NombreRaza)
+                .HasMaxLength(100);
+            modelBuilder.Entity<RazaMascota>()
+                .Property(rm => rm.Fecha_Alta)
+                .HasColumnType("datetime");
+            modelBuilder.Entity<RazaMascota>()
+                .Property(rm => rm.Fecha_Modificacion)
+                .HasColumnType("datetime");
+
+            modelBuilder.Entity<Dueños>()
+                .Property(d => d.CodDueños)
+                .HasMaxLength(100);
+            modelBuilder.Entity<Dueños>()
+                .Property(d => d.NumeroIdentificacion)
+                .HasMaxLength(100);
+            modelBuilder.Entity<Dueños>()
+                .Property(d => d.NombreCompleto)
+                .HasMaxLength(150);
+            modelBuilder.Entity<Dueños>()
+                .Property(d => d.Celular)
+                .HasMaxLength(50);
+            modelBuilder.Entity<Dueños>()
+                .Property(d => d.CorreoElectronico)
+                .HasMaxLength(100);
+            modelBuilder.Entity<Dueños>()
+                .Property(d => d.Direccion)
+                .HasMaxLength(255);
+            modelBuilder.Entity<Dueños>()
+                .Property(d => d.Activo)
+                .HasColumnType("bit")
+                .HasDefaultValue(true);
+            modelBuilder.Entity<Dueños>()
+                .Property(d => d.IsDeleted)
+                .HasColumnType("bit")
+                .HasDefaultValue(false);
+            modelBuilder.Entity<Dueños>()
+                .Property(d => d.Fecha_Alta)
+                .HasColumnType("datetime");
+            modelBuilder.Entity<Dueños>()
+                .Property(d => d.Fecha_Modificacion)
+                .HasColumnType("datetime");
+
+            modelBuilder.Entity<TipoDocumentos>()
+                .Property(td => td.TipoDocumento)
+                .HasMaxLength(100);
+            modelBuilder.Entity<TipoDocumentos>()
+                .Property(td => td.Fecha_Alta)
+                .HasColumnType("datetime");
+            modelBuilder.Entity<TipoDocumentos>()
+                .Property(td => td.Fecha_Modificacion)
+                .HasColumnType("datetime");
+
+            modelBuilder.Entity<TipoAlimentacion>()
+                .Property(ta => ta.TipoAlimento)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<ConsumoAlimento>()
+                .Property(ca => ca.Veces)
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<ConvivenciaMascota>()
+                .Property(cm => cm.SaleCalle)
+                .HasMaxLength(100);
+
+             modelBuilder.Entity<ProcedenciaMascota>()
+                .Property(pm => pm.Procedencia)
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<HabitatMascota>()
+                .Property(hm => hm.NombreHabitat)
+                .HasMaxLength(100);
             #endregion
         }
     }

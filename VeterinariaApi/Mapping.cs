@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using VeterinariaApi.Dto;
+using VeterinariaApi.Migrations;
 using VeterinariaApi.Models;
+using VeterinariaApi.Repositorio;
 
 namespace VeterinariaApi
 {
@@ -111,6 +113,36 @@ namespace VeterinariaApi
 
                 config.CreateMap<Empresa, DtoEmpresa>();
                 config.CreateMap<DtoEmpresa, Empresa>();
+
+                config.CreateMap<Clientes, DtoClientes>();
+                config.CreateMap<DtoClientes, Clientes>();
+
+                config.CreateMap<EspecieMascota, DtoEspecieMascota>();
+                config.CreateMap<DtoEspecieMascota, EspecieMascota>();
+
+                config.CreateMap<RazaMascota, DtoRazaMascota>();
+                config.CreateMap<DtoRazaMascota, RazaMascota>();
+
+                config.CreateMap<Dueños, DtoDueños>();
+                config.CreateMap<DtoDueños, Dueños>();
+
+                config.CreateMap<TipoDocumentos, DtoTipoDocumento>();
+                config.CreateMap<DtoTipoDocumento, TipoDocumentos>();
+
+                config.CreateMap<TipoAlimentacion, DtoTipoAlimentacion>();
+                config.CreateMap<DtoTipoAlimentacion, TipoAlimentacion>();
+
+                config.CreateMap<ConsumoAlimento, DtoConsumoAlimento>();
+                config.CreateMap<DtoConsumoAlimento, ConsumoAlimento>();
+
+                config.CreateMap<ConvivenciaMascota, DtoConvivenciaMascota>();
+                config.CreateMap<DtoConvivenciaMascota, ConvivenciaMascota>();
+
+                config.CreateMap<ProcedenciaMascota, DtoProcedenciaMascota>();
+                config.CreateMap<DtoProcedenciaMascota, ProcedenciaMascota>();
+
+                config.CreateMap<HabitatMascota, DtoHabitatMascota>();
+                config.CreateMap<DtoHabitatMascota, HabitatMascota>();
             });
             return mappingConfig;
         }

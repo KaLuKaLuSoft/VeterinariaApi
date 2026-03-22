@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VeterinariaApi.Data;
 
@@ -11,9 +12,11 @@ using VeterinariaApi.Data;
 namespace VeterinariaApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260320135954_Todo")]
+    partial class Todo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -376,23 +379,6 @@ namespace VeterinariaApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ConsumoAlimento");
-                });
-
-            modelBuilder.Entity("VeterinariaApi.Models.ConvivenciaMascota", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("SaleCalle")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ConvivenciaMascota");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.CriteriosEvaluacion", b =>
@@ -886,23 +872,6 @@ namespace VeterinariaApi.Migrations
                     b.ToTable("EvaluacionEmpleado");
                 });
 
-            modelBuilder.Entity("VeterinariaApi.Models.HabitatMascota", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NombreHabitat")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("HabitatMascota");
-                });
-
             modelBuilder.Entity("VeterinariaApi.Models.Login", b =>
                 {
                     b.Property<int>("Id")
@@ -1106,23 +1075,6 @@ namespace VeterinariaApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Paises");
-                });
-
-            modelBuilder.Entity("VeterinariaApi.Models.ProcedenciaMascota", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Procedencia")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProcedenciaMascota");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.RazaMascota", b =>

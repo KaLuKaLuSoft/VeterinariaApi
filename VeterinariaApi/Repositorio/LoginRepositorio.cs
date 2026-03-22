@@ -39,16 +39,23 @@ namespace VeterinariaApi.Repositorio
 
         public async Task<DtoLogin> GetLoginByRefreshToken(string refreshToken)
         {
-            var loginEntity = await _context.Login
-                .FirstOrDefaultAsync(l => l.RefreshToken == refreshToken);
-            if (loginEntity == null) return null;
+            // Hacer el cruce (JOIN) manual entre Login, Empleado y Empresa
+            var query = from l in _context.Login
+                        where l.RefreshToken == refreshToken
+                        join e in _context.Empleados on l.IdEmpleado equals e.Id // Verifica "IdEmpleado"
+                        join em in _context.Empresas on e.IdEmpresa equals em.Id // Verifica "IdEmpresa"
+                        select new DtoLogin
+                        {
+                            Id = l.Id,
+                            Usuario = l.Usuario,
+                            Contrasena = l.Contrasena,
 
-            return new DtoLogin
-            {
-                Id = loginEntity.Id,
-                Usuario = loginEntity.Usuario,
-                Contrasena = loginEntity.Contrasena
-            };
+                            // Obtenidos del JOIN:
+                            IdEmpresa = em.Id,
+                            IdPais = em.IdPais
+                        };
+            var loginDto = await query.FirstOrDefaultAsync();
+            return loginDto;
         }
 
         public Task<bool> LoginExists(int id)

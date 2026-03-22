@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using VeterinariaApi.Data;
 using VeterinariaApi.Dto;
 using VeterinariaApi.Interface;
 
@@ -9,10 +11,13 @@ namespace VeterinariaApi.Controllers
     [ApiController]
     public class RegistroController : ControllerBase
     {
+        private readonly ApplicationDbContext _context;
+
         private readonly IRegistroRepositorio _registroRepo;
-        public RegistroController(IRegistroRepositorio registroRepo)
+        public RegistroController(IRegistroRepositorio registroRepo, ApplicationDbContext context)
         {
             _registroRepo = registroRepo;
+            _context = context;
         }
 
         [HttpPost]
@@ -27,16 +32,21 @@ namespace VeterinariaApi.Controllers
                 await _registroRepo.Create(registroDto);
 
                 response.IsSuccess = true;
-                response.DisplayMessage = "Se registró el usuario y la empresa correctamente";
+                response.DisplayMessage = "El correo ya está registrado";
             }
             catch (Exception ex)
             {
                 response.IsSuccess = false;
-                response.DisplayMessage = "Error al realizar el registro";
-                response.ErrorMessages = new List<string> { ex.Message };
+                response.DisplayMessage = ex.Message;
             }
 
             return response;
+        }
+
+        [HttpGet("verificar-email")]
+        public async Task<bool> ExisteEmail(string email)
+        {
+            return await _context.Login.AnyAsync(x => x.Usuario == email);
         }
     }
 }

@@ -57,6 +57,7 @@ namespace VeterinariaApi.Repositorio
                         Activo = reader.GetBoolean(reader.GetOrdinal("Activo")),
                         IdEmpresa = reader.GetInt32(reader.GetOrdinal("IdEmpresa")),
                         Empresa = reader.GetString(reader.GetOrdinal("Empresa")),
+                        IdPais = reader.GetInt32(reader.GetOrdinal("IdPais")),
                     };
 
                     // Lanzar una excepción específica si el usuario está inactivo
