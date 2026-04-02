@@ -6,145 +6,54 @@ using VeterinariaApi.Repositorio;
 
 namespace VeterinariaApi
 {
-    public class MappingConfiguration
+    public class MappingConfiguration : Profile
     {
-        public static MapperConfiguration RegisterMap()
+        public MappingConfiguration()
         {
-            var mappingConfig = new MapperConfiguration(config =>
-            {
-                config.CreateMap<Paises, DtoPaises>();
-                config.CreateMap<DtoPaises, Paises>();
-
-                config.CreateMap<Regiones, DtoRegiones>();
-                config.CreateMap<DtoRegiones, Regiones>();
-
-                config.CreateMap<Ciudad, DtoCiudad>();
-                config.CreateMap<DtoCiudad, Ciudad>();
-
-                config.CreateMap<Sucursales, DtoSucursales>();
-                config.CreateMap<DtoSucursales, Sucursales>();
-
-                config.CreateMap<Departamentos, DtoDepartamentos>();
-                config.CreateMap<DtoDepartamentos, Departamentos>();
-
-                config.CreateMap<Roles, DtoRoles>();
-                config.CreateMap<DtoRoles, Roles>();
-
-                config.CreateMap<EspecialidadesMedicas, DtoEpecialidadesMedicas>();
-                config.CreateMap<DtoEpecialidadesMedicas, EspecialidadesMedicas>();
-
-                config.CreateMap<Modulo, DtoModulo>();
-                config.CreateMap<DtoModulo, Modulo>();
-
-                config.CreateMap<SubModulo, DtoSubModulo>();
-                config.CreateMap<DtoSubModulo, SubModulo>();
-
-                config.CreateMap<Login, DtoLogin>();
-                config.CreateMap<DtoLogin, Login>();
-
-                config.CreateMap<LoginMenu, DtoLoginMenu>();
-                config.CreateMap<DtoLoginMenu, LoginMenu>();
-
-                config.CreateMap<Acciones, DtoAcciones>();
-                config.CreateMap<DtoAcciones, Acciones>();
-
-                config.CreateMap<LoginAcciones, DtoLoginAcciones>();
-                config.CreateMap<DtoLoginAcciones, LoginAcciones>();
-
-                config.CreateMap<LoginAcciones, DtoLoginAcciones>();
-                config.CreateMap<DtoLoginAcciones, LoginAcciones>();
-
-                config.CreateMap <Empleados, DtoEmpleado>();
-                config.CreateMap<DtoEmpleado, Empleados>();
-
-                config.CreateMap<EmpleadoEsepecialidad, DtoEmpleadoEspecialidad>();
-                config.CreateMap<DtoEmpleadoEspecialidad, EmpleadoEsepecialidad>();
-
-                config.CreateMap<TipoTurno, DtoTipoTurno>();
-                config.CreateMap<DtoTipoTurno, TipoTurno>();
-
-                config.CreateMap<TurnosEmpleado, DtoTurnosEmpleado>();
-                config.CreateMap<DtoTurnosEmpleado, TurnosEmpleado>();
-
-                config.CreateMap<TipoAusencia, DtoTipoAusencia>();
-                config.CreateMap<DtoTipoAusencia, TipoAusencia>();
-
-                config.CreateMap<AusenciaEmpleado, DtoAusenciaEmpleado>();
-                config.CreateMap<DtoAusenciaEmpleado, AusenciaEmpleado>();
-
-                config.CreateMap<UsuarioRol, DtoUsuarioRol>();
-                config.CreateMap<DtoUsuarioRol, UsuarioRol>();
-
-                config.CreateMap<UsuarioSucursal, DtoUsuarioSucursal>();
-                config.CreateMap<DtoUsuarioSucursal, UsuarioSucursal>();
-
-                config.CreateMap<CriteriosEvaluacion, DtoCriterioEvaluacion>();
-                config.CreateMap<DtoCriterioEvaluacion, CriteriosEvaluacion>();
-
-                config.CreateMap<EvaluacionEmpleado, DtoEvaluacionEmpleado>();
-                config.CreateMap<DtoEvaluacionEmpleado, EvaluacionEmpleado>();
-
-                config.CreateMap<CursoCapacitacion, DtoCursoCapacitacion>();
-                config.CreateMap<DtoCursoCapacitacion, CursoCapacitacion>();
-
-                config.CreateMap<EmpleadoCapacitacion, DtoEmpleadoCapacitacion>();
-                config.CreateMap<DtoEmpleadoCapacitacion, EmpleadoCapacitacion>();
-
-                config.CreateMap<CategoriaActivoFijo, DtoCategoriaActivoFijo>();
-                config.CreateMap<DtoCategoriaActivoFijo, CategoriaActivoFijo>();
-
-                config.CreateMap<ActivosFijos, DtoActivoFijos>();
-                config.CreateMap<DtoActivoFijos, ActivosFijos>();
-
-                config.CreateMap<ConceptoNominas, DtoConceptoNominas>();
-                config.CreateMap<DtoConceptoNominas, ConceptoNominas>();
-
-                config.CreateMap<MovimientosNomina, DtoMovimientosNomina>();
-                config.CreateMap<DtoMovimientosNomina, MovimientosNomina>();
-                
-                config.CreateMap<Login, DtoLogin>();
-                config.CreateMap<DtoLogin, Login>();
-
-                config.CreateMap<Login, DtoLogueo>();
-                config.CreateMap<DtoLogueo, Login>();
-
-                config.CreateMap<TipoCliente, DtoTipoCliente>();
-                config.CreateMap<DtoTipoCliente, TipoCliente>();
-
-                config.CreateMap<Empresa, DtoEmpresa>();
-                config.CreateMap<DtoEmpresa, Empresa>();
-
-                config.CreateMap<Clientes, DtoClientes>();
-                config.CreateMap<DtoClientes, Clientes>();
-
-                config.CreateMap<EspecieMascota, DtoEspecieMascota>();
-                config.CreateMap<DtoEspecieMascota, EspecieMascota>();
-
-                config.CreateMap<RazaMascota, DtoRazaMascota>();
-                config.CreateMap<DtoRazaMascota, RazaMascota>();
-
-                config.CreateMap<Dueños, DtoDueños>();
-                config.CreateMap<DtoDueños, Dueños>();
-
-                config.CreateMap<TipoDocumentos, DtoTipoDocumento>();
-                config.CreateMap<DtoTipoDocumento, TipoDocumentos>();
-
-                config.CreateMap<TipoAlimentacion, DtoTipoAlimentacion>();
-                config.CreateMap<DtoTipoAlimentacion, TipoAlimentacion>();
-
-                config.CreateMap<ConsumoAlimento, DtoConsumoAlimento>();
-                config.CreateMap<DtoConsumoAlimento, ConsumoAlimento>();
-
-                config.CreateMap<ConvivenciaMascota, DtoConvivenciaMascota>();
-                config.CreateMap<DtoConvivenciaMascota, ConvivenciaMascota>();
-
-                config.CreateMap<ProcedenciaMascota, DtoProcedenciaMascota>();
-                config.CreateMap<DtoProcedenciaMascota, ProcedenciaMascota>();
-
-                config.CreateMap<HabitatMascota, DtoHabitatMascota>();
-                config.CreateMap<DtoHabitatMascota, HabitatMascota>();
-            });
-            return mappingConfig;
+            CreateMap<Paises, DtoPaises>().ReverseMap();
+            CreateMap<Regiones, DtoRegiones>().ReverseMap();
+            CreateMap<Ciudad, DtoCiudad>().ReverseMap();
+            CreateMap<Sucursales, DtoSucursales>().ReverseMap();
+            CreateMap<Departamentos, DtoDepartamentos>().ReverseMap();
+            CreateMap<Roles, DtoRoles>().ReverseMap();
+            CreateMap<EspecialidadesMedicas, DtoEpecialidadesMedicas>().ReverseMap();
+            CreateMap<Modulo, DtoModulo>().ReverseMap();
+            CreateMap<SubModulo, DtoSubModulo>().ReverseMap();
+            CreateMap<Login, DtoLogin>().ReverseMap();
+            CreateMap<LoginMenu, DtoLoginMenu>().ReverseMap();
+            CreateMap<Acciones, DtoAcciones>().ReverseMap();
+            CreateMap<LoginAcciones, DtoLoginAcciones>().ReverseMap();
+            CreateMap<LoginAcciones, DtoLoginAcciones>().ReverseMap();
+            CreateMap<Empleados, DtoEmpleado>().ReverseMap();
+            CreateMap<EmpleadoEsepecialidad, DtoEmpleadoEspecialidad>().ReverseMap();
+            CreateMap<TipoTurno, DtoTipoTurno>().ReverseMap();
+            CreateMap<TurnosEmpleado, DtoTurnosEmpleado>().ReverseMap();
+            CreateMap<TipoAusencia, DtoTipoAusencia>().ReverseMap();
+            CreateMap<AusenciaEmpleado, DtoAusenciaEmpleado>().ReverseMap();
+            CreateMap<UsuarioRol, DtoUsuarioRol>().ReverseMap();
+            CreateMap<UsuarioSucursal, DtoUsuarioSucursal>().ReverseMap();
+            CreateMap<CriteriosEvaluacion, DtoCriterioEvaluacion>().ReverseMap();
+            CreateMap<EvaluacionEmpleado, DtoEvaluacionEmpleado>().ReverseMap();
+            CreateMap<CursoCapacitacion, DtoCursoCapacitacion>().ReverseMap();
+            CreateMap<EmpleadoCapacitacion, DtoEmpleadoCapacitacion>().ReverseMap();
+            CreateMap<CategoriaActivoFijo, DtoCategoriaActivoFijo>().ReverseMap();
+            CreateMap<ActivosFijos, DtoActivoFijos>().ReverseMap();
+            CreateMap<ConceptoNominas, DtoConceptoNominas>().ReverseMap();
+            CreateMap<MovimientosNomina, DtoMovimientosNomina>().ReverseMap();
+            CreateMap<Login, DtoLogin>().ReverseMap();
+            CreateMap<Login, DtoLogueo>().ReverseMap();
+            CreateMap<TipoCliente, DtoTipoCliente>().ReverseMap();
+            CreateMap<Empresa, DtoEmpresa>().ReverseMap();
+            CreateMap<Clientes, DtoClientes>().ReverseMap();
+            CreateMap<EspecieMascota, DtoEspecieMascota>().ReverseMap();
+            CreateMap<RazaMascota, DtoRazaMascota>().ReverseMap();
+            CreateMap<Dueños, DtoDueños>().ReverseMap();
+            CreateMap<TipoDocumentos, DtoTipoDocumento>().ReverseMap();
+            CreateMap<TipoAlimentacion, DtoTipoAlimentacion>().ReverseMap();
+            CreateMap<ConsumoAlimento, DtoConsumoAlimento>().ReverseMap();
+            CreateMap<ConvivenciaMascota, DtoConvivenciaMascota>().ReverseMap();
+            CreateMap<ProcedenciaMascota, DtoProcedenciaMascota>().ReverseMap();
+            CreateMap<HabitatMascota, DtoHabitatMascota>().ReverseMap();
         }
     }
 }
