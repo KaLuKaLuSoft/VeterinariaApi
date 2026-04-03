@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using VeterinariaApi;
+﻿using Microsoft.EntityFrameworkCore;
 using VeterinariaApi.Data;
 using VeterinariaApi.Interface;
 using VeterinariaApi.Repositorio;
@@ -9,6 +6,9 @@ using VeterinariaApi.Seguridad;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.OpenApi;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 // CORS
@@ -50,20 +50,21 @@ builder.Services.AddSwaggerGen(options =>
         Description = "Ingrese el token JWT en este formato: Bearer {token}"
     });
 
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new string[] {}
-        }
-    });
+    //options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    //{
+    //    {
+    //        new OpenApiSecurityScheme
+    //        {
+    //            Reference = new OpenApiReference
+    //            {
+    //                Type = ReferenceType.SecurityScheme,
+    //                Id = "Bearer"
+    //            }
+    //        },
+    //        new List<string>()
+    //    }
+    //});
+
 });
 
 // Retrieve the connection string from configuration
@@ -94,11 +95,10 @@ builder.Services.AddAuthentication(config =>
             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:key"]!))
     };
 });
-// Fix: Specify the ServerVersion explicitly
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-// Inyección de dependencias de tus repositorios (lo que ya tenías)
 builder.Services.AddScoped<IPaisesRepositorio, PaisesRepositorio>();
 builder.Services.AddScoped<IRegionesRepositorio, RegionesRepositorio>();
 builder.Services.AddScoped<ICiudadRepositorio, CiudadRepositorio>();
