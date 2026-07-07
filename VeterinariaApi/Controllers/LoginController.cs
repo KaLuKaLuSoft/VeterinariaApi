@@ -143,7 +143,7 @@ namespace VeterinariaApi.Controllers
                 var refreshTokens = new RefreshTokens
                 {
                     Tokens = jwtToken,
-                    Expiration = DateTime.Now.AddMinutes(2),
+                    Expiration = DateTime.Now.AddMinutes(10),
                     RefreshToken = refreshToken
                 };
 
@@ -154,7 +154,7 @@ namespace VeterinariaApi.Controllers
                     Message = "Logueado con éxito",
                     Token = jwtToken,
                     RefreshToken = refreshToken,
-                    Expiration = DateTime.Now.AddMinutes(2),
+                    Expiration = DateTime.Now.AddMinutes(10),
                     UserData = loginDto
                 };
 

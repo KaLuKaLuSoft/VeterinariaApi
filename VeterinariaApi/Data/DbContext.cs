@@ -55,6 +55,7 @@ namespace VeterinariaApi.Data
         public DbSet<VeterinariaApi.Models.ConvivenciaMascota> ConvivenciaMascota { get; set; }
         public DbSet<VeterinariaApi.Models.ProcedenciaMascota> ProcedenciaMascota { get; set; }
         public DbSet<VeterinariaApi.Models.HabitatMascota> HabitatMascota { get; set; }
+        public DbSet<VeterinariaApi.Models.Mascotas> Mascota { get; set; }
 
         // Aquí podrías configurar modelos, relaciones, etc. (opcional)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -157,6 +158,11 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<MovimientosNomina>(entity =>
             {
                 entity.Property(e => e.Monto)
+                      .HasColumnType("decimal(18,2)");
+            });
+            modelBuilder.Entity<Mascotas>(entity =>
+            {
+                entity.Property(m => m.Peso)
                       .HasColumnType("decimal(18,2)");
             });
             #endregion
@@ -847,6 +853,22 @@ namespace VeterinariaApi.Data
             modelBuilder.Entity<HabitatMascota>()
                 .Property(hm => hm.NombreHabitat)
                 .HasMaxLength(100);
+
+            modelBuilder.Entity<Mascotas>()
+                .Property(m => m.NombreMascota)
+                .HasMaxLength(100);
+            modelBuilder.Entity<Mascotas>()
+                .Property(m => m.FechaNacimiento)
+                .HasColumnType("datetime");
+            modelBuilder.Entity<Mascotas>()
+                .Property(m => m.IdentificacionUnica)
+                .HasMaxLength(100);
+            modelBuilder.Entity<Mascotas>()
+                .Property(m => m.Fecha_Alta)
+                .HasColumnType("datetime");
+            modelBuilder.Entity<Mascotas>()
+                .Property(m => m.Fecha_Modificacion)
+                .HasColumnType("datetime");
             #endregion
         }
     }

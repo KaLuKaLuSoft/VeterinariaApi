@@ -20,6 +20,7 @@ namespace VeterinariaApi
             CreateMap<Modulo, DtoModulo>().ReverseMap();
             CreateMap<SubModulo, DtoSubModulo>().ReverseMap();
             CreateMap<Login, DtoLogin>().ReverseMap();
+            CreateMap<Login, DtoLogueo>().ReverseMap();
             CreateMap<LoginMenu, DtoLoginMenu>().ReverseMap();
             CreateMap<Acciones, DtoAcciones>().ReverseMap();
             CreateMap<LoginAcciones, DtoLoginAcciones>().ReverseMap();
@@ -40,8 +41,7 @@ namespace VeterinariaApi
             CreateMap<ActivosFijos, DtoActivoFijos>().ReverseMap();
             CreateMap<ConceptoNominas, DtoConceptoNominas>().ReverseMap();
             CreateMap<MovimientosNomina, DtoMovimientosNomina>().ReverseMap();
-            CreateMap<Login, DtoLogin>().ReverseMap();
-            CreateMap<Login, DtoLogueo>().ReverseMap();
+
             CreateMap<TipoCliente, DtoTipoCliente>().ReverseMap();
             CreateMap<Empresa, DtoEmpresa>().ReverseMap();
             CreateMap<Clientes, DtoClientes>().ReverseMap();

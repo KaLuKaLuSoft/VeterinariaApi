@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 using VeterinariaApi.Data;
 using VeterinariaApi.Dto;
 using VeterinariaApi.Interface;
@@ -14,6 +7,7 @@ using VeterinariaApi.Models;
 
 namespace VeterinariaApi.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DueñosController : ControllerBase
@@ -31,13 +25,22 @@ namespace VeterinariaApi.Controllers
             _response = new ResponseDto();
         }
 
+
+
         // GET: api/Dueños
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Dueños>>> GetDueños()
         {
             try
             {
-                var idEmpresaClaim = User.FindFirst("IdEmpresa")?.Value;
+                // Loguea todos los claims para depuración
+                _logger.LogInformation("--- Claims recibidos en el token ---");
+                foreach (var claim in User.Claims)
+                {
+                    _logger.LogInformation($"Claim Type: {claim.Type} | Value: {claim.Value}");
+                }
+                _logger.LogInformation("--- Fin claims ---");
+                var idEmpresaClaim = User.FindFirstValue("IdEmpresa");
 
                 if(string.IsNullOrEmpty(idEmpresaClaim))
                 {
@@ -76,7 +79,7 @@ namespace VeterinariaApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Dueños>> GetDueños(int id, int idEmpresa)
         {
-            if(!await _dueñosRepositorio.DueñosExists(id))
+            if (!await _dueñosRepositorio.DueñosExists(id))
             {
                 _response.IsSuccess = false;
                 _response.DisplayMessage = "Dueños no encontrado. ";
@@ -85,7 +88,7 @@ namespace VeterinariaApi.Controllers
             try
             {
                 var dueños = await _dueñosRepositorio.GetDueñosById(id, idEmpresa);
-                if(dueños != null)
+                if (dueños != null)
                 {
                     _response.Result = dueños;
                     _response.DisplayMessage = "Dueño encontrado correctamente. ";
@@ -158,13 +161,13 @@ namespace VeterinariaApi.Controllers
             try
             {
                 var idEmpresaClaim = User.FindFirst("IdEmpresa")?.Value;
-                if(string.IsNullOrEmpty(idEmpresaClaim))return Unauthorized();
+                if (string.IsNullOrEmpty(idEmpresaClaim)) return Unauthorized();
 
                 int idEmpresa = int.Parse(idEmpresaClaim);
 
                 bool deleted = await _dueñosRepositorio.DeleteDueños(id, idEmpresa);
 
-                if(deleted)
+                if (deleted)
                 {
                     return NoContent();
                 }

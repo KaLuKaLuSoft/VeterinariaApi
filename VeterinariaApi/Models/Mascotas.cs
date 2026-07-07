@@ -12,6 +12,8 @@ namespace VeterinariaApi.Models
         public DateTime FechaNacimiento { get; set; }
         public string? IdentificacionUnica { get; set; }
         public decimal? Peso { get; set; }
+        public DateTime Fecha_Alta { get; set; }
+        public DateTime Fecha_Modificacion { get; set; }
         public int IdEmpresa { get; set; }
         [ForeignKey("IdEmpresa")]
         public Empresa? Empresa { get; set; }

@@ -179,7 +179,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al actualizar al Dueño. " + ex.Message); 
             }
         }
-
         public async Task<bool> DeleteDueños(int id, int idEmpresa)
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
@@ -217,7 +216,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al eliminar al Dueño. " + ex.Message);
             }
         }
-
         public async Task<List<DtoDueños>> GetDueños(int idEmpresa)
         {
             try
@@ -267,7 +265,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al obtener los Dueños. " + ex.Message);
             }
         }
-
         public async Task<DtoDueños> GetDueñosById(int id, int idEmpresa)
         {
             try
@@ -324,7 +321,6 @@ namespace VeterinariaApi.Repositorio
                 throw new Exception("Error al obtener el Dueño por ID. " + ex.Message);
             }
         }
-
         public async Task<bool> DueñosExists(int id)
         {
             return await _context.Dueños.AnyAsync(d => d.Id == id);

@@ -6,11 +6,14 @@ using VeterinariaApi.Seguridad;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.OpenApi;
 
 
-
 var builder = WebApplication.CreateBuilder(args);
+
+// Preserve original claim names from the JWT (don't map inbound claims to Microsoft-specific claim types)
+JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 // CORS
 builder.Services.AddCors(options =>
 {

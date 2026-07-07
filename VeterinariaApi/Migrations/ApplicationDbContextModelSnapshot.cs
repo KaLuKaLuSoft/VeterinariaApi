@@ -17,7 +17,7 @@ namespace VeterinariaApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.23")
+                .HasAnnotation("ProductVersion", "9.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
@@ -990,6 +990,54 @@ namespace VeterinariaApi.Migrations
                     b.ToTable("LoginMenus");
                 });
 
+            modelBuilder.Entity("VeterinariaApi.Models.Mascotas", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("FechaNacimiento")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("Fecha_Alta")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("Fecha_Modificacion")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("IdEmpresa")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEspecie")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdRaza")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdentificacionUnica")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("NombreMascota")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<decimal?>("Peso")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdEmpresa");
+
+                    b.HasIndex("IdEspecie");
+
+                    b.HasIndex("IdRaza");
+
+                    b.ToTable("Mascota");
+                });
+
             modelBuilder.Entity("VeterinariaApi.Models.Modulo", b =>
                 {
                     b.Property<int>("Id")
@@ -1823,6 +1871,33 @@ namespace VeterinariaApi.Migrations
                     b.Navigation("Login");
 
                     b.Navigation("SubModulo");
+                });
+
+            modelBuilder.Entity("VeterinariaApi.Models.Mascotas", b =>
+                {
+                    b.HasOne("VeterinariaApi.Models.Empresa", "Empresa")
+                        .WithMany()
+                        .HasForeignKey("IdEmpresa")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VeterinariaApi.Models.EspecieMascota", "EspecieMascota")
+                        .WithMany()
+                        .HasForeignKey("IdEspecie")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VeterinariaApi.Models.RazaMascota", "RazaMascota")
+                        .WithMany()
+                        .HasForeignKey("IdRaza")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Empresa");
+
+                    b.Navigation("EspecieMascota");
+
+                    b.Navigation("RazaMascota");
                 });
 
             modelBuilder.Entity("VeterinariaApi.Models.MovimientosNomina", b =>

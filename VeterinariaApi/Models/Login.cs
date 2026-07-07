@@ -26,7 +26,7 @@ namespace VeterinariaApi.Models
         public string? RefreshToken { get; set; }
 
 
-        public DateTime FechaCreacion { get; set; }
+        public DateTime? FechaCreacion { get; set; }
         public DateTime? UltimoLogin { get; set; }
     }
 }
